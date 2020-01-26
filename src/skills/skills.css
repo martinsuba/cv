@@ -1,0 +1,14 @@
+.skills ul {
+  padding: 0;
+}
+
+.skills ul li {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 25%;
+}
+
+.skills ul li > * {
+  vertical-align: middle;
+}

@@ -1,0 +1,89 @@
+{
+  "name": "Martin Šuba",
+  "title": "javascript developer",
+  "about": "Software engineer developing applications in Javascript/Typescript focused on web technologies. Specializes in front-end part of applications and websites. Has experience with many aspects of webdevelopment such as working with front-end frameworks, Node.js, REST API, developing browser extensions, writing unit tests, refactoring and building responsive and pixel perfect websites.",
+  "contact": {
+    "email": "maritn.suba01@gmail.com",
+    "linkedin": "https://linkedin.com/in/martinsuba",
+    "github": "https://github.com/martinsuba",
+    "npm": "https://npmjs.com/~martinsuba"
+  },
+  "experience": [
+    {
+      "title": "Javascript Developer",
+      "company": {
+        "name": "SaferPass",
+        "link": "https://saferpass.net"
+      },
+      "from": "October 2017",
+      "to": "Present",
+      "location": "Bratislava, Slovakia",
+      "description": "Taking care of front-end part of SaferPass password manager browser extension. Mostly working with javascript/typescript, angularJS, web extension API, web API, node.js. Implementing new features as well as refactoring legacy code and writing unit tests."
+    },
+    {
+      "title": "Front-end web developer",
+      "company": {
+       "name": "WEZEO",
+       "link": "https://www.wezeo.com/"
+      },
+      "from": "September 2015",
+      "to": "September 2017",
+      "location": "Bratislava, Slovakia",
+      "description": "Building front-end of responsive cross-browser/platform web and mobile applications. Working mostly with HTML, SASS, Javascript, jQuery and frameworks like AngularJS, Angular and Ionic."
+    },
+    {
+      "title": "Front-end web developer",
+      "company": {
+        "name": "Elite Solutions",
+        "link": "https://www.elitesolutions.sk"
+      },
+      "from": "April 2014",
+      "to": "August 2015",
+      "location": "Bratislava, Slovakia",
+      "description": "Creating web sites and user interfaces using HTML, CSS and JavaScript. Cooperating with graphic designers and back-end developers. Working for clients like O2, Sberbank, SLSP, VÚB and Hyundai."
+    },
+    {
+      "title": "Front-end web developer",
+      "company": {
+        "name": "pelicantravel.com",
+        "link": "https://www.pelikan.sk/sk"
+      },
+      "from": "April 2013",
+      "to": "March 2014",
+      "location": "Bratislava, Slovakia",
+      "description": "I focused mainly on coding web pages, coding e-mail newsletters, customizing WordPress templates and some other online marketing activities."
+    },
+    {
+      "title": "Front-end coder",
+      "company": {
+        "name": "webikon",
+        "link": "https://webikon.sk/"
+      },
+      "from": "November 2012",
+      "to": "March 2013",
+      "location": "Bratislava, Slovakia",
+      "description": "Wordpress themes coding (HTML + CSS + jQuery)"
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Economics in Bratislava",
+      "field": "Management",
+      "degree": "Master's degree",
+      "from": "2013",
+      "to": "2015"
+    },
+    {
+      "institution": "University of Economics in Bratislava",
+      "field": "Business Economics and Management",
+      "degree": "Bachelor's degree",
+      "from": "2010",
+      "to": "2013"
+    }
+  ],
+  "skills": {
+    "development": ["Javascript", "TypeScript", "Node.js", "React / Redux", "Angular", "Git", "Webpack", "npm", "Mocha", "Jasmine", "Travis", "Chrome Extensions", "SASS"],
+    "language": ["English", "Czech", "Slovak"],
+    "other": ["Photoshop", "Sketch"]
+  }
+}
