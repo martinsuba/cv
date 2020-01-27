@@ -60,3 +60,9 @@ section h3 {
   margin-top: 5px;
   font-size: 13px;
 }
+
+@media print {
+	.item {
+		page-break-inside: avoid;
+	}
+}

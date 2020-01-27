@@ -1,16 +1,10 @@
 {
-  "name": "cv",
+  "name": "Martin Šuba - CV",
   "short_name": "cv",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
   "theme_color": "#673ab8",
-  "icons": [
-    // {
-    //   "src": "/assets/icon.png",
-    //   "type": "image/png",
-    //   "sizes": "512x512"
-    // }
-  ]
+  "icons": []
 }

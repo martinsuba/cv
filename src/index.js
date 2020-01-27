@@ -13,11 +13,11 @@ import './devicon/devicon-colors';
 export default function app() {
 	return (
 		<div className="container">
-			<Header cv={ cv }/>
-			<About about={ cv.about } />
-			<Experience experience={ cv.experience } />
-			<Education education={ cv.education } />
-			<Skills skills={ cv.skills } />
+			<Header cv={cv} />
+			<About about={cv.about} />
+			<Experience experience={cv.experience} />
+			<Education education={cv.education} />
+			<Skills skills={cv.skills} />
 		</div>
 	);
 }
