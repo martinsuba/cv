@@ -49,6 +49,7 @@ section h3 {
 .container {
 	width: 800px;
 	margin: 0 auto;
+	max-width: 100%;
 }
 
 .item {
