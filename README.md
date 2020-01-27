@@ -1,6 +1,6 @@
 # CV
 
-Simple minimalistic CV (resume) written in [Preact](https://preactjs.com/) using [Preact CLI](https://github.com/preactjs/preact-cli). Renders personal data from customizable JSON file. Also generates CV from website to PDF.
+Simple minimalistic CV (resume) written in [Preact](https://preactjs.com/) using [Preact CLI](https://github.com/preactjs/preact-cli). Renders personal data from customizable JSON file. Also generates CV from website to [PDF](https://github.com/martinsuba/cv/blob/master/cv.pdf).
 
 ## Usage
 Generate PDF
