@@ -1,7 +1,7 @@
 {
   "name": "Martin Šuba",
-  "title": "javascript developer",
-  "about": "Software engineer developing applications in Javascript/Typescript focused on web technologies. Specializes in front-end part of applications and websites. Has experience with many aspects of webdevelopment such as working with front-end frameworks, Node.js, REST API, developing browser extensions, writing unit tests, refactoring and building responsive and pixel perfect websites.",
+  "title": "JavaScript developer",
+  "about": "Software engineer developing applications in JavaScript/TypeScript focused on web technologies. Specializes in front-end part of applications and websites. Has experience with many aspects of web development such as working with front-end frameworks, Node.js, REST API, developing browser extensions, writing unit tests, refactoring and building responsive and pixel perfect websites.",
   "contact": {
     "email": "maritn.suba01@gmail.com",
     "linkedin": "https://linkedin.com/in/martinsuba",
@@ -10,7 +10,7 @@
   },
   "experience": [
     {
-      "title": "Javascript Developer",
+      "title": "JavaScript developer",
       "company": {
         "name": "SaferPass",
         "link": "https://saferpass.net"
@@ -18,7 +18,7 @@
       "from": "October 2017",
       "to": "Present",
       "location": "Bratislava, Slovakia",
-      "description": "Taking care of front-end part of SaferPass password manager browser extension. Mostly working with javascript/typescript, angularJS, web extension API, web API, node.js. Implementing new features as well as refactoring legacy code and writing unit tests."
+      "description": "Taking care of front-end part of SaferPass password manager browser extension. Mostly working with JavaScript/TypeScript, AngularJS, web extension API, web API, Node.js. Implementing new features as well as refactoring legacy code and writing unit tests."
     },
     {
       "title": "Front-end web developer",
@@ -29,7 +29,7 @@
       "from": "September 2015",
       "to": "September 2017",
       "location": "Bratislava, Slovakia",
-      "description": "Building front-end of responsive cross-browser/platform web and mobile applications. Working mostly with HTML, SASS, Javascript, jQuery and frameworks like AngularJS, Angular and Ionic."
+      "description": "Building front-end of responsive cross-browser/platform web and mobile applications. Working mostly with HTML, SASS, JavaScript, jQuery and frameworks like AngularJS, Angular and Ionic."
     },
     {
       "title": "Front-end web developer",
@@ -62,7 +62,7 @@
       "from": "November 2012",
       "to": "March 2013",
       "location": "Bratislava, Slovakia",
-      "description": "Wordpress themes coding (HTML + CSS + jQuery)"
+      "description": "WordPress themes coding (HTML + CSS + jQuery)"
     }
   ],
   "education": [
@@ -82,7 +82,7 @@
     }
   ],
   "skills": {
-    "development": ["Javascript", "TypeScript", "Node.js", "React / Redux", "Angular", "Git", "Webpack", "npm", "Mocha", "Jasmine", "Travis", "Chrome Extensions", "SASS"],
+    "development": ["JavaScript", "TypeScript", "Node.js", "React / Redux", "Angular", "Git", "Webpack", "npm", "Mocha", "Jasmine", "Travis", "Chrome Extensions", "SASS"],
     "language": ["English", "Czech", "Slovak"],
     "other": ["Photoshop", "Sketch"]
   }
