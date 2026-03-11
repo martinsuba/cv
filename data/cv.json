@@ -1,35 +1,79 @@
 {
   "name": "Martin Šuba",
-  "title": "JavaScript developer",
-  "about": "Software engineer developing applications in JavaScript/TypeScript focused on web technologies. Specializes in front-end part of applications and websites. Has experience with many aspects of web development such as working with front-end frameworks, Node.js, REST API, developing browser extensions, writing unit tests, refactoring and building responsive and pixel perfect websites.",
+  "title": "Engineering manager",
+  "about": "Engineering manager with a strong frontend background and experience across product development, delivery, and team leadership. I started in frontend engineering, building web applications, browser extensions, and JavaScript/TypeScript products, and later moved into broader roles focused on delivery, automation, and execution.",
   "contact": {
-    "email": "maritn.suba01@gmail.com",
+    "email": "martin.suba01@gmail.com",
     "linkedin": "https://linkedin.com/in/martinsuba",
     "github": "https://github.com/martinsuba",
     "npm": "https://npmjs.com/~martinsuba"
   },
   "experience": [
     {
-      "title": "JavaScript developer",
+      "title": "Engineering Manager",
+      "company": {
+        "name": "F-Secure Corporation",
+        "link": "https://www.f-secure.com/"
+      },
+      "from": "January 2025",
+      "to": "Present",
+      "location": "Bratislava, Slovakia",
+      "description": "Leading the Solution Implementation team responsible for configuring, releasing, and delivering cybersecurity solutions to partners, while overseeing internal automation and delivery tooling development. In this role, I focus on improving delivery tooling, automating internal processes, and developing internal tools that bring value by improving workflows, reducing manual effort, and making delivery more efficient and reliable."
+    },
+    {
+      "title": "Technical Project Lead",
+      "company": {
+        "name": "F-Secure Corporation",
+        "link": "https://www.f-secure.com/"
+      },
+      "from": "February 2025",
+      "to": "December 2025",
+      "location": "Bratislava, Slovakia",
+      "description": "In addition to my Engineering Manager responsibilities, taking on a side role as TPL. Managing Tier-1 partner deliveries end-to-end, coordinating cross-team work, and improving delivery processes in a dynamic environment."
+    },
+    {
+      "title": "Lead Frontend engineer",
+      "company": {
+        "name": "F-Secure Corporation",
+        "link": "https://www.f-secure.com/"
+      },
+      "from": "June 2023",
+      "to": "December 2024",
+      "location": "Bratislava, Slovakia",
+      "description": "Led frontend development of password manager clients, including browser extensions and SDKs for JavaScript, iOS, and Android. Worked in a dynamic post-acquisition environment, integrating both the team and product into a new organizational structure while aligning with company standards. Delivered full lifecycle solutions, coordinated cross-team execution, and mentored engineers while driving best practices."
+    },
+    {
+      "title": "Lead Frontend engineer at SaferPass (acquired by F-Secure)",
+      "company": {
+        "name": "Lookout",
+        "link": "https://www.lookout.com/"
+      },
+      "from": "May 2022",
+      "to": "May 2023",
+      "location": "Bratislava, Slovakia",
+      "description": "SaferPass Password Manager, by F-Secure"
+    },
+    {
+      "title": "Javascript Developer (acquired by Lookout)",
       "company": {
         "name": "SaferPass",
         "link": "https://saferpass.net"
       },
       "from": "October 2017",
-      "to": "Present",
+      "to": "May 2022",
       "location": "Bratislava, Slovakia",
-      "description": "Taking care of front-end part of SaferPass password manager browser extension. Mostly working with JavaScript/TypeScript, AngularJS, web extension API, web API, Node.js. Implementing new features as well as refactoring legacy code and writing unit tests."
+      "description": "Taking care of front-end part of SaferPass password manager browser extension. Mostly working with javascript/typescript, angularJS, React, web extension API, web API, node.js. Implementing new features as well as refactoring legacy code and writing unit tests."
     },
     {
       "title": "Front-end web developer",
       "company": {
-       "name": "WEZEO",
-       "link": "https://www.wezeo.com/"
+        "name": "WEZEO",
+        "link": "https://www.wezeo.com/"
       },
       "from": "September 2015",
       "to": "September 2017",
       "location": "Bratislava, Slovakia",
-      "description": "Building front-end of responsive cross-browser/platform web and mobile applications. Working mostly with HTML, SASS, JavaScript, jQuery and frameworks like AngularJS, Angular and Ionic."
+      "description": "Building front-end of responsive cross-browser/platform web and mobile applications. Working mostly with HTML, SASS, Javascript, jQuery and frameworks like AngularJS, Angular and Ionic."
     },
     {
       "title": "Front-end web developer",
@@ -54,7 +98,7 @@
       "description": "I focused mainly on coding web pages, coding e-mail newsletters, customizing WordPress templates and some other online marketing activities."
     },
     {
-      "title": "Front-end coder",
+      "title": "Coder",
       "company": {
         "name": "webikon",
         "link": "https://webikon.sk/"
@@ -62,7 +106,7 @@
       "from": "November 2012",
       "to": "March 2013",
       "location": "Bratislava, Slovakia",
-      "description": "WordPress themes coding (HTML + CSS + jQuery)"
+      "description": "Wordpress themes coding (HTML + CSS)"
     }
   ],
   "education": [
