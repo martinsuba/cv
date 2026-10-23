@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-008 self-hosted Inter (PR #54, in review), M3
+Current task: T-008 (PR #54): STOPPED after 3 fix rounds, waiting for Martin
 Open PRs: #54 T-008
-Blockers: –
-Next step: review + test-review T-008, merge; then T-009 PDF polish; T-014 photo once the file is on the server; T-010 proposals.
+Blockers: T-008 test-review CHANGES NEEDED (fonts.check() cannot fail; needs a FontFace status === "loaded" assertion); fix-round limit (3) reached
+Next step: Martin decides: allow a 4th round for the one-line test fix (Lead recommends) or another option; then test-review, merge, T-009.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -42,3 +42,4 @@ Next step: review + test-review T-008, merge; then T-009 PDF polish; T-014 photo
 - 2026-10-23: Martin wants the photo replaced (new portrait shared in chat; file not on the server yet). Added T-014 to plan v2; Martin to put the original at ~/HAL/ai-assistant/notes/career/cv/photo-new.jpg.
 - 2026-10-23: plan v2 (#53), deploy record (#52) and root redirect (martinsuba.github.io#1) merged by Martin; "go M3". Root redirect verified live in a browser.
 - 2026-10-23: T-008: static Inter (400/600/400-italic, latin + latin-ext, 182 KB), not the variable font: Chromium embeds variable fonts as Type3, which broke PDF text extraction (lost hyphens; bad for ATS). fonts.spec.js also asserts no Type3 and intact hyphenated words (refines REQ-012; PRD wording follows in the M3 milestone PR). h3 weight 500 → 400.
+- 2026-10-23: T-008 fix rounds: (1) variable→static Inter (Type3), (2) drop weight 500 for the font budget, (3) Type3 detector fix. Reviewer APPROVE at 8388210; test-reviewer CHANGES NEEDED: document.fonts.check() is always true for unknown/failed fonts. Stopped per framework.
