@@ -37,3 +37,4 @@ To take the site down: `gh api -X DELETE repos/martinsuba/cv/pages` (Martin deci
 None. Uses the built-in `GITHUB_TOKEN` (`pages: write`, `id-token: write`).
 
 ## History (date · commit · target · result)
+2026-10-23 · b162a1c · GitHub Pages https://martinsuba.github.io/cv/ (first deploy, run 39936713633) · success: / 200 text/html with name + title, /cv.pdf 200 application/pdf, /og-image.jpg 200, no console errors or failed requests, photo 170x196

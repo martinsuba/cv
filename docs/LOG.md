@@ -14,3 +14,5 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-23 | M1 | asked to decide on seeded-bug check after auto mode blocked a neutral PR description | y – a pre-approved permission rule or a blind setup (reviewer told nothing, body neutral from the start) would avoid it
 2026-10-23 | M1 | chose option 1 (allow neutral seeded PR description) | n – permission decision after auto-mode block
 2026-10-23 | M1 gate | merged milestone PR #49, said "go M2" | n – milestone gate
+2026-10-23 | M2 gate | merged milestone PR #51, approved first production deploy ("deploy") | n – deploy gate
+2026-10-23 | deploy | extended the agent's GitHub PAT with Pages permission after a 403 on enabling Pages | y – could be granted up front in the repo-setup checklist (harness), so deploy needs no extra round
