@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: – (M4 complete; milestone PR in review)
-Open PRs: M4 milestone (chore/milestone-M4)
+Current task: T-011 Playwright container (in progress)
+Open PRs: T-011 (task/T-011-playwright-container)
 Blockers: –
-Next step: Martin reviews/merges the M4 milestone PR; then deploy (design A + new photo); M5 maintenance optional.
+Next step: T-011 review; T-012 (needs Martin's acceptance-change label); T-013
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md

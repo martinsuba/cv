@@ -9,6 +9,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -19,25 +21,6 @@ jobs:
       - run: npm ci
       - run: npm run validate
       - run: npm run build
-      - name: Playwright version
-        id: pw
-        run: |
-          v=$(npx playwright --version | awk '{print $2}')
-          test -n "$v"
-          echo "version=$v" >> "$GITHUB_OUTPUT"
-      - name: Cache Playwright browsers
-        id: pw-cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}
-      - name: Install Chromium
-        run: |
-          if [ "${{ steps.pw-cache.outputs.cache-hit }}" = "true" ]; then
-            npx playwright install-deps chromium
-          else
-            npx playwright install --with-deps chromium
-          fi
       - run: npm run pdf
       - uses: actions/upload-pages-artifact@v5
         with:
