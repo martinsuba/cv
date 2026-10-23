@@ -20,13 +20,12 @@ function npm(args, env = {}) {
 }
 
 test.describe('REQ-002 validate', () => {
-	// T-001: scripts/validate.js and the `validate` npm script do not exist yet.
-	test.fixme('REQ-002: valid data/cv.json exits 0', () => {
+	test('REQ-002: valid data/cv.json exits 0', () => {
 		const r = npm(['run', '--silent', 'validate']);
 		expect(r.code, r.out).toBe(0);
 	});
 
-	test.fixme('REQ-002: experience entry without title exits non-zero and names the field', () => {
+	test('REQ-002: experience entry without title exits non-zero and names the field', () => {
 		const r = npm(['run', '--silent', 'validate'], {
 			CV_JSON: fixture('invalid-missing-title.json'),
 		});
@@ -34,13 +33,13 @@ test.describe('REQ-002 validate', () => {
 		expect(r.out).toMatch(/title/);
 	});
 
-	test.fixme('REQ-002: wrong type (education.from is a number) exits non-zero and names the field', () => {
+	test('REQ-002: wrong type (education.from is a number) exits non-zero and names the field', () => {
 		const r = npm(['run', '--silent', 'validate'], { CV_JSON: fixture('invalid-wrong-type.json') });
 		expect(r.code, r.out).not.toBe(0);
 		expect(r.out).toMatch(/from/);
 	});
 
-	test.fixme('REQ-002: malformed JSON exits non-zero', () => {
+	test('REQ-002: malformed JSON exits non-zero', () => {
 		const r = npm(['run', '--silent', 'validate'], {
 			CV_JSON: fixture('invalid-json-syntax.json'),
 		});
@@ -48,7 +47,7 @@ test.describe('REQ-002 validate', () => {
 		expect(r.out).toMatch(/JSON|syntax|parse/i);
 	});
 
-	test.fixme('REQ-002: npm run build fails on a broken cv.json (validation runs first)', () => {
+	test('REQ-002: npm run build fails on a broken cv.json (validation runs first)', () => {
 		const outDir = mkdtempSync(join(tmpdir(), 'cv-build-'));
 		try {
 			const r = npm(['run', '--silent', 'build', '--', '--outDir', outDir], {
