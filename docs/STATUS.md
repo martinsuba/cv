@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-003 inline SVG icons, remove devicon (PR #45, in review)
-Open PRs: #45 T-003
+Current task: T-004 PDF from the production build (PR #46, in review)
+Open PRs: #46 T-004
 Blockers: –
-Next step: review + test-review T-003, merge; then T-004. PLAN.md ticks go into the milestone PR (merge condition d forbids PLAN.md in task PRs).
+Next step: review + test-review T-004, merge; then T-005 (include: pdf self-contained test writes to a temp file, so PDF-reading specs in other workers never see a missing dist/cv.pdf). PLAN.md ticks go into the milestone PR.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -24,3 +24,5 @@ Next step: review + test-review T-003, merge; then T-004. PLAN.md ticks go into 
 - 2026-10-23: T-001 done (PR #43 merged, review + test-review clean, 0 fix rounds).
 - 2026-10-23: T-002 done (PR #44 merged, review + test-review clean, 0 fix rounds). cv.json verified word for word against martin-suba-cv.pdf.
 - 2026-10-23: T-003 also adds the SaferPass description to tests/acceptance/expected-content.js (test gap from the T-002 test review; explicit in the task text).
+- 2026-10-23: T-003 done (PR #45 merged, review + test-review clean, 0 fix rounds); axe check passes already. Review nits for T-006: no target=_blank on mailto link, explicit photo width/height.
+- 2026-10-23: T-004 CI run took 9 min: `playwright install --with-deps` on the runner (8m42s), not the code. Cache browsers if it repeats.
