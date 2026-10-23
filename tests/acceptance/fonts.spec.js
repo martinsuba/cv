@@ -1,6 +1,7 @@
 // REQ-012: one self-hosted web font (Inter) for screen and PDF. Reads dist/ (build first) and dist/cv.pdf (`npm run pdf`).
 import { test, expect } from '@playwright/test';
-import { readdirSync, statSync } from 'node:fs';
+import { mkdtempSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ROOT, cv, norm, pdfFontNames, pdfFontSubtypes, readPdf } from '../helpers.js';
 
@@ -20,9 +21,26 @@ test.describe('REQ-012 web font', () => {
 		expect(subtypes).not.toContain('Type3');
 	});
 
-	test('REQ-012: the Type3 check works: it flags a known Type3 sample PDF', () => {
-		const sample = join(ROOT, 'tests/fixtures/type3-sample.pdf');
-		expect(pdfFontSubtypes(sample)).toContain('Type3');
+	test('REQ-012: the Type3 check works: it flags a PDF printed with a variable font', async ({
+		page,
+	}) => {
+		// Chromium embeds variable fonts as Type3, so a synthetic PDF generated here is a known Type3 sample.
+		const font = readFileSync(
+			join(ROOT, 'node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2'),
+		).toString('base64');
+		await page.setContent(
+			`<style>@font-face{font-family:V;font-weight:100 900;src:url(data:font/woff2;base64,${font}) format('woff2')}
+			body{font:700 24px V}</style><p>Variable font sample</p>`,
+		);
+		await page.evaluate(() => document.fonts.ready);
+		const dir = mkdtempSync(join(tmpdir(), 'type3-'));
+		try {
+			const sample = join(dir, 'sample.pdf');
+			await page.pdf({ path: sample });
+			expect(pdfFontSubtypes(sample)).toContain('Type3');
+		} finally {
+			rmSync(dir, { recursive: true, force: true });
+		}
 	});
 
 	test('REQ-012: extracted PDF text keeps every hyphenated word from cv.json', async () => {

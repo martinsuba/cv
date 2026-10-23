@@ -89,3 +89,43 @@ export function pdfFontSubtypes(path = PDF_PATH) {
 	);
 	return [...new Set([...found].map((m) => m[1]))].sort();
 }
+
+/**
+ * Non-empty text items of every PDF page with geometry in points, origin at the page's bottom-left:
+ * `{ str, x, y, width, height, size }` where `size` is the font size taken from the item transform.
+ * Returns `{ pages: [{ width, height, items }] }`. Throws if the PDF does not exist.
+ */
+export async function readPdfTextBoxes(path = PDF_PATH) {
+	if (!existsSync(path)) throw new Error(`${path} not found: run \`npm run build && npm run pdf\``);
+	const { getDocument } = await import('pdfjs-dist/legacy/build/pdf.mjs');
+	const data = new Uint8Array(readFileSync(path));
+	const doc = await getDocument({ data, useSystemFonts: true }).promise;
+	const pages = [];
+	for (let i = 1; i <= doc.numPages; i++) {
+		const page = await doc.getPage(i);
+		const [x0, y0, x1, y1] = page.view;
+		const content = await page.getTextContent();
+		const items = content.items
+			.filter((it) => it.str.trim() !== '')
+			.map((it) => ({
+				str: it.str,
+				x: it.transform[4] - x0,
+				y: it.transform[5] - y0,
+				width: it.width,
+				height: it.height,
+				size: Math.hypot(it.transform[0], it.transform[1]),
+			}));
+		pages.push({ width: x1 - x0, height: y1 - y0, items });
+	}
+	return { pages };
+}
+
+/** Most common font size (rounded to 0.1 pt) weighted by characters, i.e. the body text size. */
+export function dominantFontSize(items) {
+	const chars = new Map();
+	for (const it of items) {
+		const key = Math.round(it.size * 10) / 10;
+		chars.set(key, (chars.get(key) ?? 0) + it.str.length);
+	}
+	return [...chars.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+}

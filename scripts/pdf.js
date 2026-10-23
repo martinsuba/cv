@@ -115,7 +115,7 @@ export async function makePdf({ root = ROOT, out } = {}) {
 			await page.pdf({
 				path: target,
 				format: 'A4',
-				margin: { top: '1.5cm', right: '1.5cm', bottom: '1.5cm', left: '1.5cm' },
+				margin: { top: '16mm', right: '16mm', bottom: '16mm', left: '16mm' },
 				printBackground: true,
 			});
 		} finally {
