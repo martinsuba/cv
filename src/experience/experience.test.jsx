@@ -15,7 +15,7 @@ const experience = [
 
 describe('Experience', () => {
 	it('renders every field of an entry', () => {
-		render(<Experience experience={experience} />);
+		render(<Experience experience={experience} number={2} />);
 		expect(screen.getByRole('heading', { name: 'Example Role' })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: 'Example Corp' })).toHaveAttribute(
 			'href',
@@ -26,8 +26,16 @@ describe('Experience', () => {
 		expect(screen.getByText('Synthetic description.')).toBeInTheDocument();
 	});
 
+	it('labels the section with its number and puts dates and title in the entry', () => {
+		const { container } = render(<Experience experience={experience} number={2} />);
+		expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('02 / Experience');
+		const entry = container.querySelector('article.entry');
+		expect(entry.querySelector('.dates')).toHaveTextContent('January 2020 - Present');
+		expect(entry.querySelector('h3')).toHaveTextContent('Example Role');
+	});
+
 	it('opens company links in a new tab with rel noopener noreferrer', () => {
-		render(<Experience experience={experience} />);
+		render(<Experience experience={experience} number={2} />);
 		const link = screen.getByRole('link', { name: 'Example Corp' });
 		expect(link).toHaveAttribute('target', '_blank');
 		expect(link).toHaveAttribute('rel', 'noopener noreferrer');

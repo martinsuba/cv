@@ -1,0 +1,126 @@
+/* Shared "label / content" grid of every section (D-007). Label left, content right; one column below 640px. */
+.section {
+	display: grid;
+	grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+	gap: 32px;
+	text-align: left;
+}
+.section-label {
+	margin: 0;
+	font-family: var(--mono);
+	font-size: 12px;
+	font-weight: 400;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	line-height: 1.6;
+	color: var(--muted);
+}
+/* Entries (experience, education): dates left, body right. */
+.entry {
+	display: grid;
+	grid-template-columns: minmax(0, 190px) minmax(0, 1fr);
+	gap: 24px;
+	padding-top: 20px;
+	border-top: 1px solid var(--rule-soft);
+}
+.entry .dates {
+	font-family: var(--mono);
+	font-size: 13px;
+	line-height: 1.6;
+	color: var(--muted);
+}
+.entry .body {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	min-width: 0;
+}
+.entry h3 {
+	margin: 0;
+	font-size: 19px;
+	font-weight: 600;
+	line-height: 1.3;
+	overflow-wrap: anywhere;
+}
+.entry .meta {
+	font-size: 14px;
+	color: var(--muted);
+}
+.entry .description {
+	margin: 6px 0 0;
+	font-size: 15px;
+	line-height: 1.65;
+	color: var(--body);
+}
+.entries {
+	display: flex;
+	flex-direction: column;
+	gap: 36px;
+	min-width: 0;
+}
+@media (max-width: 639px) {
+	.section {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 16px;
+	}
+	.entry {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 6px;
+	}
+}
+@media print {
+	.section {
+		display: block;
+	}
+	.section-label {
+		font-family: inherit;
+		font-size: 14pt;
+		line-height: 1.25;
+		letter-spacing: 0;
+		text-transform: none;
+		font-weight: 600;
+		color: #24292e;
+		padding-bottom: 4pt;
+		margin-bottom: var(--gap-entry);
+		border-bottom: 1px solid #eaecef;
+		break-after: avoid;
+	}
+	.entries {
+		display: block;
+	}
+	/* An entry stays on one page; its title block never ends a page. */
+	.entry {
+		display: block;
+		padding: 0;
+		border: 0;
+		margin: var(--gap-entry) 0 0;
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+	.entry .body {
+		display: block;
+	}
+	.entry h3 {
+		font-size: 11.5pt;
+		line-height: 1.3;
+		break-after: avoid;
+		overflow-wrap: normal;
+	}
+	/* Dates and company/location on one meta line is T-017's job; for now dates sit on their own line. */
+	.entry .dates {
+		font-family: inherit;
+		font-size: 10pt;
+		line-height: 1.5;
+		color: inherit;
+		margin-top: var(--gap-line);
+	}
+	.entry .meta {
+		font-size: 10pt;
+		color: inherit;
+	}
+	.entry .description {
+		margin-top: var(--gap-line);
+		font-size: 10pt;
+		color: inherit;
+	}
+}

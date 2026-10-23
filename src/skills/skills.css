@@ -1,3 +1,74 @@
-.skills p {
+.groups {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	min-width: 0;
+}
+.group {
+	display: grid;
+	grid-template-columns: minmax(0, 190px) minmax(0, 1fr);
+	gap: 24px;
+}
+.group h3 {
 	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.6;
+}
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	min-width: 0;
+}
+.tags li {
+	font-family: var(--mono);
+	font-size: 12px;
+	line-height: 1.5;
+	padding: 4px 10px;
+	border: 1px solid var(--tag-border);
+	border-radius: 4px;
+	color: var(--body);
+}
+@media (max-width: 639px) {
+	.group {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 8px;
+	}
+}
+/* Print: run-in "Group: a, b, c" (comma text is what ATS parsers read). T-017 owns the real print design. */
+@media print {
+	.groups {
+		display: block;
+	}
+	.group {
+		display: block;
+		margin: var(--gap-entry) 0 0;
+		break-inside: avoid;
+	}
+	.group h3,
+	.tags,
+	.tags li {
+		display: inline;
+		font-family: inherit;
+		font-size: 10pt;
+		line-height: 1.5;
+		color: inherit;
+	}
+	.group h3::after {
+		content: ':';
+	}
+	.group h3 {
+		margin-right: 3pt;
+	}
+	.tags li {
+		padding: 0;
+		border: 0;
+	}
+	.tags li:not(:last-child)::after {
+		content: ', ';
+	}
 }

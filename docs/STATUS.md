@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-015 design tokens + JetBrains Mono (in progress)
-Open PRs: #56 plan v3 + M3 milestone
+Current task: T-016 ledger layout on screen (in progress)
+Open PRs: T-016 (this PR)
 Blockers: –
-Next step: Martin merges #56, then "go M4" (design A: T-015, T-016, T-017); deploy after M4 (or now, for the new photo).
+Next step: T-016 review, then T-017 (print design); deploy after M4.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md

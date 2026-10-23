@@ -20,10 +20,13 @@ describe('Education', () => {
 				to: '2015',
 			},
 		];
-		render(<Education education={education} />);
+		render(<Education education={education} number={4} />);
 		expect(screen.getByText('Example University')).toBeInTheDocument();
 		expect(screen.getByText('Sample College')).toBeInTheDocument();
 		expect(screen.getByText('2013 - 2015')).toBeInTheDocument();
 		expect(screen.getByText("Master's degree")).toBeInTheDocument();
+		expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('04 / Education');
+		expect(screen.getByRole('heading', { name: "Master's degree" }).tagName).toBe('H3');
+		expect(screen.getByText('Samples')).toBeInTheDocument();
 	});
 });

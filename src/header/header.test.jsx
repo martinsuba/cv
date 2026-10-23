@@ -18,7 +18,8 @@ describe('Header', () => {
 	it('renders name and title', () => {
 		render(<Header cv={cv} />);
 		expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Jane Example');
-		expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('Example Engineer');
+		expect(screen.getByText('Example Engineer')).toHaveClass('job');
+		expect(screen.queryByRole('heading', { level: 2 })).toBeNull();
 	});
 
 	it('links email as mailto: and other contacts to their URL', () => {
