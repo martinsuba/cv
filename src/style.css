@@ -142,30 +142,26 @@ h3 {
 		gap: 40px;
 	}
 }
-/* Print / PDF (REQ-013). Component print rules live next to their screen rules. T-017 owns the print redesign.
-   Spacing scale: line 2pt, entry 10pt, section 20pt. Heading scale: name 24pt > section 14pt > entry title 11.5pt >
-   meta/body 10pt (body never below 9.5pt). */
+/* Print / PDF (REQ-013, D-007): ledger layout on A4, 16mm page margins from scripts/pdf.js. Component print rules live
+   next to their screen rules. No running footer (header/footer templates would embed a system font). */
 @media print {
-	:root {
-		--gap-line: 2pt;
-		--gap-entry: 10pt;
-		--gap-section: 20pt;
-	}
 	html,
 	body {
 		font-size: 10pt;
 		line-height: 1.5;
-		color: #3b434b;
+		color: var(--body);
 	}
 	a {
 		color: inherit;
 	}
 	.container {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		gap: 16pt;
 		max-width: none;
 		padding: 0;
 	}
-	.section {
-		margin: var(--gap-section) 0 0;
+	.about p {
+		font-size: 10pt;
 	}
 }

@@ -1,6 +1,6 @@
 // REQ-011 (screen criteria) and the screen part of REQ-012: "Technical ledger" layout. Computed styles and boxes only.
 import { test, expect } from '@playwright/test';
-import { cv } from '../helpers.js';
+import { cv, readPdf, norm } from '../helpers.js';
 
 async function load(page) {
 	await page.goto('/cv/', { waitUntil: 'networkidle' });
@@ -101,6 +101,21 @@ test.describe('REQ-011 ledger layout at 1280px', () => {
 		}
 	});
 
+	test('REQ-011: every date range stays on one line', async ({ page }) => {
+		await load(page);
+		// The box is stretched to the row height, so count the line boxes of the text itself.
+		const lines = await page.locator('article > .dates').evaluateAll((els) =>
+			els.map((el) => {
+				const range = document.createRange();
+				range.selectNodeContents(el);
+				const tops = new Set([...range.getClientRects()].map((r) => Math.round(r.top)));
+				return [el.textContent, tops.size];
+			}),
+		);
+		expect(lines.length).toBeGreaterThan(0);
+		for (const [text, count] of lines) expect(count, `"${text}" is one line`).toBe(1);
+	});
+
 	test('REQ-011: job title and links use the accent colour', async ({ page }) => {
 		await load(page);
 		await expectAll(page, 'header h1 + *', 'color', /^rgb\(29, 78, 216\)$/);
@@ -170,5 +185,24 @@ test.describe('REQ-011 ledger layout at 375px', () => {
 		const photo = await box(page.locator('header img'));
 		expect(photo.width).toBe(80);
 		expect(photo.height).toBe(80);
+	});
+});
+
+test.describe('REQ-011 ledger layout in dist/cv.pdf', () => {
+	test('REQ-011: every skill group is printed as comma-separated text, in order', async () => {
+		const { pages } = await readPdf();
+		const text = norm(pages.map((p) => p.text).join(' '));
+		for (const [group, items] of Object.entries(cv.skills)) {
+			const joined = items.join(', ');
+			const at = text.indexOf(joined);
+			expect(at, `"${group}" items joined by ", " in PDF text`).toBeGreaterThanOrEqual(0);
+			const before = text.slice(0, at).replace(/\s*:?\s*$/, '');
+			expect(before.endsWith(group), `group name "${group}" right before its items`).toBe(true);
+		}
+	});
+
+	test('REQ-011: the PDF has at most 2 pages', async () => {
+		const { numPages } = await readPdf();
+		expect(numPages).toBeLessThanOrEqual(2);
 	});
 });
