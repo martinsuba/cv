@@ -1,7 +1,7 @@
 # Status: cv
 Phase: plan review
 Current task: –
-Open PRs: plan v1 (branch plan/1)
+Open PRs: #40 Plan v1 (https://github.com/martinsuba/cv/pull/40)
 Blockers: –
 Next step: Martin reviews and merges the plan PR; then the `harness` skill (test-architect: Vite migration, CI, acceptance tests).
 
