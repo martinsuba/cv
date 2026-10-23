@@ -133,12 +133,12 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - REQs: REQ-011
 - Output: Martin picks a direction (or mixes); a plan v3 PR adds the implementation tasks and REQ-011 criteria.
 
-## M4: Design refresh "Technical ledger" (plan v3)
+## [x] M4: Design refresh "Technical ledger" (plan v3)
 Direction A from the T-010 canvas (https://claude.ai/artifact/AeMkfPFe6NVjtSg5Gx5pk4, boards "A · Technical ledger" web
 and PDF). Builders read the board HTML in the PR description of T-016 / T-017 (Lead pastes the relevant markup) for exact
 sizes and spacing; values below are the contract. All entries keep their full text (REQ-011).
 
-### [ ] T-015: Design tokens and JetBrains Mono  (size S)
+### [x] T-015: Design tokens and JetBrains Mono  (size S)  — #58
 - Goal: add `@fontsource/jetbrains-mono` (static 400, Latin subset only) and the colour/spacing tokens from D-007 as CSS
   custom properties; use the mono font for nothing visible yet except a `.mono` utility class. No layout change.
 - REQs: REQ-012 (updated in plan v3)
@@ -149,7 +149,7 @@ sizes and spacing; values below are the contract. All entries keep their full te
 - Areas/files: package.json, src/style.css, src/main.jsx, tests/acceptance/fonts.spec.js, docs/TESTS.md
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review + test-review clean
 
-### [ ] T-016: Ledger layout on screen  (size M)
+### [x] T-016: Ledger layout on screen  (size M)  — #59
 - Goal: restyle the page as board "A · Technical ledger — website": header (round photo 104px left, name 44px/600,
   job title in mono uppercase accent, contacts stacked right in mono, rule below); sections as label/content grid with
   labels "01 / About", "02 / Experience", "03 / Skills", "04 / Education" (order as rendered; whatever sections exist);
@@ -165,7 +165,7 @@ sizes and spacing; values below are the contract. All entries keep their full te
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review + test-review clean;
   1280px and 375px screenshots next to the canvas board in the PR.
 
-### [ ] T-017: Ledger layout in print and PDF  (size M)
+### [x] T-017: Ledger layout in print and PDF  (size M)  — #60
 - Goal: print CSS per board "A · Technical ledger — PDF page 1": compact header (photo 68px, name 30px, mono title,
   contacts as a right-aligned mono column), label column ~108px, entry header line "title … dates" with company ·
   location below, body 10pt Inter; skills printed as group name + comma-separated text; no tags, no download link,
