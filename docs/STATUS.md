@@ -1,9 +1,9 @@
 # Status: cv
-Phase: plan review (v2)
-Current task: –
-Open PRs: #52 deploy record; plan v2 (plan/2); martinsuba.github.io#1 root redirect
+Phase: build
+Current task: T-008 (PR #54): 4th fix round approved by Martin (fonts loaded assertion)
+Open PRs: #54 T-008
 Blockers: –
-Next step: Martin merges plan v2 (and #52, root #1); then "go M3" (T-008 font, T-009 PDF polish, T-010 design proposals).
+Next step: builder adds FontFace loaded assertion; test-review; merge; T-009.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -40,3 +40,6 @@ Next step: Martin merges plan v2 (and #52, root #1); then "go M3" (T-008 font, T
 - 2026-10-23: Martin: root repo redirects to /cv/ (PR martinsuba.github.io#1 also removes the old service worker); PDF looks poor (font, paddings); wants design alternatives next.
 - 2026-10-23: PDF font cause: CI runner has no Apple/Windows fonts, Chromium falls back to Liberation Sans. Plan v2: self-hosted Inter (D-006), print polish, 3 design proposals (M3); maintenance tasks as M4 (could).
 - 2026-10-23: Martin wants the photo replaced (new portrait shared in chat; file not on the server yet). Added T-014 to plan v2; Martin to put the original at ~/HAL/ai-assistant/notes/career/cv/photo-new.jpg.
+- 2026-10-23: plan v2 (#53), deploy record (#52) and root redirect (martinsuba.github.io#1) merged by Martin; "go M3". Root redirect verified live in a browser.
+- 2026-10-23: T-008: static Inter (400/600/400-italic, latin + latin-ext, 182 KB), not the variable font: Chromium embeds variable fonts as Type3, which broke PDF text extraction (lost hyphens; bad for ATS). fonts.spec.js also asserts no Type3 and intact hyphenated words (refines REQ-012; PRD wording follows in the M3 milestone PR). h3 weight 500 → 400.
+- 2026-10-23: T-008 fix rounds: (1) variable→static Inter (Type3), (2) drop weight 500 for the font budget, (3) Type3 detector fix. Reviewer APPROVE at 8388210; test-reviewer CHANGES NEEDED: document.fonts.check() is always true for unknown/failed fonts. Stopped per framework.

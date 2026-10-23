@@ -17,3 +17,5 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-23 | M2 gate | merged milestone PR #51, approved first production deploy ("deploy") | n – deploy gate
 2026-10-23 | deploy | extended the agent's GitHub PAT with Pages permission after a 403 on enabling Pages | y – could be granted up front in the repo-setup checklist (harness), so deploy needs no extra round
 2026-10-23 | after deploy | asked for root redirect, better PDF (font, paddings) and design alternatives | n – product/design feedback
+2026-10-23 | plan v2 gate | merged plan v2 #53, deploy record #52, root redirect PR; said "go M3" | n – gates
+2026-10-23 | M3 T-008 | approved a 4th fix round after the 3-round limit ("ok go on") | y – the round limit could allow +1 for test-only one-liners; root cause was a missing spike on variable-font PDF embedding
