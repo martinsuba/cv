@@ -114,9 +114,21 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 - Notes: PDF images: render pages with pdfjs-dist in Playwright, or install poppler-utils in the task's own env if possible.
 
+### [ ] T-014: Replace the photo  (size S)
+- Goal: replace data/photo.jpg with Martin's new portrait (source file provided by Martin, see STATUS). Crop to a
+  square-ish head-and-shoulders frame that works in the round header crop, resize to 800 px on the long side, strip
+  EXIF/GPS metadata, JPEG quality ~82 (target ≤ 150 KB). og-image.jpg follows automatically (built from data/photo.jpg).
+  Update the header img width/height attributes to the new intrinsic size.
+- REQs: REQ-001, REQ-008, REQ-010 (alt text unchanged)
+- Acceptance tests to make pass: existing content/meta/a11y/pdf specs keep passing; unit test for the header
+  width/height updated.
+- Areas/files: data/photo.jpg, src/header/header.jsx, src/header/header.test.jsx
+- Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean; before/after header
+  screenshots (screen + print) in the PR; no metadata left in the JPEG (check with a script).
+
 ### [ ] T-010: Design proposals  (size S, Lead-run, no code merged)
 - Goal: research clean, minimal CV/profile designs suited to a technical engineering manager; build 3 directions as
-  static mockups from the real `cv.json` (screen desktop + mobile + A4 print), on top of T-008/T-009, and share them
+  static mockups from the real `cv.json` and the new photo (screen desktop + mobile + A4 print), on top of T-008/T-009/T-014, and share them
   with Martin as one comparison page.
 - REQs: REQ-011
 - Output: Martin picks a direction (or mixes); a plan v3 PR adds the implementation tasks and REQ-011 criteria.
