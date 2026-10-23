@@ -5,15 +5,15 @@ import { readPdfTextBoxes, dominantFontSize, contactLinks } from '../helpers.js'
 const MM_15_PT = 42.5; // 15 mm in points
 
 test.describe('REQ-013 print layout', () => {
-	test('REQ-013: in print media all contact links sit on one line', async ({ page }) => {
-		await page.goto('/cv/', { waitUntil: 'networkidle' });
-		await page.emulateMedia({ media: 'print' });
-		const links = page.locator('.contact a');
-		await expect(links).toHaveCount(contactLinks().length);
-		const tops = await links.evaluateAll((els) =>
-			els.map((el) => Math.round(el.getBoundingClientRect().top)),
-		);
-		expect(new Set(tops).size, `contact link tops: ${tops}`).toBe(1);
+	test('REQ-013: in dist/cv.pdf all contact links share one baseline on page 1', async () => {
+		const { pages } = await readPdfTextBoxes();
+		const ys = contactLinks().map(([key, value]) => {
+			const text = key === 'email' ? value : value.replace(/^\w+:\/\//, '');
+			const item = pages[0].items.find((it) => it.str.includes(text));
+			expect(item, `contact "${text}" found on page 1`).toBeTruthy();
+			return Math.round(item.y * 10) / 10;
+		});
+		expect(new Set(ys).size, `contact baselines: ${ys}`).toBe(1);
 	});
 
 	test('REQ-013: text in dist/cv.pdf keeps at least 15 mm from every page edge', async () => {
@@ -33,5 +33,8 @@ test.describe('REQ-013 print layout', () => {
 		const { pages } = await readPdfTextBoxes();
 		const size = dominantFontSize(pages.flatMap((p) => p.items));
 		expect(size, 'most common font size').toBeGreaterThanOrEqual(9.5);
+		// Chromium silently shrinks overflowing pages (10 pt body becomes 9.4 pt): the size must be the CSS size.
+		expect(size, 'no page shrink-to-fit').toBeGreaterThan(9.9);
+		expect(size, 'no page shrink-to-fit').toBeLessThan(10.1);
 	});
 });

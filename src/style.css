@@ -151,6 +151,10 @@ section h3 {
 		--gap-section: 20pt;
 	}
 
+	body {
+		margin: 0;
+	}
+
 	html,
 	body {
 		font-size: 10pt;
@@ -193,7 +197,6 @@ section h3 {
 		page-break-inside: avoid;
 	}
 
-	.item > h2 + h3,
 	.item > h2 + p {
 		margin-top: var(--gap-line);
 	}
@@ -210,6 +213,8 @@ section h3 {
 		font-size: 10pt;
 	}
 
+	/* The separators rely on the markup order h3, span, div (company/field, dates, location/degree) and on those
+	   fields being required in cv.json; if the markup changes, the separators must change with it. */
 	.item > h3 + span::before,
 	.item > h3 + span + div::before {
 		content: '\00a0\00b7\00a0';

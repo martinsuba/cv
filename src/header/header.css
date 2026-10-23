@@ -53,10 +53,12 @@ header h2 {
 
 	.contact .icon {
 		margin-right: 3pt;
+		width: 16px;
+		height: 16px;
 	}
 
 	.contact li {
-		margin: 0 2pt;
+		margin: 0 1.5pt;
 	}
 
 	header h1 {
