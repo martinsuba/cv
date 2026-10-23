@@ -1,6 +1,6 @@
 # Status: cv
 Phase: build
-Current task: – (M3 complete; plan v3 + M3 milestone in review, PR #56)
+Current task: T-015 design tokens + JetBrains Mono (in progress)
 Open PRs: #56 plan v3 + M3 milestone
 Blockers: –
 Next step: Martin merges #56, then "go M4" (design A: T-015, T-016, T-017); deploy after M4 (or now, for the new photo).
