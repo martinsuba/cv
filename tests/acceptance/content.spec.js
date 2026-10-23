@@ -64,18 +64,17 @@ test.describe('REQ-003 current content', () => {
 		await page.goto('/cv/');
 	});
 
-	// T-002: data/cv.json still holds the old text.
-	test.fixme('REQ-003: About text from the PDF is shown', async ({ page }) => {
+	test('REQ-003: About text from the PDF is shown', async ({ page }) => {
 		await expectTextVisible(page, ABOUT);
 	});
 
-	test.fixme('REQ-003: the "up to 80%" sentence is in the Engineering Manager entry', async ({
+	test('REQ-003: the "up to 80%" sentence is in the Engineering Manager entry', async ({
 		page,
 	}) => {
 		await expectTextVisible(page, EM_80_SENTENCE);
 	});
 
-	test.fixme('REQ-003: full Engineering Manager / TPL / Lead Frontend / Lookout descriptions are shown', async ({
+	test('REQ-003: full Engineering Manager / TPL / Lead Frontend / Lookout descriptions are shown', async ({
 		page,
 	}) => {
 		for (const [name, text] of Object.entries(DESCRIPTIONS)) {
@@ -83,7 +82,7 @@ test.describe('REQ-003 current content', () => {
 		}
 	});
 
-	test.fixme('REQ-003: skill groups "Leadership & Delivery", "Engineering", "AI" appear in that order', async ({
+	test('REQ-003: skill groups "Leadership & Delivery", "Engineering", "AI" appear in that order', async ({
 		page,
 	}) => {
 		const re = /^(Leadership & Delivery|Engineering|AI):?$/;
@@ -91,7 +90,7 @@ test.describe('REQ-003 current content', () => {
 		expect(headings.map((h) => h.replace(/:$/, '').trim())).toEqual(SKILL_GROUPS_IN_ORDER);
 	});
 
-	test.fixme('REQ-003: old skills and the "language" group no longer appear', async ({ page }) => {
+	test('REQ-003: old skills and the "language" group no longer appear', async ({ page }) => {
 		const body = await page.locator('body').innerText();
 		for (const skill of REMOVED_SKILLS) {
 			expect(body, skill).not.toMatch(new RegExp(`\\b${skill}\\b`, 'i'));

@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-001 data schema and validation (PR #43, in review)
-Open PRs: #43 T-001; #42 seeded-bug check (throw-away, not to be merged)
-Blockers: seeded-bug check needs Martin's decision (auto mode blocked making the #42 description neutral); first test-review waits for it
-Next step: review T-001; after the seeded-bug decision, test-review T-001 and merge; then T-002.
+Current task: T-002 content from the current PDF (PR #44, in review)
+Open PRs: #44 T-002
+Blockers: –
+Next step: review + test-review T-002, merge; then T-003. PLAN.md ticks go into the milestone PR (merge condition d forbids PLAN.md in task PRs).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -20,3 +20,5 @@ Next step: review T-001; after the seeded-bug decision, test-review T-001 and me
 - 2026-10-23: harness PR #41: Vite 8 + Preact 10, ESLint/Prettier, Vitest, Playwright; 10 acceptance tests pass, 27 fixme tagged T-001…T-007. Follow-up nit: pin Stryker in devDependencies (mutation.yml uses npx @8).
 - 2026-10-23: harness merged (#41) with `acceptance-change`; branch protection on master (ci + acceptance-guard) set by Lead.
 - 2026-10-23: M1 started (Martin: "go m1").
+- 2026-10-23: seeded-bug check passed: test-reviewer said CHANGES NEEDED on #42 (weakened description assertion); #42 closed unmerged.
+- 2026-10-23: T-001 done (PR #43 merged, review + test-review clean, 0 fix rounds).
