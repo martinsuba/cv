@@ -27,7 +27,7 @@ Status: passing = runs in CI now; fixme = `test.fixme` until the named task is d
 | REQ | Acceptance test(s) | Status |
 |---|---|---|
 | REQ-001 | `content.spec.js`: name/title/about; contact links (mailto vs URL); every experience entry; every education entry; every skill group + items | passing |
-| REQ-002 | `validate.spec.js`: valid exits 0; missing title; wrong type; malformed JSON; build fails on broken data | fixme (T-001) |
+| REQ-002 | `validate.spec.js`: valid exits 0; missing title; wrong type; malformed JSON; build fails on broken data | passing |
 | REQ-003 | `content.spec.js`: About text; "up to 80%" sentence; full descriptions; skill group order; removed skills/language group | fixme (T-002) |
 | REQ-004 | `build.spec.js`: build without legacy flags; all assets 200 and no console errors under /cv/; no service worker/manifest in dist | passing |
 | REQ-005 | `pdf.spec.js`: `npm run pdf` self-contained; A4; text content | fixme (T-004). At most 3 pages, last page >= 25%: fixme (T-005) |
