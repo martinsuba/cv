@@ -23,3 +23,4 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-23 | deploy gate | approved deploy of T-008/T-009 ("deploy") | n – deploy gate
 2026-10-23 | T-014 | told the Lead to take the photo from the chat ("you copy it") | y – the Lead could have saved the pasted image from the session transcript right away instead of asking for scp
 2026-10-23 | M4 gate | merged plan v3 + M3 milestone #56, said "go M4" | n – milestone gate
+2026-10-23 | M4 review | asked whether the red Vitest runs in the mutation summary are OK; asked to fix the Node 20 action deprecation in the next milestone | y – the milestone PR could explain the mutation summary up front; the deprecation was already planned as T-012
