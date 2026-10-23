@@ -1,3 +1,4 @@
+import DownloadLink from './download-link/download-link.jsx';
 import Header from './header/header.jsx';
 import About from './about/about.jsx';
 import Experience from './experience/experience.jsx';
@@ -11,6 +12,7 @@ import './style.css';
 export default function App() {
 	return (
 		<div className="container">
+			<DownloadLink />
 			<Header cv={cv} />
 			<About about={cv.about} />
 			<Experience experience={cv.experience} />

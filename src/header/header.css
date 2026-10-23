@@ -36,3 +36,15 @@ header h2 {
 .contact .icon {
 	margin-right: 5px;
 }
+
+@media print {
+	.photo {
+		width: 110px;
+		height: 110px;
+	}
+
+	.contact {
+		margin: 0 0 14px;
+		padding-bottom: 8px;
+	}
+}

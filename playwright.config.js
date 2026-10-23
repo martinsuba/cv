@@ -6,7 +6,7 @@ export default defineConfig({
 	testDir: './tests',
 	testMatch: '**/*.spec.{js,ts}',
 	outputDir: 'test-results',
-	// Tests within a file run in order: pdf.spec.js's first test deletes and regenerates dist/cv.pdf that later tests read.
+	// Tests within a file run in order. pdf.spec.js generates into a temp file (`--out`), so dist/cv.pdf is only written by `npm run pdf`.
 	fullyParallel: false,
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 1 : 0,
