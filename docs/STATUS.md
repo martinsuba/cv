@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-008 (PR #54): STOPPED after 3 fix rounds, waiting for Martin
+Current task: T-008 (PR #54): 4th fix round approved by Martin (fonts loaded assertion)
 Open PRs: #54 T-008
-Blockers: T-008 test-review CHANGES NEEDED (fonts.check() cannot fail; needs a FontFace status === "loaded" assertion); fix-round limit (3) reached
-Next step: Martin decides: allow a 4th round for the one-line test fix (Lead recommends) or another option; then test-review, merge, T-009.
+Blockers: –
+Next step: builder adds FontFace loaded assertion; test-review; merge; T-009.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
