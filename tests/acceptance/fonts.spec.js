@@ -1,4 +1,4 @@
-// REQ-012: one self-hosted web font (Inter) for screen and PDF. Reads dist/ (build first) and dist/cv.pdf (`npm run pdf`).
+// REQ-012: self-hosted web fonts (Inter, JetBrains Mono) for screen and PDF. Reads dist/ (build first) and dist/cv.pdf (`npm run pdf`).
 import { test, expect } from '@playwright/test';
 import { mkdtempSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -6,11 +6,11 @@ import { join } from 'node:path';
 import { ROOT, cv, norm, pdfFontNames, pdfFontSubtypes, readPdf } from '../helpers.js';
 
 test.describe('REQ-012 web font', () => {
-	test('REQ-012: every font embedded in dist/cv.pdf is Inter, none is a system fallback', () => {
+	test('REQ-012: every font embedded in dist/cv.pdf is Inter or JetBrains Mono, none is a system fallback', () => {
 		const fonts = pdfFontNames();
 		expect(fonts.length, 'PDF embeds at least one font').toBeGreaterThan(0);
 		for (const f of fonts) {
-			expect(f, `embedded font ${f}`).toMatch(/^Inter/i);
+			expect(f, `embedded font ${f}`).toMatch(/^(Inter|JetBrainsMono)/i);
 			expect(f).not.toMatch(/Liberation|DejaVu|Arial|Helvetica|Noto/i);
 		}
 	});
@@ -77,6 +77,23 @@ test.describe('REQ-012 web font', () => {
 		expect(family).toMatch(/^"?Inter\b/);
 	});
 
+	test('REQ-012: the JetBrains Mono face loads on the built site', async ({ page }) => {
+		await page.goto('/cv/', { waitUntil: 'networkidle' });
+		// Nothing uses the mono font until T-016, so the browser has not fetched it yet: request it explicitly.
+		// load() resolves with the matching faces; a missing @font-face or a failed file gives [] or a rejection.
+		const result = await page.evaluate(async () => {
+			const faces = await document.fonts.load('16px "JetBrains Mono"');
+			return {
+				count: faces.length,
+				faceLoaded: [...document.fonts].some(
+					(f) => /^"?JetBrains Mono"?$/.test(f.family) && f.status === 'loaded',
+				),
+			};
+		});
+		expect(result.count, 'a JetBrains Mono @font-face matches').toBeGreaterThan(0);
+		expect(result.faceLoaded, 'a JetBrains Mono @font-face has status "loaded"').toBe(true);
+	});
+
 	test('REQ-012: no request leaves localhost during page load', async ({ page }) => {
 		const external = [];
 		page.on('request', (req) => {
@@ -89,11 +106,11 @@ test.describe('REQ-012 web font', () => {
 		expect(external).toEqual([]);
 	});
 
-	test('REQ-012: woff2 files in dist/assets total at most 200 KB (200,000 B)', () => {
+	test('REQ-012: woff2 files in dist/assets total at most 230 KB (230,000 B)', () => {
 		const dir = join(ROOT, 'dist/assets');
 		const files = readdirSync(dir).filter((f) => f.endsWith('.woff2'));
 		expect(files.length, 'woff2 files bundled').toBeGreaterThan(0);
 		const total = files.reduce((sum, f) => sum + statSync(join(dir, f)).size, 0);
-		expect(total, `woff2 total ${total} bytes`).toBeLessThanOrEqual(200_000);
+		expect(total, `woff2 total ${total} bytes`).toBeLessThanOrEqual(230_000);
 	});
 });
