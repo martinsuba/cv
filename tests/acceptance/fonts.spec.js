@@ -44,9 +44,17 @@ test.describe('REQ-012 web font', () => {
 		await page.goto('/cv/', { waitUntil: 'networkidle' });
 		const loaded = await page.evaluate(async () => {
 			await document.fonts.ready;
-			return document.fonts.check('16px "Inter"');
+			return {
+				// check() is true for unknown fonts too, so it cannot fail on its own.
+				check: document.fonts.check('16px "Inter"'),
+				// Fails if the @font-face is missing or the file did not load.
+				faceLoaded: [...document.fonts].some(
+					(f) => /^"?Inter"?$/.test(f.family) && f.status === 'loaded',
+				),
+			};
 		});
-		expect(loaded).toBe(true);
+		expect(loaded.check).toBe(true);
+		expect(loaded.faceLoaded, 'an Inter @font-face has status "loaded"').toBe(true);
 		const family = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
 		expect(family).toMatch(/^"?Inter\b/);
 	});
