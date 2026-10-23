@@ -6,3 +6,4 @@ test-results/
 playwright-report/
 /reports/
 /screenshots/
+.claude/worktrees/
