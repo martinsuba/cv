@@ -19,3 +19,6 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-23 | after deploy | asked for root redirect, better PDF (font, paddings) and design alternatives | n – product/design feedback
 2026-10-23 | plan v2 gate | merged plan v2 #53, deploy record #52, root redirect PR; said "go M3" | n – gates
 2026-10-23 | M3 T-008 | approved a 4th fix round after the 3-round limit ("ok go on") | y – the round limit could allow +1 for test-only one-liners; root cause was a missing spike on variable-font PDF embedding
+2026-10-23 | T-010 | picked design direction A (Technical ledger) | n – design choice
+2026-10-23 | deploy gate | approved deploy of T-008/T-009 ("deploy") | n – deploy gate
+2026-10-23 | T-014 | told the Lead to take the photo from the chat ("you copy it") | y – the Lead could have saved the pasted image from the session transcript right away instead of asking for scp

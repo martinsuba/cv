@@ -38,3 +38,4 @@ None. Uses the built-in `GITHUB_TOKEN` (`pages: write`, `id-token: write`).
 
 ## History (date · commit · target · result)
 2026-10-23 · b162a1c · GitHub Pages https://martinsuba.github.io/cv/ (first deploy, run 39936713633) · success: / 200 text/html with name + title, /cv.pdf 200 application/pdf, /og-image.jpg 200, no console errors or failed requests, photo 170x196
+2026-10-23 · d01f760 (T-008 Inter + T-009 PDF polish) · GitHub Pages, run 39959117497 · success: / 200 with name, /cv.pdf 200 application/pdf (2 pages, Inter only, no Type3), no console errors or failed requests, photo loads, body font Inter
