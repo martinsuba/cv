@@ -9,6 +9,7 @@ import {
 	mimeType,
 	defaultOut,
 	parseArgs,
+	baseDir,
 	makePdf,
 } from './pdf.js';
 
@@ -104,6 +105,15 @@ describe('parseArgs', () => {
 	it('reads --out <path> as an absolute path', () => {
 		expect(parseArgs(['--out', '/tmp/x.pdf'])).toEqual({ out: '/tmp/x.pdf' });
 		expect(parseArgs(['--out', 'x.pdf']).out).toBe(resolve('x.pdf'));
+	});
+	it('resolves a relative --out against the given base directory (npm INIT_CWD)', () => {
+		expect(parseArgs(['--out', 'x.pdf'], '/work/dir').out).toBe('/work/dir/x.pdf');
+		expect(parseArgs(['--out', '/abs/x.pdf'], '/work/dir').out).toBe('/abs/x.pdf');
+	});
+	it('defaults the base directory to INIT_CWD, else the cwd', () => {
+		expect(baseDir({ INIT_CWD: '/init' }, '/cwd')).toBe('/init');
+		expect(baseDir({}, '/cwd')).toBe('/cwd');
+		expect(baseDir({ INIT_CWD: '' }, '/cwd')).toBe('/cwd');
 	});
 	it('throws when --out has no value', () => {
 		expect(() => parseArgs(['--out'])).toThrow(/--out/);

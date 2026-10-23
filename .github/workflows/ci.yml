@@ -22,7 +22,10 @@ jobs:
       - run: npm run build
       - name: Playwright version
         id: pw
-        run: echo "version=$(npx playwright --version | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+        run: |
+          v=$(npx playwright --version | awk '{print $2}')
+          test -n "$v"
+          echo "version=$v" >> "$GITHUB_OUTPUT"
       - name: Cache Playwright browsers
         id: pw-cache
         uses: actions/cache@v4

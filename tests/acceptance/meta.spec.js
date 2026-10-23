@@ -15,16 +15,15 @@ test.describe('REQ-008 meta and SEO', () => {
 		await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 	});
 
-	// T-006: title and meta tags are still hard-coded / missing.
-	test.fixme('REQ-008: <title> is "<name> – <title>" from cv.json', async ({ page }) => {
+	test('REQ-008: <title> is "<name> – <title>" from cv.json', async ({ page }) => {
 		await expect(page).toHaveTitle(`${cv.name} – ${cv.title}`);
 	});
 
-	test.fixme('REQ-008: meta description is the about text', async ({ page }) => {
+	test('REQ-008: meta description is the about text', async ({ page }) => {
 		await expect(meta(page, 'name', 'description')).toHaveAttribute('content', cv.about);
 	});
 
-	test.fixme('REQ-008: og:title, og:description, og:type and og:image (absolute URL) are set', async ({
+	test('REQ-008: og:title, og:description, og:type and og:image (absolute URL) are set', async ({
 		page,
 	}) => {
 		await expect(meta(page, 'property', 'og:title')).toHaveAttribute('content', /\S/);

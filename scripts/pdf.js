@@ -66,13 +66,18 @@ export function defaultOut(root = ROOT) {
 	return resolve(root, 'dist', 'cv.pdf');
 }
 
-/** Parses CLI args: only `--out <path>` is supported. */
-export function parseArgs(argv) {
+/** Base for relative paths: npm sets INIT_CWD to where the user ran `npm run`. */
+export function baseDir(env = process.env, cwd = process.cwd()) {
+	return env.INIT_CWD || cwd;
+}
+
+/** Parses CLI args: only `--out <path>` is supported. A relative path is resolved against `base`. */
+export function parseArgs(argv, base = baseDir()) {
 	let out;
 	for (let i = 0; i < argv.length; i++) {
 		if (argv[i] === '--out') {
 			if (!argv[i + 1]) throw new Error('--out needs a file path');
-			out = resolve(argv[++i]);
+			out = resolve(base, argv[++i]);
 		} else {
 			throw new Error(`unknown argument: ${argv[i]}`);
 		}
