@@ -1,8 +1,8 @@
-// REQ-007: PDF download link (T-005; the served file needs T-004).
+// REQ-007: PDF download link (the served file is dist/cv.pdf from `npm run pdf`).
 import { test, expect } from '@playwright/test';
 
 test.describe('REQ-007 PDF download link', () => {
-	test.fixme('REQ-007: a visible "Download PDF" link points to cv.pdf relative to the page and the file is served', async ({
+	test('REQ-007: a visible "Download PDF" link points to cv.pdf relative to the page and the file is served', async ({
 		page,
 		request,
 	}) => {

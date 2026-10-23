@@ -1,10 +1,10 @@
-// REQ-006: print layout (T-005).
+// REQ-006: print layout.
 import { test, expect } from '@playwright/test';
 import { cv, readPdf, norm } from '../helpers.js';
 
 test.describe('REQ-006 print layout', () => {
-	// T-005 (needs dist/cv.pdf from T-004): title and the end of the description must be on the same page.
-	test.fixme('REQ-006: no experience entry is split across two PDF pages', async () => {
+	// Needs dist/cv.pdf (T-004): title and the end of the description must be on the same page.
+	test('REQ-006: no experience entry is split across two PDF pages', async () => {
 		const { pages } = await readPdf();
 		const texts = pages.map((p) => norm(p.text));
 		const pageOf = (s) => texts.findIndex((t) => t.includes(norm(s)));
@@ -20,8 +20,7 @@ test.describe('REQ-006 print layout', () => {
 		}
 	});
 
-	// T-005: "Download PDF" link does not exist yet.
-	test.fixme('REQ-006: the PDF download link is hidden in print media', async ({ page }) => {
+	test('REQ-006: the PDF download link is hidden in print media', async ({ page }) => {
 		await page.goto('/cv/');
 		const link = page.getByRole('link', { name: /download pdf/i });
 		await expect(link).toBeVisible();

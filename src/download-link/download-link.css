@@ -1,0 +1,22 @@
+.download {
+	margin: 0 0 10px;
+	font-size: 11px;
+	text-align: right;
+}
+
+.download a {
+	color: #586069;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.download a:hover,
+.download a:focus-visible {
+	color: #24292e;
+}
+
+@media print {
+	.download {
+		display: none;
+	}
+}

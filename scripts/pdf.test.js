@@ -2,8 +2,15 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { createStaticServer, resolveRequest, mimeType } from './pdf.js';
+import { join, resolve } from 'node:path';
+import {
+	createStaticServer,
+	resolveRequest,
+	mimeType,
+	defaultOut,
+	parseArgs,
+	makePdf,
+} from './pdf.js';
 
 describe('mimeType', () => {
 	it.each([
@@ -80,5 +87,41 @@ describe('createStaticServer', () => {
 	it('does not serve files outside dist', async () => {
 		const res = await fetch(`${base}/cv/%2e%2e/secret.txt`);
 		expect(res.status).toBe(404);
+	});
+});
+
+describe('defaultOut', () => {
+	it('is dist/cv.pdf in the repo root', () => {
+		expect(defaultOut()).toBe(resolve(import.meta.dirname, '..', 'dist', 'cv.pdf'));
+		expect(defaultOut('/srv/app')).toBe('/srv/app/dist/cv.pdf');
+	});
+});
+
+describe('parseArgs', () => {
+	it('has no output override by default', () => {
+		expect(parseArgs([])).toEqual({ out: undefined });
+	});
+	it('reads --out <path> as an absolute path', () => {
+		expect(parseArgs(['--out', '/tmp/x.pdf'])).toEqual({ out: '/tmp/x.pdf' });
+		expect(parseArgs(['--out', 'x.pdf']).out).toBe(resolve('x.pdf'));
+	});
+	it('throws when --out has no value', () => {
+		expect(() => parseArgs(['--out'])).toThrow(/--out/);
+	});
+	it('throws on unknown arguments', () => {
+		expect(() => parseArgs(['--nope'])).toThrow(/unknown argument/i);
+	});
+});
+
+describe('makePdf', () => {
+	it('rejects with a clear message when dist/index.html is missing', async () => {
+		const dir = mkdtempSync(join(tmpdir(), 'cvpdf-empty-'));
+		try {
+			await expect(makePdf({ root: dir })).rejects.toThrow(
+				'dist/index.html not found. Run `npm run build` first.',
+			);
+		} finally {
+			rmSync(dir, { recursive: true, force: true });
+		}
 	});
 });
