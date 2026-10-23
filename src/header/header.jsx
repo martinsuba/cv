@@ -26,7 +26,7 @@ export default function header({ cv }) {
 			</ul>
 
 			<div className="photo">
-				<img src={photo} alt={cv.name} width="1000" height="1152" />
+				<img src={photo} alt={cv.name} width="800" height="800" />
 			</div>
 			<h1>{cv.name}</h1>
 			<h2>{cv.title}</h2>

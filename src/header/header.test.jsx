@@ -71,8 +71,8 @@ describe('Header', () => {
 	it('gives the photo explicit width and height to avoid layout shift', () => {
 		render(<Header cv={cv} />);
 		const img = screen.getByRole('img');
-		expect(img).toHaveAttribute('width', '1000');
-		expect(img).toHaveAttribute('height', '1152');
+		expect(img).toHaveAttribute('width', '800');
+		expect(img).toHaveAttribute('height', '800');
 	});
 
 	it('gives the photo alt text equal to the name', () => {
