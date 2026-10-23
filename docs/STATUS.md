@@ -1,9 +1,9 @@
 # Status: cv
-Phase: build (M1 review)
-Current task: – (M1 complete, milestone PR open)
-Open PRs: milestone M1 PR (chore/milestone-M1)
+Phase: build
+Current task: T-007 manual deploy workflow (PR #50, in review), M2
+Open PRs: #50 T-007
 Blockers: –
-Next step: Martin reviews and merges the M1 milestone PR, then says "go M2" (T-007 deploy workflow, then the deploy phase).
+Next step: review + test-review T-007, merge; then deploy phase: Lead enables Pages (build_type=workflow), asks Martin to approve the first production deploy.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -31,3 +31,5 @@ Next step: Martin reviews and merges the M1 milestone PR, then says "go M2" (T-0
 - 2026-10-23: T-005 done (PR #47 merged, review + test-review clean, 0 fix rounds).
 - 2026-10-23: T-006 done (PR #48 merged; 1 fix round: photo width/height attributes had the aspect ratio inverted, caught by the reviewer; review + test-review clean after fix).
 - 2026-10-23: M1 complete: T-001…T-006 merged, 0/0/0/0/0/1 fix rounds, master CI green. Opus milestone review: no blocking findings. Open follow-ups: pin Stryker in devDependencies; injectMeta silently no-ops without </head>; consider Playwright container image if apt slowness returns.
+- 2026-10-23: M1 milestone PR #49 merged by Martin; "go M2". Mutation report on #49 not meaningful (44/47 timeouts, scripts/ not mutated): follow-up task via plan update (vitest runner, mutate scripts/**, pin Stryker).
+- 2026-10-23: T-007: Pages actions on v5 (upload-pages-artifact, deploy-pages); checkout/setup-node/cache still v4 in all workflows (latest: v7/v7/v6). Proposed chore: bump all workflows together (acceptance-guard.yml change needs Martin's label).
