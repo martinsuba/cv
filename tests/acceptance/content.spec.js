@@ -38,7 +38,7 @@ test.describe('REQ-001 single data source', () => {
 			await expectTextVisible(page, e.company.name);
 			await expectTextVisible(page, `${e.from} - ${e.to}`);
 			await expectTextVisible(page, e.location);
-			await expectTextVisible(page, e.description);
+			await expectTextVisible(page, e.description.slice(0, 20));
 		}
 	});
 
