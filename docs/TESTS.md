@@ -28,14 +28,14 @@ Status: passing = runs in CI now; fixme = `test.fixme` until the named task is d
 |---|---|---|
 | REQ-001 | `content.spec.js`: name/title/about; contact links (mailto vs URL); every experience entry; every education entry; every skill group + items | passing |
 | REQ-002 | `validate.spec.js`: valid exits 0; missing title; wrong type; malformed JSON; build fails on broken data | passing |
-| REQ-003 | `content.spec.js`: About text; "up to 80%" sentence; full descriptions; skill group order; removed skills/language group | passing |
+| REQ-003 | `content.spec.js`: About text; "up to 80%" sentence; full descriptions (incl. SaferPass JavaScript Developer); skill group order; removed skills/language group | passing |
 | REQ-004 | `build.spec.js`: build without legacy flags; all assets 200 and no console errors under /cv/; no service worker/manifest in dist | passing |
 | REQ-005 | `pdf.spec.js`: `npm run pdf` self-contained; A4; text content | fixme (T-004). At most 3 pages, last page >= 25%: fixme (T-005) |
 | REQ-006 | `print.spec.js`: no experience entry split across PDF pages; download link hidden in print | fixme (T-005) |
 | REQ-007 | `download.spec.js`: visible "Download PDF" link to relative `cv.pdf`, file served as application/pdf | fixme (T-005) |
 | REQ-008 | `meta.spec.js`: `lang="en"` passing; title, meta description, og tags fixme (T-006) | partly passing |
 | REQ-009 | `deploy-workflow.spec.js`: static checks of `.github/workflows/deploy.yml` (workflow_dispatch only, steps, permissions, concurrency); live checks belong to the deploy phase (docs/DEPLOY.md) | fixme (T-007) |
-| REQ-010 | `a11y.spec.js`: no horizontal scroll at 375px passing; axe, `rel="noopener"`, photo alt fixme (axe and noopener/alt: T-003, T-006) | partly passing |
+| REQ-010 | `a11y.spec.js`: no horizontal scroll at 375px; axe (no serious/critical); `rel="noopener"` on `_blank` links; photo alt = name. Unit tests: header icons (linkedin/github/npm only, aria-hidden), rel, alt | passing (T-003) |
 | REQ-011 | none yet (criteria come with the M3 plan) | n/a |
 
 Unit tests (`src/**/*.test.jsx`) cover the header, about, experience, education, skills components and the App.

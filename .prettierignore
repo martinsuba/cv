@@ -9,6 +9,5 @@ data/
 assets/
 cv.pdf
 docs/
-src/devicon/
 tests/fixtures/
 *.md

@@ -7,8 +7,6 @@ import Skills from './skills/skills.jsx';
 import cv from '../data/cv.json';
 
 import './style.css';
-import './devicon/devicon.css';
-import './devicon/devicon-colors.css';
 
 export default function App() {
 	return (

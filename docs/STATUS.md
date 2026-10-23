@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-002 content from the current PDF (PR #44, in review)
-Open PRs: #44 T-002
+Current task: T-003 inline SVG icons, remove devicon (PR #45, in review)
+Open PRs: #45 T-003
 Blockers: –
-Next step: review + test-review T-002, merge; then T-003. PLAN.md ticks go into the milestone PR (merge condition d forbids PLAN.md in task PRs).
+Next step: review + test-review T-003, merge; then T-004. PLAN.md ticks go into the milestone PR (merge condition d forbids PLAN.md in task PRs).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -22,3 +22,5 @@ Next step: review + test-review T-002, merge; then T-003. PLAN.md ticks go into 
 - 2026-10-23: M1 started (Martin: "go m1").
 - 2026-10-23: seeded-bug check passed: test-reviewer said CHANGES NEEDED on #42 (weakened description assertion); #42 closed unmerged.
 - 2026-10-23: T-001 done (PR #43 merged, review + test-review clean, 0 fix rounds).
+- 2026-10-23: T-002 done (PR #44 merged, review + test-review clean, 0 fix rounds). cv.json verified word for word against martin-suba-cv.pdf.
+- 2026-10-23: T-003 also adds the SaferPass description to tests/acceptance/expected-content.js (test gap from the T-002 test review; explicit in the task text).

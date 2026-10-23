@@ -7,7 +7,7 @@ Default branch is `master`: wherever the framework says "main", use `master`.
 ## Stack
 Preact 10 + Vite (`@preact/preset-vite`, base `/cv/`), plain CSS, ESLint 9 + Prettier, Vitest + @testing-library/preact,
 Playwright (acceptance tests; PDF later), Node 24 (`.nvmrc`). JS only, no TypeScript. See docs/ARCHITECTURE.md.
-Entry: `index.html` + `src/main.jsx` -> `src/app.jsx`. Legacy until their tasks: `generate-pdf.cjs`/puppeteer (T-004), devicon (T-003).
+Entry: `index.html` + `src/main.jsx` -> `src/app.jsx`. Legacy until its task: `generate-pdf.cjs`/puppeteer (T-004).
 
 ## Commands
 - Install: `npm ci` (then once `npx playwright install chromium`)

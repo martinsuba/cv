@@ -25,4 +25,11 @@ describe('Experience', () => {
 		expect(screen.getByText('Nowhere')).toBeInTheDocument();
 		expect(screen.getByText('Synthetic description.')).toBeInTheDocument();
 	});
+
+	it('opens company links in a new tab with rel noopener noreferrer', () => {
+		render(<Experience experience={experience} />);
+		const link = screen.getByRole('link', { name: 'Example Corp' });
+		expect(link).toHaveAttribute('target', '_blank');
+		expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+	});
 });
