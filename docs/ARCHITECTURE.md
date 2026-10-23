@@ -94,3 +94,12 @@ matches the deployed data.
 Context: two browser drivers would be redundant; devicon is a 5-file icon font used for 3 header icons after the skills
 went text-only. · Decision: Playwright Chromium for both; inline SVG icons. · Consequences: smaller install and bundle,
 no fuzzy icon-name matching.
+
+### D-006: Self-hosted Inter for screen and PDF
+Context: the CSS font stack (-apple-system, Segoe UI, Helvetica, Arial) resolves to San Francisco on Martin's Mac but to
+Liberation Sans on the Linux CI runner that prints the PDF, so the PDF looks different and worse. · Options: keep the
+system stack and install fonts on the runner; a Google Fonts link; a self-hosted web font via Fontsource. · Decision:
+self-host **Inter** (SIL OFL, neutral and technical, close to the San Francisco look Martin's own PDF had) with
+`@fontsource-variable/inter`, Latin + Latin Extended subsets (Š, Ú, ...); the M3 design proposals may suggest another
+family. · Consequences: identical rendering everywhere; no third-party requests; `scripts/pdf.js` already waits for
+`document.fonts.ready`.

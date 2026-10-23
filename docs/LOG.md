@@ -16,3 +16,4 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-23 | M1 gate | merged milestone PR #49, said "go M2" | n – milestone gate
 2026-10-23 | M2 gate | merged milestone PR #51, approved first production deploy ("deploy") | n – deploy gate
 2026-10-23 | deploy | extended the agent's GitHub PAT with Pages permission after a 403 on enabling Pages | y – could be granted up front in the repo-setup checklist (harness), so deploy needs no extra round
+2026-10-23 | after deploy | asked for root redirect, better PDF (font, paddings) and design alternatives | n – product/design feedback

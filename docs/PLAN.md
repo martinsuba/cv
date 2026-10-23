@@ -90,15 +90,66 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 - Then: `deploy` skill (Lead enables Pages with build_type=workflow, Martin approves, first run, smoke checks).
 
-## M3: Design refresh (detailed in a later plan PR)
-### [ ] T-008: Design proposals  (size S, Lead-run, no code merged)
-- Goal: research clean, minimal CV/profile designs suited to a technical engineering manager; build 2–3 directions
-  as static mockups from the real `cv.json` (screen + print), share them with Martin as a page with screenshots.
+## M3: PDF polish and design proposals (plan v2)
+### [ ] T-008: Self-hosted web font for screen and PDF  (size S)
+- Goal: add `@fontsource-variable/inter` (Latin + Latin Extended), use it as the first family in the font stack for screen
+  and print; keep the system stack as fallback. Check the PDF embeds only Inter.
+- REQs: REQ-012
+- Acceptance tests to make pass: new tests/acceptance/fonts.spec.js (this task explicitly may create it): PDF embedded
+  fonts are Inter only; `document.fonts.check` true and computed body font is Inter; no external font requests;
+  woff2 total ≤ 200 KB. Existing pdf/print specs keep passing.
+- Areas/files: package.json, src/main.jsx or src/style.css, tests/acceptance/fonts.spec.js, tests/helpers.js (font
+  listing helper), docs/TESTS.md
+- Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
+
+### [ ] T-009: PDF polish: spacing, margins, header  (size M)
+- Goal: rework print CSS so the PDF reads like the website: consistent vertical rhythm between sections and entries,
+  clearer heading scale, contact links on one line, photo size balanced, page margins ≥ 15 mm (A4), body ≥ 9.5 pt.
+  Screen look unchanged. Attach before/after PDF page images and the website screenshot to the PR.
+- REQs: REQ-013 (and REQ-005/006 keep passing)
+- Acceptance tests to make pass: new tests/acceptance/print-layout.spec.js (this task explicitly may create it):
+  contact links on one line in print media; PDF page margins ≥ 15 mm (text bounding boxes from the PDF) and body text
+  ≥ 9.5 pt. pdf.spec.js and print.spec.js keep passing.
+- Areas/files: src/style.css, src/*/*.css, scripts/pdf.js (margins), tests/acceptance/print-layout.spec.js, docs/TESTS.md
+- Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
+- Notes: PDF images: render pages with pdfjs-dist in Playwright, or install poppler-utils in the task's own env if possible.
+
+### [ ] T-014: Replace the photo  (size S)
+- Goal: replace data/photo.jpg with Martin's new portrait (source file provided by Martin, see STATUS). Crop to a
+  square-ish head-and-shoulders frame that works in the round header crop, resize to 800 px on the long side, strip
+  EXIF/GPS metadata, JPEG quality ~82 (target ≤ 150 KB). og-image.jpg follows automatically (built from data/photo.jpg).
+  Update the header img width/height attributes to the new intrinsic size.
+- REQs: REQ-001, REQ-008, REQ-010 (alt text unchanged)
+- Acceptance tests to make pass: existing content/meta/a11y/pdf specs keep passing; unit test for the header
+  width/height updated.
+- Areas/files: data/photo.jpg, src/header/header.jsx, src/header/header.test.jsx
+- Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean; before/after header
+  screenshots (screen + print) in the PR; no metadata left in the JPEG (check with a script).
+
+### [ ] T-010: Design proposals  (size S, Lead-run, no code merged)
+- Goal: research clean, minimal CV/profile designs suited to a technical engineering manager; build 3 directions as
+  static mockups from the real `cv.json` and the new photo (screen desktop + mobile + A4 print), on top of T-008/T-009/T-014, and share them
+  with Martin as one comparison page.
 - REQs: REQ-011
-- Output: Martin picks a direction (or the Lead picks if Martin delegates); a plan v2 PR adds the implementation
-  tasks and REQ-011 acceptance criteria.
+- Output: Martin picks a direction (or mixes); a plan v3 PR adds the implementation tasks and REQ-011 criteria.
+
+## M4: Maintenance (could; Martin may drop or reorder)
+### [ ] T-011: CI on the Playwright container image  (size S)
+- Goal: run the `ci` and `screenshots` jobs in `mcr.microsoft.com/playwright:v<installed version>-noble`, drop the
+  browser cache/install steps; deploy.yml the same. Keep the version in one place (check it matches package-lock).
+- REQs: REQ-014. Areas/files: .github/workflows/ci.yml, screenshots.yml, deploy.yml (explicitly allowed).
+
+### [ ] T-012: Current major versions of workflow actions  (size S)
+- Goal: bump checkout, setup-node, cache (and any other action) in all workflows to current majors; read release notes
+  for breaking changes. acceptance-guard.yml is included, so this PR needs Martin's `acceptance-change` label.
+- REQs: REQ-014. Areas/files: .github/workflows/* (explicitly allowed).
+
+### [ ] T-013: Meaningful mutation testing  (size S)
+- Goal: Stryker as a pinned devDependency with `@stryker-mutator/vitest-runner`, mutate `src/**` and `scripts/**`,
+  timeouts ≤ 10%; mutation.yml uses the local binary. Report the score and survivors in the PR.
+- REQs: REQ-014. Areas/files: package.json, stryker.config.json, .github/workflows/mutation.yml (explicitly allowed).
 
 ## Screens (web UI projects)
 - CV page, desktop 1280px: full page.
 - CV page, mobile 375px: full page.
-- CV page, print media (A4 emulation): full page; plus PDF pages rendered as images if cheap.
+- CV page, print media (A4 emulation): full page; plus PDF pages rendered as images (from T-009).
