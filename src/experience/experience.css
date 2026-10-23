@@ -1,0 +1,8 @@
+.experience .meta a {
+	color: inherit;
+}
+.experience .meta a:hover,
+.experience .meta a:focus-visible {
+	color: var(--accent-dark);
+	text-decoration: underline;
+}
