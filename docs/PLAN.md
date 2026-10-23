@@ -90,8 +90,8 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 - Then: `deploy` skill (Lead enables Pages with build_type=workflow, Martin approves, first run, smoke checks).
 
-## M3: PDF polish and design proposals (plan v2)
-### [ ] T-008: Self-hosted web font for screen and PDF  (size S)
+## [x] M3: PDF polish and design proposals (plan v2)
+### [x] T-008: Self-hosted web font for screen and PDF  (size S)  — #54
 - Goal: add `@fontsource/inter` (static faces; Latin + Latin Extended), use it as the first family in the font stack for screen
   and print; keep the system stack as fallback. Check the PDF embeds only Inter.
 - REQs: REQ-012
@@ -102,7 +102,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
   listing helper), docs/TESTS.md
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 
-### [ ] T-009: PDF polish: spacing, margins, header  (size M)
+### [x] T-009: PDF polish: spacing, margins, header  (size M)  — #55
 - Goal: rework print CSS so the PDF reads like the website: consistent vertical rhythm between sections and entries,
   clearer heading scale, contact links on one line, photo size balanced, page margins ≥ 15 mm (A4), body ≥ 9.5 pt.
   Screen look unchanged. Attach before/after PDF page images and the website screenshot to the PR.
@@ -114,7 +114,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 - Notes: PDF images: render pages with pdfjs-dist in Playwright, or install poppler-utils in the task's own env if possible.
 
-### [ ] T-014: Replace the photo  (size S)
+### [x] T-014: Replace the photo  (size S)  — #57
 - Goal: replace data/photo.jpg with Martin's new portrait (source file provided by Martin, see STATUS). Crop to a
   square-ish head-and-shoulders frame that works in the round header crop, resize to 800 px on the long side, strip
   EXIF/GPS metadata, JPEG quality ~82 (target ≤ 150 KB). og-image.jpg follows automatically (built from data/photo.jpg).
@@ -126,7 +126,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean; before/after header
   screenshots (screen + print) in the PR; no metadata left in the JPEG (check with a script).
 
-### [ ] T-010: Design proposals  (size S, Lead-run, no code merged)
+### [x] T-010: Design proposals  (size S, Lead-run, no code merged)  — direction A chosen, see M4
 - Goal: research clean, minimal CV/profile designs suited to a technical engineering manager; build 3 directions as
   static mockups from the real `cv.json` and the new photo (screen desktop + mobile + A4 print), on top of T-008/T-009/T-014, and share them
   with Martin as one comparison page.

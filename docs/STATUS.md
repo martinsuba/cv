@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-014 new photo (builder running); plan v3 (design A) in review
-Open PRs: plan v3 (this branch); T-014 coming
+Current task: – (M3 complete; plan v3 + M3 milestone in review, PR #56)
+Open PRs: #56 plan v3 + M3 milestone
 Blockers: –
-Next step: Martin merges plan v3; T-014 review + merge; M3 milestone PR (ticks T-008/T-009/T-014/T-010); then "go M4" (design A).
+Next step: Martin merges #56, then "go M4" (design A: T-015, T-016, T-017); deploy after M4 (or now, for the new photo).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -47,3 +47,5 @@ Next step: Martin merges plan v3; T-014 review + merge; M3 milestone PR (ticks T
 - 2026-10-23: T-009 done (PR #55 merged, 0 fix rounds after review). T-010: three directions on the Design canvas https://claude.ai/artifact/AeMkfPFe6NVjtSg5Gx5pk4 (A Technical ledger, B Structured sidebar, C Quiet editorial).
 - 2026-10-23: Martin picked direction A; approved deploy of d01f760 (run 39959117497, smoke checks green); asked the Lead to copy the pasted portrait: saved from the session transcript to ~/HAL/ai-assistant/notes/career/cv/photo-new.jpg (1500×2000), T-014 started.
 - 2026-10-23: plan v3 (Lead decisions): keep full text for every entry (no condensed "Earlier" list: REQ-001, content tailoring out of scope); JetBrains Mono static 400 Latin as second font, budget 230 KB; skills as tags on screen but comma text in the PDF (ATS); no PDF running footer (header/footer templates would embed a system font). Design tasks are M4 (T-015…T-017); maintenance moves to M5.
+- 2026-10-23: T-014 done (PR #57 merged, 0 fix rounds): 800×800 square crop, 57 KB, no metadata segments; Lead checked the rendered header on screen and in print against the live site.
+- 2026-10-23: M3 complete: T-008 (4 fix rounds, 4th approved by Martin), T-009 (0), T-014 (0), T-010 (Lead-run, direction A). Deployed: T-008/T-009 (d01f760). Not yet deployed: T-014 photo. Follow-ups: GitHub reports 153 Dependabot alerts on master (likely stale old-toolchain lockfile entries; check in M5); optional OFL licence note for Inter/JetBrains Mono in README.
