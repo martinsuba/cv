@@ -25,3 +25,5 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-23 | M4 gate | merged plan v3 + M3 milestone #56, said "go M4" | n – milestone gate
 2026-10-23 | M4 review | asked whether the red Vitest runs in the mutation summary are OK; asked to fix the Node 20 action deprecation in the next milestone | y – the milestone PR could explain the mutation summary up front; the deprecation was already planned as T-012
 2026-10-23 | M4 gate + deploy gate | merged M4 milestone #61, approved deploy, said "go M5" | n – gates
+2026-10-23 | M5 T-012 | added acceptance-change label and merged #63 (acceptance-guard.yml changed) | n – framework gate
+2026-10-23 | M5 | paused the session for the Claude usage limit, asked for a status write-up | n – resource limit
