@@ -49,12 +49,30 @@ describe('Header', () => {
 		expect(container.querySelector('i')).toBeNull();
 	});
 
-	it('opens contact links in a new tab with rel noopener noreferrer', () => {
+	it('opens external contact links in a new tab with rel noopener noreferrer', () => {
 		const { container } = render(<Header cv={cv} />);
-		for (const a of container.querySelectorAll('a')) {
+		const external = [...container.querySelectorAll('a')].filter(
+			(a) => !a.getAttribute('href').startsWith('mailto:'),
+		);
+		expect(external).toHaveLength(4);
+		for (const a of external) {
 			expect(a).toHaveAttribute('target', '_blank');
 			expect(a).toHaveAttribute('rel', 'noopener noreferrer');
 		}
+	});
+
+	it('does not open the mailto: link in a new tab and gives it no rel', () => {
+		render(<Header cv={cv} />);
+		const a = screen.getByText('jane@example.invalid').closest('a');
+		expect(a).not.toHaveAttribute('target');
+		expect(a).not.toHaveAttribute('rel');
+	});
+
+	it('gives the photo explicit width and height to avoid layout shift', () => {
+		render(<Header cv={cv} />);
+		const img = screen.getByRole('img');
+		expect(img).toHaveAttribute('width', '1000');
+		expect(img).toHaveAttribute('height', '1152');
 	});
 
 	it('gives the photo alt text equal to the name', () => {

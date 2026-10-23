@@ -14,7 +14,10 @@ export default function header({ cv }) {
 					return (
 						<li>
 							{Icon && <Icon />}
-							<a href={href} target="_blank" rel="noopener noreferrer">
+							<a
+								href={href}
+								{...(key === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+							>
 								{text}
 							</a>
 						</li>
@@ -23,7 +26,7 @@ export default function header({ cv }) {
 			</ul>
 
 			<div className="photo">
-				<img src={photo} alt={cv.name} />
+				<img src={photo} alt={cv.name} width="1000" height="1152" />
 			</div>
 			<h1>{cv.name}</h1>
 			<h2>{cv.title}</h2>
