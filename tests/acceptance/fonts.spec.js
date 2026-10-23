@@ -20,6 +20,11 @@ test.describe('REQ-012 web font', () => {
 		expect(subtypes).not.toContain('Type3');
 	});
 
+	test('REQ-012: the Type3 check works: it flags a known Type3 sample PDF', () => {
+		const sample = join(ROOT, 'tests/fixtures/type3-sample.pdf');
+		expect(pdfFontSubtypes(sample)).toContain('Type3');
+	});
+
 	test('REQ-012: extracted PDF text keeps every hyphenated word from cv.json', async () => {
 		const { pages } = await readPdf();
 		// A word wrapped at its hyphen reads "user- facing"; that is still intact.

@@ -64,7 +64,8 @@ export const norm = (s) => s.replace(/\s+/g, ' ').trim();
 /**
  * Names (subset prefix stripped, de-duplicated) of every font embedded in a PDF: /BaseFont of normal fonts and
  * /FontName of font descriptors (Chromium embeds variable fonts as Type3 fonts that have no /BaseFont).
- * Throws if the PDF does not exist.
+ * Throws if the PDF does not exist. Scans the raw PDF text, so it assumes no compressed object streams (true for
+ * Chromium output today).
  */
 export function pdfFontNames(path = PDF_PATH) {
 	if (!existsSync(path)) throw new Error(`${path} not found: run \`npm run build && npm run pdf\``);
@@ -75,10 +76,16 @@ export function pdfFontNames(path = PDF_PATH) {
 	return [...new Set(names)].sort();
 }
 
-/** /Subtype values of the font dictionaries in a PDF (e.g. Type0, TrueType, Type3). */
+/**
+ * Font /Subtype values found in a PDF (Type0, TrueType, Type3, CIDFontType2, ...). Scans the raw PDF text, so it assumes
+ * no compressed object streams (true for Chromium output today). It does not parse dictionaries: nested dicts of Type3
+ * fonts (/Encoding, /CharProcs) would defeat a dictionary regex, so it matches the font subtype names anywhere.
+ */
 export function pdfFontSubtypes(path = PDF_PATH) {
 	if (!existsSync(path)) throw new Error(`${path} not found: run \`npm run build && npm run pdf\``);
 	const raw = readFileSync(path).toString('latin1');
-	const dicts = raw.match(/<<[^<>]*\/Type\s*\/Font\b[^<>]*>>/g) ?? [];
-	return [...new Set(dicts.map((d) => d.match(/\/Subtype\s*\/(\w+)/)?.[1]).filter(Boolean))].sort();
+	const found = raw.matchAll(
+		/\/Subtype\s*\/(Type0|Type1|MMType1|TrueType|Type3|CIDFontType0|CIDFontType2)\b/g,
+	);
+	return [...new Set([...found].map((m) => m[1]))].sort();
 }
