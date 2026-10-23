@@ -1,4 +1,4 @@
-import getIconClass from '../get-icon-class.js';
+import icons from './icons.jsx';
 import photo from '../../data/photo.jpg';
 
 import './header.css';
@@ -10,10 +10,11 @@ export default function header({ cv }) {
 				{Object.entries(cv.contact).map(([key, value]) => {
 					const text = value.replace(/(^\w+:|^)\/\//, '');
 					const href = key === 'email' ? `mailto:${value}` : value;
+					const Icon = Object.hasOwn(icons, key) ? icons[key] : null;
 					return (
 						<li>
-							<i class={`devicon-${getIconClass(key)} colored`} />
-							<a href={href} target="_blank">
+							{Icon && <Icon />}
+							<a href={href} target="_blank" rel="noopener noreferrer">
 								{text}
 							</a>
 						</li>
@@ -22,7 +23,7 @@ export default function header({ cv }) {
 			</ul>
 
 			<div className="photo">
-				<img src={photo} />
+				<img src={photo} alt={cv.name} />
 			</div>
 			<h1>{cv.name}</h1>
 			<h2>{cv.title}</h2>

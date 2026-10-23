@@ -8,7 +8,7 @@ export default function experience({ experience }) {
 				<div className="item">
 					<h2>{item.title}</h2>
 					<h3>
-						<a href={item.company.link} target="_blank">
+						<a href={item.company.link} target="_blank" rel="noopener noreferrer">
 							{item.company.name}
 						</a>
 					</h3>
