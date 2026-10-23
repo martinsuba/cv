@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { ROOT, pdfFontNames } from '../helpers.js';
+import { ROOT, cv, norm, pdfFontNames, pdfFontSubtypes, readPdf } from '../helpers.js';
 
 test.describe('REQ-012 web font', () => {
 	test('REQ-012: every font embedded in dist/cv.pdf is Inter, none is a system fallback', () => {
@@ -14,17 +14,36 @@ test.describe('REQ-012 web font', () => {
 		}
 	});
 
+	test('REQ-012: no embedded font is Type3 (text stays extractable)', () => {
+		const subtypes = pdfFontSubtypes();
+		expect(subtypes.length, 'font dictionaries found').toBeGreaterThan(0);
+		expect(subtypes).not.toContain('Type3');
+	});
+
+	test('REQ-012: extracted PDF text keeps every hyphenated word from cv.json', async () => {
+		const { pages } = await readPdf();
+		// A word wrapped at its hyphen reads "user- facing"; that is still intact.
+		const text = norm(pages.map((p) => p.text).join(' ')).replace(/(\w-) (?=\w)/g, '$1');
+		const words = new Set(
+			JSON.stringify(cv)
+				.replace(/https?:\/\/[^"\s]+/g, '')
+				.match(/[\p{L}\d]+(?:-[\p{L}\d]+)+/gu),
+		);
+		expect(words.size, 'hyphenated words in cv.json').toBeGreaterThan(5);
+		for (const w of words) expect(text, w).toContain(w);
+	});
+
 	test('REQ-012: on the built site the web font is loaded and body text computes to it', async ({
 		page,
 	}) => {
 		await page.goto('/cv/', { waitUntil: 'networkidle' });
 		const loaded = await page.evaluate(async () => {
 			await document.fonts.ready;
-			return document.fonts.check('16px "Inter Variable"');
+			return document.fonts.check('16px "Inter"');
 		});
 		expect(loaded).toBe(true);
 		const family = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
-		expect(family).toMatch(/^"?Inter/);
+		expect(family).toMatch(/^"?Inter\b/);
 	});
 
 	test('REQ-012: no request leaves localhost during page load', async ({ page }) => {

@@ -74,3 +74,11 @@ export function pdfFontNames(path = PDF_PATH) {
 	);
 	return [...new Set(names)].sort();
 }
+
+/** /Subtype values of the font dictionaries in a PDF (e.g. Type0, TrueType, Type3). */
+export function pdfFontSubtypes(path = PDF_PATH) {
+	if (!existsSync(path)) throw new Error(`${path} not found: run \`npm run build && npm run pdf\``);
+	const raw = readFileSync(path).toString('latin1');
+	const dicts = raw.match(/<<[^<>]*\/Type\s*\/Font\b[^<>]*>>/g) ?? [];
+	return [...new Set(dicts.map((d) => d.match(/\/Subtype\s*\/(\w+)/)?.[1]).filter(Boolean))].sort();
+}
