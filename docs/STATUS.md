@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-017 ledger layout in print and PDF (in progress)
-Open PRs: T-017 (see PR list)
+Current task: – (M4 complete; milestone PR in review)
+Open PRs: M4 milestone (chore/milestone-M4)
 Blockers: –
-Next step: T-017 review; deploy after M4.
+Next step: Martin reviews/merges the M4 milestone PR; then deploy (design A + new photo); M5 maintenance optional.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -49,3 +49,6 @@ Next step: T-017 review; deploy after M4.
 - 2026-10-23: plan v3 (Lead decisions): keep full text for every entry (no condensed "Earlier" list: REQ-001, content tailoring out of scope); JetBrains Mono static 400 Latin as second font, budget 230 KB; skills as tags on screen but comma text in the PDF (ATS); no PDF running footer (header/footer templates would embed a system font). Design tasks are M4 (T-015…T-017); maintenance moves to M5.
 - 2026-10-23: T-014 done (PR #57 merged, 0 fix rounds): 800×800 square crop, 57 KB, no metadata segments; Lead checked the rendered header on screen and in print against the live site.
 - 2026-10-23: M3 complete: T-008 (4 fix rounds, 4th approved by Martin), T-009 (0), T-014 (0), T-010 (Lead-run, direction A). Deployed: T-008/T-009 (d01f760). Not yet deployed: T-014 photo. Follow-ups: GitHub reports 153 Dependabot alerts on master (likely stale old-toolchain lockfile entries; check in M5); optional OFL licence note for Inter/JetBrains Mono in README.
+- 2026-10-23: M4 complete: T-015 (#58, 0 fix rounds), T-016 (#59, 1 fix round: design.spec checked only the first element, caught by the test-reviewer), T-017 (#60, 0). PDF 2 pages, fonts Inter + JetBrains Mono (no Type3). Not yet deployed: T-014 photo + all of M4.
+- 2026-10-23: Lead note: two test-reviewers claimed the `acceptance-change` label was required; it is not (guard accepts test-review success). Consider clarifying the test-reviewer prompt.
+

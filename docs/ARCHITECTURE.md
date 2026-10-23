@@ -110,7 +110,8 @@ Decision: Inter stays the text font; **JetBrains Mono** (SIL OFL, `@fontsource/j
 subset only: labels, dates and contacts are ASCII) for section labels, dates, the job title and contacts. Colours as CSS
 custom properties in `src/style.css`: `--text #111827`, `--muted #5B6470` (6.3:1 on white), `--accent #1D4ED8`,
 `--rule #E5E7EB`, `--rule-soft #F0F1F3`, `--tag-border #D7DBE0`. Layout: each section is a two-column grid (label column
-200px, content); entries are a second grid (dates 190px, body); one column below 640px. Section numbers come from render
+200px, content); entries are a second grid (dates 230px, 12px mono, one line, body) from 900px up, dates above the title below 900px;
+sections go to one column below 640px. In print: title left, dates right on one line, label column ~108px. Section numbers come from render
 order, section names are UI strings (not CV content). Skills render as `ul > li` per group: tags on screen, inline
 comma-separated text in print (CSS generated separators), so the PDF stays ATS-friendly. No running PDF footer: Chromium
 header/footer templates cannot use the page's web fonts and would embed a system font (breaks REQ-012). ·
