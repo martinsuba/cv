@@ -37,6 +37,6 @@ Status: passing = runs in CI now; fixme = `test.fixme` until the named task is d
 | REQ-009 | `deploy-workflow.spec.js`: static checks of `.github/workflows/deploy.yml` (workflow_dispatch only, steps, permissions, concurrency); live checks belong to the deploy phase (docs/DEPLOY.md) | passing (T-007); live checks in the deploy phase |
 | REQ-010 | `a11y.spec.js`: no horizontal scroll at 375px; axe (no serious/critical); `rel="noopener"` on `_blank` links; photo alt = name. Unit tests: header icons (linkedin/github/npm only, aria-hidden), rel, alt | passing (T-003, T-006) |
 | REQ-011 | none yet (criteria come with the M3 plan) | n/a |
-| REQ-012 | `fonts.spec.js`: every font in `dist/cv.pdf` is Inter (helper `pdfFontNames`); no Type3 font; extracted text keeps every hyphenated word of cv.json; `document.fonts.check()` true and body computes to Inter; no non-localhost request on load; woff2 total <= 200 KB (200 x 1024 B) | passing (T-008) |
+| REQ-012 | `fonts.spec.js`: every font in `dist/cv.pdf` is Inter (helper `pdfFontNames`); no Type3 font; extracted text keeps every hyphenated word of cv.json; `document.fonts.check()` true and body computes to Inter; no non-localhost request on load; woff2 total <= 200 KB (200,000 B) | passing (T-008) |
 
 Unit tests (`src/**/*.test.jsx`) cover the header, about, experience, education, skills components and the App.

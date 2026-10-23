@@ -58,11 +58,11 @@ test.describe('REQ-012 web font', () => {
 		expect(external).toEqual([]);
 	});
 
-	test('REQ-012: woff2 files in dist/assets total at most 200 KB', () => {
+	test('REQ-012: woff2 files in dist/assets total at most 200 KB (200,000 B)', () => {
 		const dir = join(ROOT, 'dist/assets');
 		const files = readdirSync(dir).filter((f) => f.endsWith('.woff2'));
 		expect(files.length, 'woff2 files bundled').toBeGreaterThan(0);
 		const total = files.reduce((sum, f) => sum + statSync(join(dir, f)).size, 0);
-		expect(total, `woff2 total ${total} bytes`).toBeLessThanOrEqual(200 * 1024);
+		expect(total, `woff2 total ${total} bytes`).toBeLessThanOrEqual(200_000);
 	});
 });
