@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-011 Playwright container (in progress)
-Open PRs: T-011 (task/T-011-playwright-container)
+Current task: T-012 action majors (in progress, waiting for Martin's acceptance-change label)
+Open PRs: T-012 (task/T-012-action-majors)
 Blockers: –
-Next step: T-011 review; T-012 (needs Martin's acceptance-change label); T-013
+Next step: T-012 review + label; T-013
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md

@@ -19,7 +19,9 @@ describe('workflow container image (REQ-014)', () => {
 			expect(job.container.image).toBe(`mcr.microsoft.com/playwright:v${version}-noble`);
 		});
 		it(`${file}.yml has no browser install or cache step`, () => {
-			expect(read(`.github/workflows/${file}.yml`)).not.toMatch(/playwright install|ms-playwright/);
+			expect(read(`.github/workflows/${file}.yml`)).not.toMatch(
+				/playwright install|ms-playwright|apt(-get)? install/,
+			);
 		});
 	}
 });
