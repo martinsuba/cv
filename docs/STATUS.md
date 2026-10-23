@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-005 print layout + download link (PR #47, in review)
-Open PRs: #47 T-005
+Current task: T-006 meta/SEO + review fixes (PR #48, in review), last task of M1
+Open PRs: #48 T-006
 Blockers: –
-Next step: review + test-review T-005, merge; then T-006 (+ nits: no target=_blank on mailto, explicit photo width/height). PLAN.md ticks go into the milestone PR.
+Next step: review + test-review T-006, merge; then M1 end: Opus milestone review, screenshots, milestone PR chore/milestone-M1 (PLAN ticks; fix generate-pdf.js -> .cjs wording in PLAN/ARCHITECTURE).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -28,3 +28,4 @@ Next step: review + test-review T-005, merge; then T-006 (+ nits: no target=_bla
 - 2026-10-23: T-004 CI run took 9 min: `playwright install --with-deps` on the runner (8m42s), not the code. Cache browsers if it repeats.
 - 2026-10-23: T-004 done (PR #46 merged, review + test-review clean, 0 fix rounds).
 - 2026-10-23: T-005 PDF checked visually by the Lead: 3 pages, no split entries, last page ~2/3 full. Slow CI was apt mirror speed in `playwright install --with-deps`; browser cache added, container image is the next option if it repeats.
+- 2026-10-23: T-005 done (PR #47 merged, review + test-review clean, 0 fix rounds).
