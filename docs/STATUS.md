@@ -1,9 +1,9 @@
 # Status: cv
-Phase: build (M2 review)
-Current task: – (M2 complete, milestone PR open)
-Open PRs: milestone M2 PR (chore/milestone-M2)
+Phase: deploy (live)
+Current task: –
+Open PRs: deploy record (chore/deploy-2026-10-23)
 Blockers: –
-Next step: Martin merges the M2 milestone PR and approves the first production deploy; then the Lead enables Pages (build_type=workflow), runs `deploy`, smoke checks per docs/DEPLOY.md.
+Next step: retro (offered); then plan v2 with Martin: M3 design proposals, mutation-testing fix, CI container image, workflow action bumps.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -35,3 +35,5 @@ Next step: Martin merges the M2 milestone PR and approves the first production d
 - 2026-10-23: T-007: Pages actions on v5 (upload-pages-artifact, deploy-pages); checkout/setup-node/cache still v4 in all workflows (latest: v7/v7/v6). Proposed chore: bump all workflows together (acceptance-guard.yml change needs Martin's label).
 - 2026-10-23: T-007 done (PR #50 merged; 2 fix rounds: Pages actions bumped to v5, Pages permissions moved to the deploy job). M2 complete.
 - 2026-10-23: DEPLOY.md rollback corrected (workflow_dispatch needs a branch/tag; github-pages env deploys from master only).
+- 2026-10-23: Pages enabled (build_type=workflow) after Martin extended the PAT with Pages permission; first deploy of b162a1c to https://martinsuba.github.io/cv/ succeeded, smoke checks green.
+- 2026-10-23: Note for Martin: the root repo martinsuba.github.io still serves the old preact-cli PWA with sw.js at scope "/"; returning visitors with that worker installed may get cached content for /cv/. Fix (in the root repo, Martin's call): replace sw.js with a self-unregistering worker.
