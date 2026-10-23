@@ -79,7 +79,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 
 ## M2: Deploy
-### [ ] T-007: Manual deploy workflow  (size S)
+### [x] T-007: Manual deploy workflow  (size S)
 - Goal: `.github/workflows/deploy.yml`, `workflow_dispatch` only, on `master`: npm ci → validate → build → pdf →
   `actions/upload-pages-artifact` (dist/) → `actions/deploy-pages`; permissions `pages: write`, `id-token: write`;
   concurrency group `pages`. README: how to edit `cv.json`, run locally, deploy.

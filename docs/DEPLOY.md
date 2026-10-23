@@ -25,8 +25,12 @@ The workflow: npm ci → validate → build → pdf → upload-pages-artifact (d
 - Open the page once in Playwright: no console errors, photo loads.
 
 ## Rollback
-Re-run the `deploy` workflow on the previous good commit: `gh workflow run deploy --ref <sha-or-tag>` (workflow_dispatch
-accepts a ref). Or revert the bad commit through a PR and redeploy.
+The `github-pages` environment only accepts deploys from `master` by default, and `workflow_dispatch --ref` takes a
+branch or tag, not a bare SHA. So the reliable rollback is:
+1. Revert the bad change on `master` through a PR (`git revert <sha>` on a `fix/*` branch), merge it.
+2. Run the deploy again: `gh workflow run deploy --ref master`.
+Faster alternative (Martin decides): re-run an earlier successful `deploy` run from the Actions tab ("Re-run all jobs"),
+which rebuilds that run's commit.
 To take the site down: `gh api -X DELETE repos/martinsuba/cv/pages` (Martin decides).
 
 ## Secrets needed (names only; values set by Martin in GitHub/target)
