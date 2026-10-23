@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-008 (PR #54): 4th fix round approved by Martin (fonts loaded assertion)
-Open PRs: #54 T-008
+Current task: T-009 PDF polish (PR #55, in review)
+Open PRs: #55 T-009
 Blockers: –
-Next step: builder adds FontFace loaded assertion; test-review; merge; T-009.
+Next step: review + test-review T-009, merge; T-014 photo once the file is on the server; T-010 design proposals.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -43,3 +43,4 @@ Next step: builder adds FontFace loaded assertion; test-review; merge; T-009.
 - 2026-10-23: plan v2 (#53), deploy record (#52) and root redirect (martinsuba.github.io#1) merged by Martin; "go M3". Root redirect verified live in a browser.
 - 2026-10-23: T-008: static Inter (400/600/400-italic, latin + latin-ext, 182 KB), not the variable font: Chromium embeds variable fonts as Type3, which broke PDF text extraction (lost hyphens; bad for ATS). fonts.spec.js also asserts no Type3 and intact hyphenated words (refines REQ-012; PRD wording follows in the M3 milestone PR). h3 weight 500 → 400.
 - 2026-10-23: T-008 fix rounds: (1) variable→static Inter (Type3), (2) drop weight 500 for the font budget, (3) Type3 detector fix. Reviewer APPROVE at 8388210; test-reviewer CHANGES NEEDED: document.fonts.check() is always true for unknown/failed fonts. Stopped per framework.
+- 2026-10-23: T-008 done (PR #54 merged; 4 fix rounds, 4th approved by Martin). T-009: PDF now 2 pages, Inter 10pt body, 16mm margins, one-line meta per entry; Lead checked the rendered pages. Type3 fixture replaced by a synthetic PDF generated at test time.
