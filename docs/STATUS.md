@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-013 meaningful mutation testing (PR #64, head d497c07): builder done, reviewer running at pause time
+Current task: T-013 meaningful mutation testing (PR #64, head d497c07): reviewer APPROVE at d497c07 (no blocking issues); test-review not run yet
 Open PRs: #64 T-013; this status PR
 Blockers: – (session paused for Claude usage limit, 2026-10-23)
-Next step (resume here): 1) check the reviewer verdict on #64 (`gh pr view 64 --comments`); if APPROVE on the current head, run the
+Next step (resume here): 1) #64 reviewer already APPROVED d497c07; if the head is unchanged, run the
 test-reviewer (mutation.yml changed), re-run acceptance-guard, merge with --match-head-commit. 0 fix rounds used so far.
 2) Then M5 milestone PR (chore/milestone-M5): PLAN ticks T-011/T-012/T-013, screenshots, mutation score; test the new
 `workflow_dispatch` on mutation.yml. 3) Optional: retro (offered after deploys, not run yet).
@@ -59,4 +59,4 @@ test-reviewer (mutation.yml changed), re-run acceptance-guard, merge with --matc
 - 2026-10-23: T-011 done (PR #62, 0 fix rounds): ci/screenshots/deploy build in mcr.microsoft.com/playwright:v1.64.1-noble, ci ~56 s (was ~9 min); scripts/workflows.test.js pins image tag = package-lock version. Deploy container path verified only by review until the next deploy run.
 - 2026-10-23: T-012 done (PR #63, merged by Martin with acceptance-change): checkout/setup-node/upload-artifact v4 -> v7; Pages actions already v5; Node 20 deprecation gone; keep ubuntu-latest (Ubuntu 26 notice harmless).
 - 2026-10-23: T-013 (PR #64): Stryker 10.0.0 + vitest-runner, mutates src/** + scripts/**; local run 399 mutants, 250 killed, 82 survived, 1 timeout, 66 no coverage, score 62.9%. Lead decision: vitest pinned 5.x -> 4.1.12 because Stryker 10.0.0's vitest-runner runs no tests on Vitest 5 (stryker-js #6210/#6262/#6263, fixed upstream, unreleased); revert when Stryker releases the fix. Top survivors (follow-up candidates): pdf.js makePdf/resolveRequest, validate.js CLI exit path, vite-plugin-cv-meta injectMeta, app.jsx empty-section branches.
-
+- 2026-10-23: T-013 review non-blocking follow-ups: mutation-summary.js crashes if mutation.json is missing (use existsSync); add `permissions: contents: read` to mutation.yml (now has workflow_dispatch); list top survivor lines in the summary.
