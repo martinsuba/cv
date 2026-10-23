@@ -34,7 +34,7 @@ Status: passing = runs in CI now; fixme = `test.fixme` until the named task is d
 | REQ-006 | `print.spec.js`: no experience entry split across PDF pages; download link hidden in print | passing (T-005) |
 | REQ-007 | `download.spec.js`: visible "Download PDF" link to relative `cv.pdf`, file served as application/pdf | passing (T-005) |
 | REQ-008 | `meta.spec.js` (JS disabled): `lang="en"`, title `<name> – <title>`, meta description, og tags with absolute og:image. Unit tests: `scripts/vite-plugin-cv-meta.test.js` (generation, escaping) | passing (T-006) |
-| REQ-009 | `deploy-workflow.spec.js`: static checks of `.github/workflows/deploy.yml` (workflow_dispatch only, steps, permissions, concurrency); live checks belong to the deploy phase (docs/DEPLOY.md) | fixme (T-007) |
+| REQ-009 | `deploy-workflow.spec.js`: static checks of `.github/workflows/deploy.yml` (workflow_dispatch only, steps, permissions, concurrency); live checks belong to the deploy phase (docs/DEPLOY.md) | passing (T-007); live checks in the deploy phase |
 | REQ-010 | `a11y.spec.js`: no horizontal scroll at 375px; axe (no serious/critical); `rel="noopener"` on `_blank` links; photo alt = name. Unit tests: header icons (linkedin/github/npm only, aria-hidden), rel, alt | passing (T-003, T-006) |
 | REQ-011 | none yet (criteria come with the M3 plan) | n/a |
 

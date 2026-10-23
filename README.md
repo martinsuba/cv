@@ -17,4 +17,9 @@ npm run preview      # serve dist/ at http://localhost:4173/cv/
 ```
 
 Edit `data/cv.json` (and `data/photo.jpg`) to change the content. Checks: `npm run lint`, `npm run format:check`,
-`npm test`, `npm run test:e2e` (build first). See docs/TESTS.md. Deployment is being reworked, see docs/PLAN.md.
+`npm test`, `npm run test:e2e` (build first). See docs/TESTS.md.
+
+## Deploy
+Merges to `master` never deploy automatically. To publish, open the Actions tab, choose the `deploy` workflow and
+click "Run workflow" on `master`, or run `gh workflow run deploy --ref master`. The workflow validates the data, builds
+the site, generates `cv.pdf` and publishes `dist/` to GitHub Pages.

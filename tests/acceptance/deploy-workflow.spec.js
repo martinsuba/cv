@@ -17,13 +17,12 @@ const load = () => {
 };
 
 test.describe('REQ-009 deploy workflow (static)', () => {
-	// T-007: .github/workflows/deploy.yml does not exist yet.
-	test.fixme('REQ-009: the only trigger is workflow_dispatch (no push, pull_request or schedule)', () => {
+	test('REQ-009: the only trigger is workflow_dispatch (no push, pull_request or schedule)', () => {
 		const { wf } = load();
 		expect(Object.keys(wf.on ?? wf[true])).toEqual(['workflow_dispatch']);
 	});
 
-	test.fixme('REQ-009: it validates, builds, generates the PDF and deploys to GitHub Pages', () => {
+	test('REQ-009: it validates, builds, generates the PDF and deploys to GitHub Pages', () => {
 		const { cmds, uses } = load();
 		expect(cmds).toMatch(/npm ci/);
 		expect(cmds).toMatch(/npm run validate/);
@@ -35,7 +34,7 @@ test.describe('REQ-009 deploy workflow (static)', () => {
 		expect(order(/npm run validate/)).toBeLessThan(order(/npm run pdf/));
 	});
 
-	test.fixme('REQ-009: it has pages: write and id-token: write permissions and the pages concurrency group', () => {
+	test('REQ-009: it has pages: write and id-token: write permissions and the pages concurrency group', () => {
 		const { wf } = load();
 		const perms = {
 			...wf.permissions,
