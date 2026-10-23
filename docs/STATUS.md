@@ -1,9 +1,9 @@
 # Status: cv
-Phase: deploy (live)
+Phase: plan review (v2)
 Current task: –
-Open PRs: deploy record (chore/deploy-2026-10-23)
+Open PRs: #52 deploy record; plan v2 (plan/2); martinsuba.github.io#1 root redirect
 Blockers: –
-Next step: retro (offered); then plan v2 with Martin: M3 design proposals, mutation-testing fix, CI container image, workflow action bumps.
+Next step: Martin merges plan v2 (and #52, root #1); then "go M3" (T-008 font, T-009 PDF polish, T-010 design proposals).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -37,3 +37,5 @@ Next step: retro (offered); then plan v2 with Martin: M3 design proposals, mutat
 - 2026-10-23: DEPLOY.md rollback corrected (workflow_dispatch needs a branch/tag; github-pages env deploys from master only).
 - 2026-10-23: Pages enabled (build_type=workflow) after Martin extended the PAT with Pages permission; first deploy of b162a1c to https://martinsuba.github.io/cv/ succeeded, smoke checks green.
 - 2026-10-23: Note for Martin: the root repo martinsuba.github.io still serves the old preact-cli PWA with sw.js at scope "/"; returning visitors with that worker installed may get cached content for /cv/. Fix (in the root repo, Martin's call): replace sw.js with a self-unregistering worker.
+- 2026-10-23: Martin: root repo redirects to /cv/ (PR martinsuba.github.io#1 also removes the old service worker); PDF looks poor (font, paddings); wants design alternatives next.
+- 2026-10-23: PDF font cause: CI runner has no Apple/Windows fonts, Chromium falls back to Liberation Sans. Plan v2: self-hosted Inter (D-006), print polish, 3 design proposals (M3); maintenance tasks as M4 (could).

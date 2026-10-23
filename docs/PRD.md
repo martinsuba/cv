@@ -1,5 +1,5 @@
 # PRD: cv
-Status: draft (plan PR) · Last update: 2026-10-23
+Status: v2 draft (plan PR v2) · Last update: 2026-10-23
 
 ## Problem & why
 Martin's CV is a small Preact site that renders `data/cv.json` and exports `cv.pdf`. It stopped being maintainable:
@@ -120,8 +120,39 @@ Acceptance criteria:
 Priority: should
 
 ### REQ-011: Design refresh (M3)
-A clean, minimal design that fits a technical engineering manager, chosen by Martin from 2–3 proposals. Detailed
-criteria are added in a later plan PR once a direction is chosen; REQ-001…REQ-010 must keep passing.
+A clean, minimal design that fits a technical engineering manager, chosen by Martin from 2–3 proposals (T-010). Detailed
+criteria are added in a plan v3 PR once a direction is chosen; REQ-001…REQ-010 and REQ-012 must keep passing.
+Priority: should
+
+### REQ-012: Same typography on screen and in the PDF
+The site and the PDF use one self-hosted web font, so they look the same on every machine (the CI runner has no
+Apple/Windows system fonts and currently falls back to Liberation Sans).
+Acceptance criteria:
+- Given dist/cv.pdf, When its embedded fonts are listed, Then every font belongs to the chosen web font family; none is a
+  system fallback (Liberation, DejaVu, Arial, Helvetica, Noto).
+- Given the built site in Chromium, When the page has loaded, Then `document.fonts.check()` is true for the web font and
+  body text computes to it.
+- Given the build, Then the font files are served from /cv/ (no third-party font CDN request) and the woff2 files
+  total at most 200 KB.
+Priority: must
+
+### REQ-013: Polished print layout
+The PDF has comfortable, consistent spacing and reads like the website.
+Acceptance criteria:
+- Given print media, When the header is rendered, Then all contact links sit on one line.
+- Given dist/cv.pdf, Then REQ-005 and REQ-006 still hold (≤3 A4 pages, last page ≥25%, no split entries).
+- Given dist/cv.pdf, Then the page margins are at least 15 mm on every side and body text is at least 9.5 pt.
+- Visual check: the Lead compares PDF pages with the website screenshot and attaches both to the PR; Martin judges on
+  the milestone PR.
+Priority: must
+
+### REQ-014: Maintenance (M4)
+Acceptance criteria:
+- Given the `ci` workflow, When it runs, Then Playwright and its OS dependencies come from the official Playwright
+  container image (no apt install step), and the job finishes in under 3 minutes on a normal run.
+- Given all workflows, Then checkout, setup-node, cache and the Pages actions use their current major versions.
+- Given the mutation workflow on a milestone PR, Then Stryker uses the Vitest runner, mutates `src/**` and `scripts/**`,
+  at most 10% of mutants end as timeouts, and Stryker is a pinned devDependency.
 Priority: could
 
 ## Constraints (budget, privacy, data, platforms)
@@ -130,4 +161,4 @@ Priority: could
 - Node 24 (server and CI). Default branch is `master` (framework docs say "main"; read it as `master` here).
 
 ## Open questions
-- Should the root `martinsuba.github.io` later redirect to `/cv/` or link to it? (Martin's call, outside this repo.)
+- (answered 2026-10-23) The root `martinsuba.github.io` redirects to `/cv/` (Martin; PR in that repo).
