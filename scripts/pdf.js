@@ -1,5 +1,5 @@
 // Serves dist/ under /cv/ on a free port, prints it with Playwright Chromium to dist/cv.pdf.
-// Run `npm run build` first. Exits non-zero with a message on failure.
+// Run `npm run build` first. `--out <path>` overrides the output (default dist/cv.pdf). Exits non-zero with a message on failure.
 import { createServer } from 'node:http';
 import { existsSync, readFile } from 'node:fs';
 import { resolve, sep, extname } from 'node:path';
@@ -62,52 +62,75 @@ export function createStaticServer(root) {
 	});
 }
 
-export async function makePdf({ root = ROOT } = {}) {
+export function defaultOut(root = ROOT) {
+	return resolve(root, 'dist', 'cv.pdf');
+}
+
+/** Parses CLI args: only `--out <path>` is supported. */
+export function parseArgs(argv) {
+	let out;
+	for (let i = 0; i < argv.length; i++) {
+		if (argv[i] === '--out') {
+			if (!argv[i + 1]) throw new Error('--out needs a file path');
+			out = resolve(argv[++i]);
+		} else {
+			throw new Error(`unknown argument: ${argv[i]}`);
+		}
+	}
+	return { out };
+}
+
+export async function makePdf({ root = ROOT, out } = {}) {
 	const dist = resolve(root, 'dist');
 	if (!existsSync(resolve(dist, 'index.html'))) {
 		throw new Error('dist/index.html not found. Run `npm run build` first.');
 	}
+	const target = out ? resolve(out) : defaultOut(root);
 	const { chromium } = await import('@playwright/test');
 	const server = createStaticServer(dist);
-	let browser;
 	try {
 		await new Promise((ok, fail) => {
 			server.once('error', fail);
 			server.listen(0, '127.0.0.1', ok);
 		});
 		const url = `http://127.0.0.1:${server.address().port}${BASE}/`;
-		browser = await chromium.launch();
-		const page = await browser.newPage();
-		await page.goto(url, { waitUntil: 'networkidle' });
-		await page.evaluate(async () => {
-			await document.fonts.ready;
-			await Promise.all(
-				[...document.images].map((img) =>
-					img.complete ? undefined : new Promise((r) => ((img.onload = r), (img.onerror = r))),
-				),
-			);
-		});
-		await page.emulateMedia({ media: 'print' });
-		const out = resolve(dist, 'cv.pdf');
-		await page.pdf({
-			path: out,
-			format: 'A4',
-			margin: { top: '1.5cm', right: '1.5cm', bottom: '1.5cm', left: '1.5cm' },
-			printBackground: true,
-		});
-		return out;
+		const browser = await chromium.launch();
+		try {
+			const page = await browser.newPage();
+			await page.goto(url, { waitUntil: 'networkidle' });
+			await page.evaluate(async () => {
+				await document.fonts.ready;
+				await Promise.all(
+					[...document.images].map((img) =>
+						img.complete ? undefined : new Promise((r) => ((img.onload = r), (img.onerror = r))),
+					),
+				);
+			});
+			// page.pdf() renders with print media, so no emulateMedia() needed.
+			await page.pdf({
+				path: target,
+				format: 'A4',
+				margin: { top: '1.5cm', right: '1.5cm', bottom: '1.5cm', left: '1.5cm' },
+				printBackground: true,
+			});
+		} finally {
+			// Best effort: a failing close must not mask the original error.
+			await browser.close().catch(() => {});
+		}
+		return target;
 	} finally {
-		await browser?.close();
 		await new Promise((r) => server.close(r));
 	}
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-	makePdf().then(
-		(out) => console.log(`wrote ${out}`),
-		(err) => {
-			console.error(`pdf failed: ${err.message}`);
-			process.exit(1);
-		},
-	);
+	Promise.resolve()
+		.then(() => makePdf(parseArgs(process.argv.slice(2))))
+		.then(
+			(out) => console.log(`wrote ${out}`),
+			(err) => {
+				console.error(`pdf failed: ${err.message}`);
+				process.exit(1);
+			},
+		);
 }
