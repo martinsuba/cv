@@ -1,0 +1,24 @@
+name: mutation
+# Node/JS projects. NOT a required check. Runs only on milestone PRs (branch chore/milestone-*), report is a run artifact.
+# Other stacks: same shape with their tool (Python: mutmut or cosmic-ray). Mutation testing is too heavy for the 4 GB VPS.
+on:
+  pull_request:
+jobs:
+  mutation:
+    if: ${{ startsWith(github.head_ref, 'chore/milestone-') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx --yes @stryker-mutator/core@8 run --reporters json,clear-text
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mutation-report
+          path: reports/mutation/
+          retention-days: 30

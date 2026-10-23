@@ -1,0 +1,18 @@
+{
+	"$schema": "https://raw.githubusercontent.com/stryker-mutator/stryker/master/packages/core/schema/stryker-core.json",
+	"testRunner": "command",
+	"commandRunner": { "command": "npm test" },
+	"mutate": ["src/**/*.{js,jsx}", "!src/**/*.test.{js,jsx}"],
+	"ignorePatterns": [
+		"dist",
+		"tests",
+		"build",
+		"reports",
+		"playwright-report",
+		"test-results",
+		"screenshots"
+	],
+	"coverageAnalysis": "off",
+	"reporters": ["json", "clear-text"],
+	"jsonReporter": { "fileName": "reports/mutation/mutation.json" }
+}

@@ -8,7 +8,7 @@ export default function about({ about }) {
 	return (
 		<section className="about">
 			<h1>About</h1>
-			<div>{ about }</div>
+			<div>{about}</div>
 		</section>
 	);
 }

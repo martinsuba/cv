@@ -1,0 +1,26 @@
+{
+	"name": "Jane Example",
+	"title": "Example Engineer",
+	"about": "Synthetic fixture: education.from is a number instead of a string.",
+	"contact": { "email": "jane@example.invalid" },
+	"experience": [
+		{
+			"title": "Example Role",
+			"company": { "name": "Example Corp", "link": "https://example.invalid/" },
+			"from": "January 2020",
+			"to": "Present",
+			"location": "Nowhere",
+			"description": "Synthetic description."
+		}
+	],
+	"education": [
+		{
+			"institution": "Example University",
+			"field": "Examples",
+			"degree": "Bachelor's degree",
+			"from": 2010,
+			"to": "2013"
+		}
+	],
+	"skills": { "Engineering": ["Testing"] }
+}

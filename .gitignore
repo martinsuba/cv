@@ -1,3 +1,8 @@
 node_modules
 /build
 /*.log
+dist/
+test-results/
+playwright-report/
+/reports/
+/screenshots/

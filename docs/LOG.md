@@ -8,3 +8,4 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-23 | plan | chose Pages project site at /cv/ over root (asked why /cv/) | n – URL choice; Lead should have explained Pages URL rules up front
 2026-10-23 | plan | chose Vite migration; content from his PDF | n – Martin's decision
 2026-10-23 | plan | asked for manual-trigger deploy; delegated icons, PR cleanup and further decisions to the Lead | n – preference
+2026-10-23 | plan gate | merged plan PR #40 and said "go" | n – approval gate

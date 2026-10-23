@@ -1,4 +1,4 @@
-import getIconClass from '../get-icon-class';
+import getIconClass from '../get-icon-class.js';
 import photo from '../../data/photo.jpg';
 
 import './header.css';
@@ -13,7 +13,9 @@ export default function header({ cv }) {
 					return (
 						<li>
 							<i class={`devicon-${getIconClass(key)} colored`} />
-							<a href={href} target="_blank">{ text }</a>
+							<a href={href} target="_blank">
+								{text}
+							</a>
 						</li>
 					);
 				})}
@@ -22,9 +24,8 @@ export default function header({ cv }) {
 			<div className="photo">
 				<img src={photo} />
 			</div>
-			<h1>{ cv.name }</h1>
-			<h2>{ cv.title }</h2>
-
+			<h1>{cv.name}</h1>
+			<h2>{cv.title}</h2>
 		</header>
 	);
 }
