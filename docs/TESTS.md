@@ -8,7 +8,15 @@
   (serves `dist/` under `http://localhost:4173/cv/`) itself. The tests read `dist/`, so build first; the PDF specs also
   need `dist/cv.pdf` (`npm run pdf`). One spec: `npx playwright test tests/acceptance/build.spec.js`.
 - Screenshots (not a gate): `npm run build && npx playwright test tests/screenshots`, output in `screenshots/`.
-- Mutation (milestone PRs only, heavy): `npx @stryker-mutator/core@8 run`, report in `reports/mutation/`.
+- Mutation (milestone PRs and manual `workflow_dispatch` of `mutation.yml`; heavy, ~6.5 min locally): `npx stryker run`
+  (`stryker.config.json`: pinned `@stryker-mutator/core` + `vitest-runner`, mutates `src/**` and `scripts/**` without test files,
+  `coverageAnalysis: perTest`). Report in `reports/mutation/mutation.json`; `node scripts/mutation-summary.js` prints the score
+  and counts as Markdown (CI appends it to the job summary). Under Stryker `vite.config.js` sets Vitest `reporters: ['dot']`
+  (detected via `STRYKER_MUTATOR_WORKER`) so no per-run GitHub summary box is written; plain `npm test` is unchanged.
+  Entry files and CLI guards that only run as processes (`scripts/pdf.js` makePdf, `validate.js` main block, `src/main.jsx`)
+  show as NoCoverage: they are exercised only by the Playwright acceptance tests. Stryker 10.0.0 does not select tests
+  correctly on Vitest 5 (nested `describe` names), so Vitest is pinned to 4.1.12 until a Stryker release with the fix
+  (stryker-js #6210/#6262/#6263) allows going back to Vitest 5.
 - CI (`.github/workflows/ci.yml`, job `ci`): npm ci, lint, format check, unit, build, acceptance. `npm run pdf` runs before acceptance and `dist/cv.pdf` is uploaded as artifact `cv-pdf` on every run.
 
 ## Contracts the not-yet-built features must satisfy (tests are written against them)

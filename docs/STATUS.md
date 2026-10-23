@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-012 action majors (in progress, waiting for Martin's acceptance-change label)
-Open PRs: T-012 (task/T-012-action-majors)
+Current task: T-013 Stryker with the Vitest runner (in progress)
+Open PRs: T-013 (task/T-013-stryker-vitest)
 Blockers: –
-Next step: T-012 review + label; T-013
+Next step: T-013 review and merge
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -52,3 +52,4 @@ Next step: T-012 review + label; T-013
 - 2026-10-23: M4 complete: T-015 (#58, 0 fix rounds), T-016 (#59, 1 fix round: design.spec checked only the first element, caught by the test-reviewer), T-017 (#60, 0). PDF 2 pages, fonts Inter + JetBrains Mono (no Type3). Not yet deployed: T-014 photo + all of M4.
 - 2026-10-23: Lead note: two test-reviewers claimed the `acceptance-change` label was required; it is not (guard accepts test-review success). Consider clarifying the test-reviewer prompt.
 - 2026-10-23: Martin: fix the Node 20 deprecation warning (checkout@v4, setup-node@v4, upload-artifact@v4 forced onto Node 24) in the next milestone. Covered by M5 T-012 (all actions to current majors; needs his `acceptance-change` label because acceptance-guard.yml changes). Also check the ubuntu-latest → Ubuntu 26 migration notice there.
+- 2026-10-23: T-013: Stryker 10.0.0 vitest-runner cannot select tests on Vitest 5 (all covered mutants survive; upstream fixes merged on master, unreleased), so Vitest is pinned to 4.1.12 (Builder, flagged to the Lead). Revert to Vitest 5 once Stryker releases the fix.
