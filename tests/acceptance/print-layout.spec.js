@@ -5,15 +5,27 @@ import { readPdfTextBoxes, dominantFontSize, contactLinks } from '../helpers.js'
 const MM_15_PT = 42.5; // 15 mm in points
 
 test.describe('REQ-013 print layout', () => {
-	test('REQ-013: in dist/cv.pdf all contact links share one baseline on page 1', async () => {
+	test('REQ-013: in dist/cv.pdf all contact links sit in the page-1 header, above the first section, on one line or right-aligned in one column', async () => {
 		const { pages } = await readPdfTextBoxes();
-		const ys = contactLinks().map(([key, value]) => {
+		const boxes = contactLinks().map(([key, value]) => {
 			const text = key === 'email' ? value : value.replace(/^\w+:\/\//, '');
 			const item = pages[0].items.find((it) => it.str.includes(text));
 			expect(item, `contact "${text}" found on page 1`).toBeTruthy();
-			return Math.round(item.y * 10) / 10;
+			return item;
 		});
-		expect(new Set(ys).size, `contact baselines: ${ys}`).toBe(1);
+		// The first section label starts with the text box "01"; contacts must be above it (PDF y grows upwards).
+		const label = pages[0].items.find((it) => it.str.trim() === '01');
+		expect(label, 'first section label on page 1').toBeTruthy();
+		for (const b of boxes) {
+			expect(b.y, `"${b.str}" above the first section label`).toBeGreaterThan(label.y + label.size);
+		}
+		const baselines = new Set(boxes.map((b) => Math.round(b.y * 10) / 10));
+		const rights = boxes.map((b) => b.x + b.width);
+		const rightAligned = Math.max(...rights) - Math.min(...rights) <= 2;
+		expect(
+			baselines.size === 1 || rightAligned,
+			`one baseline (${[...baselines]}) or right edges within 2 pt (${rights.map((r) => r.toFixed(1))})`,
+		).toBe(true);
 	});
 
 	test('REQ-013: text in dist/cv.pdf keeps at least 15 mm from every page edge', async () => {

@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-016 ledger layout on screen (in progress)
-Open PRs: #59 T-016
+Current task: T-017 ledger layout in print and PDF (in progress)
+Open PRs: T-017 (see PR list)
 Blockers: –
-Next step: T-016 review, then T-017 (print design); deploy after M4.
+Next step: T-017 review; deploy after M4.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md

@@ -18,16 +18,17 @@
 /* Entries (experience, education): dates left, body right. */
 .entry {
 	display: grid;
-	grid-template-columns: minmax(0, 190px) minmax(0, 1fr);
+	grid-template-columns: minmax(0, 230px) minmax(0, 1fr);
 	gap: 24px;
 	padding-top: 20px;
 	border-top: 1px solid var(--rule-soft);
 }
 .entry .dates {
 	font-family: var(--mono);
-	font-size: 13px;
+	font-size: 12px;
 	line-height: 1.6;
 	color: var(--muted);
+	white-space: nowrap; /* "September 2015 - September 2017" must stay on one line */
 }
 .entry .body {
 	display: flex;
@@ -58,6 +59,12 @@
 	gap: 36px;
 	min-width: 0;
 }
+@media (max-width: 899px) {
+	.entry {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 6px;
+	}
+}
 @media (max-width: 639px) {
 	.section {
 		grid-template-columns: minmax(0, 1fr);
@@ -70,57 +77,69 @@
 }
 @media print {
 	.section {
-		display: block;
+		display: grid;
+		grid-template-columns: 108px minmax(0, 1fr);
+		gap: 20px;
+		margin: 0;
 	}
 	.section-label {
-		font-family: inherit;
-		font-size: 14pt;
-		line-height: 1.25;
-		letter-spacing: 0;
-		text-transform: none;
-		font-weight: 600;
-		color: #24292e;
-		padding-bottom: 4pt;
-		margin-bottom: var(--gap-entry);
-		border-bottom: 1px solid #eaecef;
+		font-size: 8pt;
+		font-weight: 400;
+		line-height: 1.4;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--muted);
+		padding-top: 2pt;
 		break-after: avoid;
 	}
 	.entries {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		gap: 14pt;
 	}
-	/* An entry stays on one page; its title block never ends a page. */
+	/* An entry stays on one page. Header line: title left, dates right; company/location below. */
 	.entry {
-		display: block;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		column-gap: 12pt;
+		row-gap: 0;
 		padding: 0;
 		border: 0;
-		margin: var(--gap-entry) 0 0;
 		break-inside: avoid;
 		page-break-inside: avoid;
 	}
 	.entry .body {
-		display: block;
+		display: contents;
 	}
 	.entry h3 {
-		font-size: 11.5pt;
+		grid-column: 1;
+		grid-row: 1;
+		font-size: 11pt;
 		line-height: 1.3;
-		break-after: avoid;
+		text-wrap: balance; /* a long title wraps at a space, not after the hyphen in "F-Secure" */
 		overflow-wrap: normal;
+		break-after: avoid;
 	}
-	/* Dates and company/location on one meta line is T-017's job; for now dates sit on their own line. */
 	.entry .dates {
-		font-family: inherit;
-		font-size: 10pt;
-		line-height: 1.5;
-		color: inherit;
-		margin-top: var(--gap-line);
+		grid-column: 2;
+		grid-row: 1;
+		align-self: baseline;
+		font-size: 8pt;
+		line-height: 1.4;
+		color: var(--muted);
 	}
 	.entry .meta {
-		font-size: 10pt;
-		color: inherit;
+		grid-column: 1 / -1;
+		font-size: 9pt;
+		line-height: 1.4;
+		color: var(--muted);
+		break-after: avoid;
 	}
 	.entry .description {
-		margin-top: var(--gap-line);
+		grid-column: 1 / -1;
+		margin: 3pt 0 0;
 		font-size: 10pt;
-		color: inherit;
+		line-height: 1.5;
+		color: var(--body);
 	}
 }
