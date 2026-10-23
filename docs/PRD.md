@@ -1,5 +1,5 @@
 # PRD: cv
-Status: v2 draft (plan PR v2) · Last update: 2026-10-23
+Status: v3 draft (plan PR v3) · Last update: 2026-10-23
 
 ## Problem & why
 Martin's CV is a small Preact site that renders `data/cv.json` and exports `cv.pdf`. It stopped being maintainable:
@@ -21,12 +21,12 @@ deploy he triggers publishes both to `https://martinsuba.github.io/cv/`.
 - Site and PDF content match `data/cv.json` exactly; `data/cv.json` matches Martin's current PDF (2026-10-23).
 - PDF: A4, at most 3 pages, no near-empty last page.
 - Deploy is one manual GitHub Actions run; site + `cv.pdf` live under `/cv/`.
-- Later (M3): a clean, minimal design that fits a technical engineering manager.
+- M4: the "Technical ledger" design (direction A, chosen by Martin from the T-010 proposals) on screen and in the PDF.
 
 ## Non-goals (explicitly out of scope)
 - Rewriting or tailoring CV content for specific roles (separate effort, later).
 - Changes to the `martinsuba.github.io` root repo (it stays as is; Martin may host other things there).
-- New photo, dark mode, multiple languages, a CMS or editing UI, analytics.
+- Dark mode, multiple languages, a CMS or editing UI, analytics.
 - A custom domain.
 
 ## Requirements
@@ -119,34 +119,54 @@ Acceptance criteria:
 - Given links that open a new tab, Then they have `rel="noopener"`; the photo has alt text (the name).
 Priority: should
 
-### REQ-011: Design refresh (M3)
-A clean, minimal design that fits a technical engineering manager, chosen by Martin from 2–3 proposals (T-010). Detailed
-criteria are added in a plan v3 PR once a direction is chosen; REQ-001…REQ-010 and REQ-012 must keep passing.
+### REQ-011: Design refresh: "Technical ledger" (M4)
+Martin chose direction A from the T-010 proposals (canvas: https://claude.ai/artifact/AeMkfPFe6NVjtSg5Gx5pk4, boards
+"A · Technical ledger"): Inter for text, JetBrains Mono for labels, dates and contacts, one blue accent (#1D4ED8),
+numbered section labels in a left column, dates in their own column, skills as tags on screen. All content stays: every
+entry keeps its full description on screen and in the PDF (the mockup's condensed "Earlier" list is not adopted, because
+content tailoring is out of scope and REQ-001 requires every description).
+Acceptance criteria:
+- Given the built site at 1280px, When it is opened, Then every section heading reads "<nn> / <Name>" numbered 01, 02, …
+  in page order, is set in JetBrains Mono, and sits left of the section content (its box ends before the content starts).
+- Given the built site at 1280px, Then every experience and education entry shows its dates in JetBrains Mono, left of
+  the entry title.
+- Given the built site at 375px, Then labels and dates sit above their content (single column), with no horizontal scroll.
+- Given the built site, Then the job title under the name and the links use the accent colour, and each skill item is
+  its own list item (`li`) inside its group.
+- Given dist/cv.pdf, Then the extracted text contains every skill group as one comma-separated line
+  ("<item>, <item>, …"), i.e. print shows skills as text, not tags (ATS-friendly).
+- Given dist/cv.pdf, Then it has at most 2 A4 pages and REQ-005/006/012/013 still hold.
+- Visual check: the PR attaches 1280px, 375px and PDF page screenshots next to the matching canvas boards; Martin
+  judges on the milestone PR.
 Priority: should
 
 ### REQ-012: Same typography on screen and in the PDF
-The site and the PDF use one self-hosted web font, so they look the same on every machine (the CI runner has no
-Apple/Windows system fonts and currently falls back to Liberation Sans).
+The site and the PDF use the same self-hosted web fonts, so they look the same on every machine (the CI runner has no
+Apple/Windows system fonts and falls back to Liberation Sans). Since plan v3: Inter for text, JetBrains Mono for labels
+(REQ-011). Both are static (non-variable) fonts: Chromium embeds variable fonts in PDFs as Type3, which breaks text
+extraction (lost hyphens) and ATS parsing.
 Acceptance criteria:
-- Given dist/cv.pdf, When its embedded fonts are listed, Then every font belongs to the chosen web font family; none is a
-  system fallback (Liberation, DejaVu, Arial, Helvetica, Noto).
-- Given the built site in Chromium, When the page has loaded, Then `document.fonts.check()` is true for the web font and
-  body text computes to it.
+- Given dist/cv.pdf, When its embedded fonts are listed, Then every font is Inter or JetBrains Mono; none is a system
+  fallback (Liberation, DejaVu, Arial, Helvetica, Noto) and none is Type3.
+- Given dist/cv.pdf, When its text is extracted, Then every hyphenated word in cv.json is intact.
+- Given the built site in Chromium, When the page has loaded, Then an Inter and a JetBrains Mono @font-face have status
+  "loaded", body text computes to Inter and section labels to JetBrains Mono.
 - Given the build, Then the font files are served from /cv/ (no third-party font CDN request) and the woff2 files
-  total at most 200 KB.
+  total at most 230 KB (230,000 B).
 Priority: must
 
 ### REQ-013: Polished print layout
 The PDF has comfortable, consistent spacing and reads like the website.
 Acceptance criteria:
-- Given print media, When the header is rendered, Then all contact links sit on one line.
+- Given print media, When the header is rendered, Then all contact links sit in the header block on page 1 (one line,
+  or since plan v3 one right-aligned column), above the first section.
 - Given dist/cv.pdf, Then REQ-005 and REQ-006 still hold (≤3 A4 pages, last page ≥25%, no split entries).
 - Given dist/cv.pdf, Then the page margins are at least 15 mm on every side and body text is at least 9.5 pt.
 - Visual check: the Lead compares PDF pages with the website screenshot and attaches both to the PR; Martin judges on
   the milestone PR.
 Priority: must
 
-### REQ-014: Maintenance (M4)
+### REQ-014: Maintenance (M5)
 Acceptance criteria:
 - Given the `ci` workflow, When it runs, Then Playwright and its OS dependencies come from the official Playwright
   container image (no apt install step), and the job finishes in under 3 minutes on a normal run.

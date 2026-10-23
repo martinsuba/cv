@@ -90,9 +90,9 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 - Then: `deploy` skill (Lead enables Pages with build_type=workflow, Martin approves, first run, smoke checks).
 
-## M3: PDF polish and design proposals (plan v2)
-### [ ] T-008: Self-hosted web font for screen and PDF  (size S)
-- Goal: add `@fontsource-variable/inter` (Latin + Latin Extended), use it as the first family in the font stack for screen
+## [x] M3: PDF polish and design proposals (plan v2)
+### [x] T-008: Self-hosted web font for screen and PDF  (size S)  — #54
+- Goal: add `@fontsource/inter` (static faces; Latin + Latin Extended), use it as the first family in the font stack for screen
   and print; keep the system stack as fallback. Check the PDF embeds only Inter.
 - REQs: REQ-012
 - Acceptance tests to make pass: new tests/acceptance/fonts.spec.js (this task explicitly may create it): PDF embedded
@@ -102,7 +102,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
   listing helper), docs/TESTS.md
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 
-### [ ] T-009: PDF polish: spacing, margins, header  (size M)
+### [x] T-009: PDF polish: spacing, margins, header  (size M)  — #55
 - Goal: rework print CSS so the PDF reads like the website: consistent vertical rhythm between sections and entries,
   clearer heading scale, contact links on one line, photo size balanced, page margins ≥ 15 mm (A4), body ≥ 9.5 pt.
   Screen look unchanged. Attach before/after PDF page images and the website screenshot to the PR.
@@ -114,7 +114,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 - Notes: PDF images: render pages with pdfjs-dist in Playwright, or install poppler-utils in the task's own env if possible.
 
-### [ ] T-014: Replace the photo  (size S)
+### [x] T-014: Replace the photo  (size S)  — #57
 - Goal: replace data/photo.jpg with Martin's new portrait (source file provided by Martin, see STATUS). Crop to a
   square-ish head-and-shoulders frame that works in the round header crop, resize to 800 px on the long side, strip
   EXIF/GPS metadata, JPEG quality ~82 (target ≤ 150 KB). og-image.jpg follows automatically (built from data/photo.jpg).
@@ -126,14 +126,62 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean; before/after header
   screenshots (screen + print) in the PR; no metadata left in the JPEG (check with a script).
 
-### [ ] T-010: Design proposals  (size S, Lead-run, no code merged)
+### [x] T-010: Design proposals  (size S, Lead-run, no code merged)  — direction A chosen, see M4
 - Goal: research clean, minimal CV/profile designs suited to a technical engineering manager; build 3 directions as
   static mockups from the real `cv.json` and the new photo (screen desktop + mobile + A4 print), on top of T-008/T-009/T-014, and share them
   with Martin as one comparison page.
 - REQs: REQ-011
 - Output: Martin picks a direction (or mixes); a plan v3 PR adds the implementation tasks and REQ-011 criteria.
 
-## M4: Maintenance (could; Martin may drop or reorder)
+## M4: Design refresh "Technical ledger" (plan v3)
+Direction A from the T-010 canvas (https://claude.ai/artifact/AeMkfPFe6NVjtSg5Gx5pk4, boards "A · Technical ledger" web
+and PDF). Builders read the board HTML in the PR description of T-016 / T-017 (Lead pastes the relevant markup) for exact
+sizes and spacing; values below are the contract. All entries keep their full text (REQ-011).
+
+### [ ] T-015: Design tokens and JetBrains Mono  (size S)
+- Goal: add `@fontsource/jetbrains-mono` (static 400, Latin subset only) and the colour/spacing tokens from D-007 as CSS
+  custom properties; use the mono font for nothing visible yet except a `.mono` utility class. No layout change.
+- REQs: REQ-012 (updated in plan v3)
+- Acceptance tests to make pass: tests/acceptance/fonts.spec.js, updated by this task (explicitly allowed): embedded PDF
+  fonts are Inter or JetBrains Mono (not Type3, no fallback); an Inter and a JetBrains Mono face are "loaded" after load
+  (render one hidden-from-AT element with `.mono` if needed, or assert after T-016; builder's choice, documented);
+  woff2 total ≤ 230,000 B. Remaining fonts specs keep passing.
+- Areas/files: package.json, src/style.css, src/main.jsx, tests/acceptance/fonts.spec.js, docs/TESTS.md
+- Definition of done: code + unit tests, listed acceptance tests pass, CI green, review + test-review clean
+
+### [ ] T-016: Ledger layout on screen  (size M)
+- Goal: restyle the page as board "A · Technical ledger — website": header (round photo 104px left, name 44px/600,
+  job title in mono uppercase accent, contacts stacked right in mono, rule below); sections as label/content grid with
+  labels "01 / About", "02 / Experience", "03 / Skills", "04 / Education" (order as rendered; whatever sections exist);
+  experience and education entries as dates/body grid (dates mono muted; title 19px/600; company · location muted;
+  description 15px/1.65); skills as group name + tags (`ul > li`, mono 12px, 1px border, radius 4px). Max width 1040px.
+  Below 640px: one column, label and dates above content, photo 80px. Download link restyled to fit (mono, accent).
+  Print CSS untouched apart from what is needed to keep print tests green (T-017 does print).
+- REQs: REQ-011, REQ-010, REQ-001
+- Acceptance tests to make pass: new tests/acceptance/design.spec.js (this task explicitly may create it) for the
+  screen criteria of REQ-011 (numbered mono labels left of content at 1280; mono dates left of titles; single column at
+  375; accent colour on title/links; skills as li); content/a11y/meta/fonts specs keep passing.
+- Areas/files: src/**/*.jsx, src/**/*.css, src/style.css, unit tests, tests/acceptance/design.spec.js, docs/TESTS.md
+- Definition of done: code + unit tests, listed acceptance tests pass, CI green, review + test-review clean;
+  1280px and 375px screenshots next to the canvas board in the PR.
+
+### [ ] T-017: Ledger layout in print and PDF  (size M)
+- Goal: print CSS per board "A · Technical ledger — PDF page 1": compact header (photo 68px, name 30px, mono title,
+  contacts as a right-aligned mono column), label column ~108px, entry header line "title … dates" with company ·
+  location below, body 10pt Inter; skills printed as group name + comma-separated text; no tags, no download link,
+  no running footer. Target 2 A4 pages, no split entries.
+- REQs: REQ-011 (PDF criteria), REQ-013 (updated contact criterion), REQ-005/006/012
+- Acceptance tests to make pass: tests/acceptance/print-layout.spec.js, updated by this task (explicitly allowed):
+  contact links all in the page-1 header block above the first section (one line or one right-aligned column); new
+  PDF checks in design.spec.js: skills as comma-separated lines in the extracted text, ≤ 2 pages. pdf/print/fonts
+  specs keep passing.
+- Areas/files: src/style.css, src/**/*.css, scripts/pdf.js (only if margins need it), tests/acceptance/print-layout.spec.js,
+  tests/acceptance/design.spec.js, docs/TESTS.md
+- Definition of done: code + unit tests, listed acceptance tests pass, CI green, review + test-review clean; PDF page
+  images next to the canvas board in the PR.
+- Then: deploy (Martin approves).
+
+## M5: Maintenance (could; Martin may drop or reorder)
 ### [ ] T-011: CI on the Playwright container image  (size S)
 - Goal: run the `ci` and `screenshots` jobs in `mcr.microsoft.com/playwright:v<installed version>-noble`, drop the
   browser cache/install steps; deploy.yml the same. Keep the version in one place (check it matches package-lock).
@@ -153,3 +201,4 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - CV page, desktop 1280px: full page.
 - CV page, mobile 375px: full page.
 - CV page, print media (A4 emulation): full page; plus PDF pages rendered as images (from T-009).
+- From M4: compare each screen with its canvas board (A · Technical ledger, web and PDF).
