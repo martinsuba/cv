@@ -6,10 +6,10 @@
 - Unit (Vitest + @testing-library/preact, `src/**/*.test.jsx`): `npm test`.
 - Acceptance (Playwright, `tests/acceptance/`): `npm run build && npm run test:e2e`. Playwright starts `vite preview`
   (serves `dist/` under `http://localhost:4173/cv/`) itself. The tests read `dist/`, so build first; the PDF specs also
-  need `dist/cv.pdf` (`npm run pdf`, available from T-004). One spec: `npx playwright test tests/acceptance/build.spec.js`.
+  need `dist/cv.pdf` (`npm run pdf`). One spec: `npx playwright test tests/acceptance/build.spec.js`.
 - Screenshots (not a gate): `npm run build && npx playwright test tests/screenshots`, output in `screenshots/`.
 - Mutation (milestone PRs only, heavy): `npx @stryker-mutator/core@8 run`, report in `reports/mutation/`.
-- CI (`.github/workflows/ci.yml`, job `ci`): npm ci, lint, format check, unit, build, acceptance. T-004 adds `pdf` before acceptance.
+- CI (`.github/workflows/ci.yml`, job `ci`): npm ci, lint, format check, unit, build, acceptance. `npm run pdf` runs before acceptance and `dist/cv.pdf` is uploaded as artifact `cv-pdf` on every run.
 
 ## Contracts the not-yet-built features must satisfy (tests are written against them)
 - `npm run validate` validates `data/cv.json`, or the file in env `CV_JSON` when set; field-level errors go to stdout/stderr
@@ -30,7 +30,7 @@ Status: passing = runs in CI now; fixme = `test.fixme` until the named task is d
 | REQ-002 | `validate.spec.js`: valid exits 0; missing title; wrong type; malformed JSON; build fails on broken data | passing |
 | REQ-003 | `content.spec.js`: About text; "up to 80%" sentence; full descriptions (incl. SaferPass JavaScript Developer); skill group order; removed skills/language group | passing |
 | REQ-004 | `build.spec.js`: build without legacy flags; all assets 200 and no console errors under /cv/; no service worker/manifest in dist | passing |
-| REQ-005 | `pdf.spec.js`: `npm run pdf` self-contained; A4; text content | fixme (T-004). At most 3 pages, last page >= 25%: fixme (T-005) |
+| REQ-005 | `pdf.spec.js`: `npm run pdf` self-contained; A4; text content | passing (T-004). At most 3 pages, last page >= 25%: fixme (T-005) |
 | REQ-006 | `print.spec.js`: no experience entry split across PDF pages; download link hidden in print | fixme (T-005) |
 | REQ-007 | `download.spec.js`: visible "Download PDF" link to relative `cv.pdf`, file served as application/pdf | fixme (T-005) |
 | REQ-008 | `meta.spec.js`: `lang="en"` passing; title, meta description, og tags fixme (T-006) | partly passing |

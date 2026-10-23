@@ -6,7 +6,8 @@ export default defineConfig({
 	testDir: './tests',
 	testMatch: '**/*.spec.{js,ts}',
 	outputDir: 'test-results',
-	fullyParallel: true,
+	// Tests within a file run in order: pdf.spec.js's first test deletes and regenerates dist/cv.pdf that later tests read.
+	fullyParallel: false,
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 1 : 0,
 	workers: process.env.CI ? 2 : 1,
