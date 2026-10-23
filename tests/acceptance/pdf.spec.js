@@ -8,8 +8,7 @@ import { cv, PDF_PATH, readPdf, norm, ROOT } from '../helpers.js';
 const A4 = { width: 595.28, height: 841.89 };
 
 test.describe('REQ-005 PDF', () => {
-	// T-004: scripts/pdf.js does not exist yet (npm run pdf still points at the old generate-pdf.cjs).
-	test.fixme('REQ-005: npm run pdf with no server running writes dist/cv.pdf by itself', () => {
+	test('REQ-005: npm run pdf with no server running writes dist/cv.pdf by itself', () => {
 		if (existsSync(PDF_PATH)) unlinkSync(PDF_PATH);
 		const r = spawnSync('npm', ['run', '--silent', 'pdf'], {
 			cwd: ROOT,
@@ -22,7 +21,7 @@ test.describe('REQ-005 PDF', () => {
 		expect(statSync(PDF_PATH).size).toBeGreaterThan(10_000);
 	});
 
-	test.fixme('REQ-005: dist/cv.pdf is A4', async () => {
+	test('REQ-005: dist/cv.pdf is A4', async () => {
 		const { pages } = await readPdf();
 		for (const p of pages) {
 			expect(p.width).toBeCloseTo(A4.width, -1);
@@ -47,8 +46,7 @@ test.describe('REQ-005 PDF', () => {
 		expect(last).toBeGreaterThanOrEqual(0.25 * avg);
 	});
 
-	// T-004
-	test.fixme('REQ-005: PDF text contains the name, every experience title and every education entry', async () => {
+	test('REQ-005: PDF text contains the name, every experience title and every education entry', async () => {
 		const { pages } = await readPdf();
 		const text = norm(pages.map((p) => p.text).join(' '));
 		expect(text).toContain(norm(cv.name));

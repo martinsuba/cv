@@ -12,8 +12,9 @@ cd cv
 npm ci
 npm run dev          # dev server, http://localhost:5173/cv/
 npm run build        # static site in dist/ (base path /cv/)
+npm run pdf          # dist/cv.pdf from the build (run build first)
 npm run preview      # serve dist/ at http://localhost:4173/cv/
 ```
 
 Edit `data/cv.json` (and `data/photo.jpg`) to change the content. Checks: `npm run lint`, `npm run format:check`,
-`npm test`, `npm run test:e2e` (build first). See docs/TESTS.md. PDF export and deployment are being reworked, see docs/PLAN.md.
+`npm test`, `npm run test:e2e` (build first). See docs/TESTS.md. Deployment is being reworked, see docs/PLAN.md.
