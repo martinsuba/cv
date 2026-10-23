@@ -34,7 +34,7 @@ data/photo.jpg ───────────────────┘     
 - `src/download-link`: "Download PDF" link to `cv.pdf`, hidden in print.
 - `scripts/validate.js`: validates `data/cv.json` against `data/cv.schema.json`, prints field-level errors.
 - `scripts/pdf.js`: serves `dist/` under `/cv/` on a free port, opens it in Playwright Chromium, `page.pdf()` A4 with
-  1.5cm margins → `dist/cv.pdf`, stops the server. Replaces `generate-pdf.js`.
+  1.5cm margins → `dist/cv.pdf`, stops the server. Replaced `generate-pdf.cjs` (T-004).
 - `.github/workflows/ci.yml`: lint, format check, validate, unit, build, pdf, acceptance (built by the harness).
 - `.github/workflows/deploy.yml`: `workflow_dispatch` only → validate, build, pdf, `actions/upload-pages-artifact`,
   `actions/deploy-pages`.

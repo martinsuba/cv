@@ -1,9 +1,9 @@
 # Status: cv
-Phase: build
-Current task: T-006 meta/SEO + review fixes (PR #48, in review), last task of M1
-Open PRs: #48 T-006
+Phase: build (M1 review)
+Current task: – (M1 complete, milestone PR open)
+Open PRs: milestone M1 PR (chore/milestone-M1)
 Blockers: –
-Next step: review + test-review T-006, merge; then M1 end: Opus milestone review, screenshots, milestone PR chore/milestone-M1 (PLAN ticks; fix generate-pdf.js -> .cjs wording in PLAN/ARCHITECTURE).
+Next step: Martin reviews and merges the M1 milestone PR, then says "go M2" (T-007 deploy workflow, then the deploy phase).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -29,3 +29,5 @@ Next step: review + test-review T-006, merge; then M1 end: Opus milestone review
 - 2026-10-23: T-004 done (PR #46 merged, review + test-review clean, 0 fix rounds).
 - 2026-10-23: T-005 PDF checked visually by the Lead: 3 pages, no split entries, last page ~2/3 full. Slow CI was apt mirror speed in `playwright install --with-deps`; browser cache added, container image is the next option if it repeats.
 - 2026-10-23: T-005 done (PR #47 merged, review + test-review clean, 0 fix rounds).
+- 2026-10-23: T-006 done (PR #48 merged; 1 fix round: photo width/height attributes had the aspect ratio inverted, caught by the reviewer; review + test-review clean after fix).
+- 2026-10-23: M1 complete: T-001…T-006 merged, 0/0/0/0/0/1 fix rounds, master CI green. Opus milestone review: no blocking findings. Open follow-ups: pin Stryker in devDependencies; injectMeta silently no-ops without </head>; consider Playwright container image if apt slowness returns.

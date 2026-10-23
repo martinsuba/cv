@@ -1,7 +1,7 @@
 # Plan: cv
 Legend: [ ] todo · [~] in progress · [x] done
 
-## Harness (before M1, `harness` skill → test-architect)
+## [x] Harness (before M1, `harness` skill → test-architect; PR #41)
 Besides CI and acceptance tests, the harness does the toolchain swap, because it is pure tooling with no visual change:
 - Replace preact-cli with Vite + `@preact/preset-vite` (base `/cv/`), move the entry to `index.html` + `src/main.jsx`;
   components keep rendering the current `cv.json` as today. Remove `preact.config.js`, `manifest.json`, `if-env`, PWA/service worker.
@@ -12,7 +12,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - REQ-004 acceptance tests should pass at the end of the harness.
 
 ## M1: Current content, PDF and print layout
-### [ ] T-001: Data schema and validation  (size S)
+### [x] T-001: Data schema and validation  (size S)
 - Goal: `data/cv.schema.json` + `scripts/validate.js` (ajv); `npm run validate`; `build` runs it first.
 - REQs: REQ-002
 - Acceptance tests to make pass: tests/acceptance/validate.spec.* (REQ-002)
@@ -20,7 +20,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 - Notes: schema per docs/ARCHITECTURE.md "Data model"; skills is an object of string arrays, keys are display names.
 
-### [ ] T-002: Content from the current PDF + text skills  (size S)
+### [x] T-002: Content from the current PDF + text skills  (size S)
 - Goal: update `data/cv.json` with the exact text of Martin's current CV PDF and render skills as grouped comma-separated
   text (as in the PDF). The exact text is given below; copy it verbatim.
 - REQs: REQ-001, REQ-003
@@ -44,7 +44,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
     - "Engineering": JavaScript/TypeScript, React, Node.js, frontend architecture, browser extensions, web and native integration, CI/CD, testing, Angular, Git, Webpack, npm
     - "AI": AI-assisted development, LLM prototyping and automation, Anthropic / Claude ecosystem
 
-### [ ] T-003: Inline SVG contact icons, remove devicon  (size S)
+### [x] T-003: Inline SVG contact icons, remove devicon  (size S)
 - Goal: replace devicon font icons in the header with three inline SVGs (LinkedIn, GitHub, npm; email text only);
   delete assets/fonts/devicon.*, src/devicon/, src/get-icon-class.js. Add `rel="noopener noreferrer"` and photo alt text.
 - REQs: REQ-001, REQ-010
@@ -52,17 +52,17 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Areas/files: src/header/*, src/experience/*, src/style.css, assets/, src/devicon/
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 
-### [ ] T-004: PDF script from the production build  (size M)
+### [x] T-004: PDF script from the production build  (size M)
 - Goal: `scripts/pdf.js` serves `dist/` under `/cv/` on a free port, prints A4 with 1.5cm margins via Playwright to
-  `dist/cv.pdf`, stops the server; `npm run pdf`. Remove `generate-pdf.js`, the committed `cv.pdf` and `puppeteer`.
+  `dist/cv.pdf`, stops the server; `npm run pdf`. Remove `generate-pdf.cjs` (was generate-pdf.js before the harness), the committed `cv.pdf` and `puppeteer`.
   CI uploads `dist/cv.pdf` as an artifact.
 - REQs: REQ-005 (generation, A4, content)
 - Acceptance tests to make pass: tests/acceptance/pdf.spec.* (generation, A4, content cases)
-- Areas/files: scripts/pdf.js, package.json, cv.pdf (delete), generate-pdf.js (delete), .github/workflows/ci.yml
+- Areas/files: scripts/pdf.js, package.json, cv.pdf (delete), generate-pdf.cjs (delete), .github/workflows/ci.yml
   (this task may edit ci.yml to add the pdf step and artifact upload)
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 
-### [ ] T-005: Print layout: max 3 pages, no split entries, download link  (size M)
+### [x] T-005: Print layout: max 3 pages, no split entries, download link  (size M)
 - Goal: print CSS so the PDF fits ≤3 A4 pages with no near-empty last page and no experience entry split across pages
   (tune spacing/font sizes for print only; screen look unchanged); add the "Download PDF" link (hidden in print).
 - REQs: REQ-005 (page count, last page), REQ-006, REQ-007
@@ -70,7 +70,7 @@ Besides CI and acceptance tests, the harness does the toolchain swap, because it
 - Areas/files: src/style.css, src/*/**.css, src/download-link/*, src/app.jsx
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs updated if needed
 
-### [ ] T-006: Meta, SEO and responsive check  (size S)
+### [x] T-006: Meta, SEO and responsive check  (size S)
 - Goal: `lang="en"`, title and meta description from `cv.json` at build time, OG tags with absolute photo URL
   (`https://martinsuba.github.io/cv/…`); fix anything that scrolls horizontally at 375px.
 - REQs: REQ-008, REQ-010
