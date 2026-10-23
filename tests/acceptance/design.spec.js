@@ -2,12 +2,32 @@
 import { test, expect } from '@playwright/test';
 import { cv } from '../helpers.js';
 
-const ACCENT = 'rgb(29, 78, 216)';
-
 async function load(page) {
 	await page.goto('/cv/', { waitUntil: 'networkidle' });
 	await page.evaluate(() => document.fonts.ready);
 }
+
+/** Computed `prop` of EVERY element matching `sel`, as [{ text, value }]; fails if nothing matches. */
+async function styles(page, sel, prop) {
+	const all = await page.locator(sel).evaluateAll(
+		(els, p) =>
+			els.map((el) => ({
+				text: el.textContent.trim().slice(0, 40),
+				value: getComputedStyle(el)[p],
+			})),
+		prop,
+	);
+	expect(all.length, `elements match ${sel}`).toBeGreaterThan(0);
+	return all;
+}
+
+async function expectAll(page, sel, prop, matcher) {
+	for (const { text, value } of await styles(page, sel, prop)) {
+		expect(value, `${sel} ${prop} of "${text}"`).toMatch(matcher);
+	}
+}
+
+const MONO = /^"?JetBrains Mono\b/;
 
 const box = async (locator) => {
 	const b = await locator.boundingBox();
@@ -34,17 +54,11 @@ test.describe('REQ-011 ledger layout at 1280px', () => {
 		page,
 	}) => {
 		await load(page);
-		const mono = /^"?JetBrains Mono\b/;
-		const family = (sel) =>
-			page
-				.locator(sel)
-				.first()
-				.evaluate((el) => getComputedStyle(el).fontFamily);
-		expect(await family('section > h2')).toMatch(mono);
-		expect(await family('section article > div:first-child')).toMatch(mono);
-		expect(await family('header nav a')).toMatch(mono);
-		expect(await family('section li')).toMatch(mono);
-		expect(await family('section article h3')).toMatch(/^"?Inter\b/);
+		await expectAll(page, 'section > h2', 'fontFamily', MONO);
+		await expectAll(page, 'article > .dates', 'fontFamily', MONO);
+		await expectAll(page, 'header nav a', 'fontFamily', MONO);
+		await expectAll(page, 'section li', 'fontFamily', MONO);
+		await expectAll(page, 'article h3', 'fontFamily', /^"?Inter\b/);
 	});
 
 	test('REQ-011: every section label sits left of its content (box ends before content starts)', async ({
@@ -73,19 +87,25 @@ test.describe('REQ-011 ledger layout at 1280px', () => {
 			const date = await box(entries.nth(i).locator('> div').first());
 			const title = await box(entries.nth(i).locator('h3'));
 			expect(date.x + date.width, `entry ${i}`).toBeLessThan(title.x);
+			const font = await entries
+				.nth(i)
+				.locator('> div')
+				.first()
+				.evaluate((el) => getComputedStyle(el).fontFamily);
+			expect(font, `entry ${i} date font`).toMatch(MONO);
+			const titleFont = await entries
+				.nth(i)
+				.locator('h3')
+				.evaluate((el) => getComputedStyle(el).fontFamily);
+			expect(titleFont, `entry ${i} title font`).toMatch(/^"?Inter\b/);
 		}
 	});
 
 	test('REQ-011: job title and links use the accent colour', async ({ page }) => {
 		await load(page);
-		const color = (sel) =>
-			page
-				.locator(sel)
-				.first()
-				.evaluate((el) => getComputedStyle(el).color);
-		expect(await color('header h1 + *')).toBe(ACCENT);
-		expect(await color('header nav a')).toBe(ACCENT);
-		expect(await color('a[download]')).toBe(ACCENT);
+		await expectAll(page, 'header h1 + *', 'color', /^rgb\(29, 78, 216\)$/);
+		await expectAll(page, 'header nav a', 'color', /^rgb\(29, 78, 216\)$/);
+		await expectAll(page, 'a[download]', 'color', /^rgb\(29, 78, 216\)$/);
 	});
 
 	test('REQ-011: header has a 104px round photo, name 44px, content max width 1040px', async ({
@@ -115,12 +135,9 @@ test.describe('REQ-011 ledger layout at 1280px', () => {
 			const lis = heading.locator('xpath=following-sibling::ul[1]/li');
 			await expect(lis).toHaveText(items);
 		}
-		const li = page.locator('section li').first();
-		const style = await li.evaluate((el) => {
-			const s = getComputedStyle(el);
-			return { border: s.borderTopWidth, radius: s.borderTopLeftRadius, size: s.fontSize };
-		});
-		expect(style).toEqual({ border: '1px', radius: '4px', size: '12px' });
+		await expectAll(page, 'section li', 'borderTopWidth', /^1px$/);
+		await expectAll(page, 'section li', 'borderTopLeftRadius', /^4px$/);
+		await expectAll(page, 'section li', 'fontSize', /^12px$/);
 	});
 });
 

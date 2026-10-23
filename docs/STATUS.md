@@ -1,7 +1,7 @@
 # Status: cv
 Phase: build
 Current task: T-016 ledger layout on screen (in progress)
-Open PRs: T-016 (this PR)
+Open PRs: #59 T-016
 Blockers: –
 Next step: T-016 review, then T-017 (print design); deploy after M4.
 
