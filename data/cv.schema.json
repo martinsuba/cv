@@ -13,9 +13,9 @@
 			"additionalProperties": false,
 			"properties": {
 				"email": { "type": "string", "minLength": 1 },
-				"linkedin": { "type": "string", "format": "uri" },
-				"github": { "type": "string", "format": "uri" },
-				"npm": { "type": "string", "format": "uri" }
+				"linkedin": { "type": "string" },
+				"github": { "type": "string" },
+				"npm": { "type": "string" }
 			}
 		},
 		"experience": {
@@ -32,7 +32,7 @@
 						"required": ["name"],
 						"properties": {
 							"name": { "type": "string", "minLength": 1 },
-							"link": { "type": "string", "format": "uri" }
+							"link": { "type": "string" }
 						}
 					},
 					"from": { "type": "string", "minLength": 1 },

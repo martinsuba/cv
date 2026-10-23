@@ -1,7 +1,7 @@
 {
   "name": "Martin Šuba",
-  "title": "Engineering manager",
-  "about": "Engineering manager with a strong frontend background and experience across product development, delivery, and team leadership. I started in frontend engineering, building web applications, browser extensions, and JavaScript/TypeScript products, and later moved into broader roles focused on delivery, automation, and execution.",
+  "title": "Engineering Manager",
+  "about": "Engineering Manager with a strong background in web product development across JavaScript / TypeScript, React, and Node.js. Combines hands-on engineering experience with team leadership, technical ownership, and close product collaboration. Strongest in leading product engineering teams in web-based environments, shaping technical solutions, improving execution, and delivering user-facing products in changing environments.",
   "contact": {
     "email": "martin.suba01@gmail.com",
     "linkedin": "https://linkedin.com/in/martinsuba",
@@ -18,7 +18,7 @@
       "from": "January 2025",
       "to": "Present",
       "location": "Bratislava, Slovakia",
-      "description": "Leading the Solution Implementation team responsible for configuring, releasing, and delivering cybersecurity solutions to partners, while overseeing internal automation and delivery tooling development. In this role, I focus on improving delivery tooling, automating internal processes, and developing internal tools that bring value by improving workflows, reducing manual effort, and making delivery more efficient and reliable."
+      "description": "Leading the Solution Implementation team responsible for configuring, releasing, and delivering cybersecurity solutions to partners, while overseeing internal automation and delivery tooling development. In this role, I focus on improving delivery tooling, automating internal processes, and developing internal tools that improve workflows, reduce manual effort, and make delivery more efficient and reliable, including AI-orchestrated workflows and agentic automations. Current automation initiatives are reducing manual effort by up to 80% in selected internal workflows."
     },
     {
       "title": "Technical Project Lead",
@@ -29,7 +29,7 @@
       "from": "February 2025",
       "to": "December 2025",
       "location": "Bratislava, Slovakia",
-      "description": "In addition to my Engineering Manager responsibilities, taking on a side role as TPL. Managing Tier-1 partner deliveries end-to-end, coordinating cross-team work, and improving delivery processes in a dynamic environment."
+      "description": "In addition to my Engineering Manager responsibilities, took on a side role as Technical Project Lead, managing Tier-1 partner deliveries end-to-end, coordinating cross-team execution, and improving delivery processes in a dynamic environment. Worked across engineering and stakeholder groups to keep delivery aligned, unblock execution, and drive complex customer-facing releases."
     },
     {
       "title": "Lead Frontend engineer",
@@ -40,7 +40,7 @@
       "from": "June 2023",
       "to": "December 2024",
       "location": "Bratislava, Slovakia",
-      "description": "Led frontend development of password manager clients, including browser extensions and SDKs for JavaScript, iOS, and Android. Worked in a dynamic post-acquisition environment, integrating both the team and product into a new organizational structure while aligning with company standards. Delivered full lifecycle solutions, coordinated cross-team execution, and mentored engineers while driving best practices."
+      "description": "Led frontend development of password manager clients, including browser extensions and SDKs for TypeScript, iOS, and Android. Worked closely with Product and engineering stakeholders on integrating SaferPass technology into F-Secure products and apps, discussing technical feasibility, feature integration, and UX coherence to ensure the combined experience made sense for users. Led the technical solution for delivering SaferPass technology as a component in the F-Secure SDK, including integration across web and native technologies. Owned architectural direction in this area, coordinated cross-team execution, and helped deliver a successful SDK release for a Tier-1 customer, enabling launch of a new product offering."
     },
     {
       "title": "Lead Frontend engineer at SaferPass (acquired by F-Secure)",
@@ -51,10 +51,10 @@
       "from": "May 2022",
       "to": "May 2023",
       "location": "Bratislava, Slovakia",
-      "description": "SaferPass Password Manager, by F-Secure"
+      "description": "Started taking on team lead responsibilities while continuing hands-on frontend development of the SaferPass web product and browser extension. Worked across product and engineering during the acquisition period, helping maintain delivery continuity, support the team through change, and contribute to the transition of the product into a larger organization."
     },
     {
-      "title": "Javascript Developer (acquired by Lookout)",
+      "title": "JavaScript Developer (acquired by Lookout)",
       "company": {
         "name": "SaferPass",
         "link": "https://saferpass.net"
@@ -62,7 +62,7 @@
       "from": "October 2017",
       "to": "May 2022",
       "location": "Bratislava, Slovakia",
-      "description": "Taking care of front-end part of SaferPass password manager browser extension. Mostly working with javascript/typescript, angularJS, React, web extension API, web API, node.js. Implementing new features as well as refactoring legacy code and writing unit tests."
+      "description": "Worked as a JavaScript developer in a small, product-focused startup environment, building the frontend of the SaferPass web-based password manager and browser extension. Worked across JavaScript / TypeScript, AngularJS, React, Web Extension APIs, Web APIs, and Node.js to deliver new features, refactor legacy code, and improve test coverage."
     },
     {
       "title": "Front-end web developer",
@@ -73,7 +73,7 @@
       "from": "September 2015",
       "to": "September 2017",
       "location": "Bratislava, Slovakia",
-      "description": "Building front-end of responsive cross-browser/platform web and mobile applications. Working mostly with HTML, SASS, Javascript, jQuery and frameworks like AngularJS, Angular and Ionic."
+      "description": "Built responsive cross-browser web and mobile applications using HTML, SASS, JavaScript, jQuery, AngularJS, Angular, and Ionic."
     },
     {
       "title": "Front-end web developer",
@@ -84,7 +84,7 @@
       "from": "April 2014",
       "to": "August 2015",
       "location": "Bratislava, Slovakia",
-      "description": "Creating web sites and user interfaces using HTML, CSS and JavaScript. Cooperating with graphic designers and back-end developers. Working for clients like O2, Sberbank, SLSP, VÚB and Hyundai."
+      "description": "Built websites and user interfaces using HTML, CSS, and JavaScript, collaborating with designers and back-end developers on client projects for O2, Sberbank, SLSP, VÚB, and Hyundai."
     },
     {
       "title": "Front-end web developer",
@@ -95,7 +95,7 @@
       "from": "April 2013",
       "to": "March 2014",
       "location": "Bratislava, Slovakia",
-      "description": "I focused mainly on coding web pages, coding e-mail newsletters, customizing WordPress templates and some other online marketing activities."
+      "description": "Built web pages, e-mail newsletters, and customized WordPress templates, while also supporting related online marketing activities."
     },
     {
       "title": "Coder",
@@ -106,7 +106,7 @@
       "from": "November 2012",
       "to": "March 2013",
       "location": "Bratislava, Slovakia",
-      "description": "Wordpress themes coding (HTML + CSS)"
+      "description": "Built WordPress themes using HTML and CSS."
     }
   ],
   "education": [
@@ -126,8 +126,33 @@
     }
   ],
   "skills": {
-    "development": ["JavaScript", "TypeScript", "Node.js", "React / Redux", "Angular", "Git", "Webpack", "npm", "Mocha", "Jasmine", "Travis", "Chrome Extensions", "SASS"],
-    "language": ["English", "Czech", "Slovak"],
-    "other": ["Photoshop", "Sketch"]
+    "Leadership & Delivery": [
+      "engineering leadership",
+      "team leadership",
+      "delivery ownership",
+      "product collaboration",
+      "cross-functional collaboration",
+      "process improvement",
+      "agile delivery"
+    ],
+    "Engineering": [
+      "JavaScript/TypeScript",
+      "React",
+      "Node.js",
+      "frontend architecture",
+      "browser extensions",
+      "web and native integration",
+      "CI/CD",
+      "testing",
+      "Angular",
+      "Git",
+      "Webpack",
+      "npm"
+    ],
+    "AI": [
+      "AI-assisted development",
+      "LLM prototyping and automation",
+      "Anthropic / Claude ecosystem"
+    ]
   }
 }
