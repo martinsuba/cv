@@ -1,10 +1,13 @@
-// REQ-001 (single data source), REQ-017 (highlights, location, languages) and REQ-003 (current content).
+// REQ-001 (single data source), REQ-017 (highlights, location, languages) and REQ-018 (content v2).
 import { test, expect } from '@playwright/test';
 import { cv, contactLinks, expectTextVisible } from '../helpers.js';
 import {
 	ABOUT,
-	EM_80_SENTENCE,
+	LOCATION,
+	EM_HIGHLIGHTS,
+	OTHER_HIGHLIGHTS,
 	DESCRIPTIONS,
+	LANGUAGES,
 	SKILL_GROUPS_IN_ORDER,
 	REMOVED_SKILLS,
 } from './expected-content.js';
@@ -60,16 +63,13 @@ test.describe('REQ-001 single data source', () => {
 		}
 	});
 
-	// Until T-024 data/cv.json has no location or languages; these tests switch on when the data has them.
 	test('REQ-017: location is shown under the job title in the header', async ({ page }) => {
-		test.fixme(cv.location == null, 'T-024: cv.json has no top-level location yet');
 		await expect(page.locator('header .job + .location')).toHaveText(cv.location);
 	});
 
 	test('REQ-017: Languages section after Education lists "<language> (<level>)"', async ({
 		page,
 	}) => {
-		test.fixme(!cv.languages?.length, 'T-024: cv.json has no languages yet');
 		const section = page.locator('section.languages');
 		await expect(section.getByRole('heading', { level: 2 })).toHaveText(/^\d\d \/ Languages$/i);
 		await expect(section.locator('ul > li')).toHaveText(
@@ -97,42 +97,56 @@ test.describe('REQ-001 single data source', () => {
 	});
 });
 
-test.describe('REQ-003 current content', () => {
+test.describe('REQ-018 content v2', () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto('/cv/');
 	});
 
-	test('REQ-003: About text from the PDF is shown', async ({ page }) => {
+	test('REQ-018: About text is shown', async ({ page }) => {
 		await expectTextVisible(page, ABOUT);
 	});
 
-	test('REQ-003: the "up to 80%" sentence is in the Engineering Manager entry', async ({
-		page,
-	}) => {
-		await expectTextVisible(page, EM_80_SENTENCE);
+	test('REQ-018: location is shown in the header', async ({ page }) => {
+		await expect(page.locator('header .location')).toHaveText(LOCATION);
 	});
 
-	test('REQ-003: full Engineering Manager / TPL / Lead Frontend / Lookout descriptions are shown', async ({
-		page,
-	}) => {
+	test('REQ-018: the five Engineering Manager highlights are shown in order', async ({ page }) => {
+		const entry = page.locator('article.entry', { has: page.locator('h3') }).first();
+		await expect(entry.locator('ul.highlights > li')).toHaveText(EM_HIGHLIGHTS);
+	});
+
+	test('REQ-018: highlights of the other recent roles are shown', async ({ page }) => {
+		for (const [name, items] of Object.entries(OTHER_HIGHLIGHTS)) {
+			for (const text of items) await expect(page.getByText(text).first(), name).toBeVisible();
+		}
+	});
+
+	test('REQ-018: descriptions are shown', async ({ page }) => {
 		for (const [name, text] of Object.entries(DESCRIPTIONS)) {
 			await expect(page.getByText(text).first(), name).toBeVisible();
 		}
 	});
 
-	test('REQ-003: skill groups "Leadership & Delivery", "Engineering", "AI" appear in that order', async ({
+	test('REQ-018: languages are listed', async ({ page }) => {
+		await expect(page.locator('section.languages ul > li')).toHaveText(LANGUAGES);
+	});
+
+	test('REQ-018: skill groups appear in order Leadership, Delivery, AI, Engineering', async ({
 		page,
 	}) => {
-		const re = /^(Leadership & Delivery|Engineering|AI):?$/;
-		const headings = await page.getByRole('heading', { name: re }).allTextContents();
+		const headings = await page.locator('.skills h3').allTextContents();
 		expect(headings.map((h) => h.replace(/:$/, '').trim())).toEqual(SKILL_GROUPS_IN_ORDER);
 	});
 
-	test('REQ-003: old skills and the "language" group no longer appear', async ({ page }) => {
+	test('REQ-018: Git, Webpack and npm skills, the npm contact and "open to" are absent', async ({
+		page,
+	}) => {
 		const body = await page.locator('body').innerText();
 		for (const skill of REMOVED_SKILLS) {
 			expect(body, skill).not.toMatch(new RegExp(`\\b${skill}\\b`, 'i'));
 		}
+		expect(body).not.toMatch(/open to/i);
+		await expect(page.locator('a[href*="npmjs"]')).toHaveCount(0);
 		await expect(page.getByRole('heading', { name: /^language:?$/i })).toHaveCount(0);
 	});
 });

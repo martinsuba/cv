@@ -57,7 +57,7 @@ test.describe('REQ-011 ledger layout at 1280px', () => {
 		await expectAll(page, 'section > h2', 'fontFamily', MONO);
 		await expectAll(page, 'article > .dates', 'fontFamily', MONO);
 		await expectAll(page, 'header nav a', 'fontFamily', MONO);
-		await expectAll(page, 'section li', 'fontFamily', MONO);
+		await expectAll(page, '.skills li', 'fontFamily', MONO);
 		await expectAll(page, 'article h3', 'fontFamily', /^"?Inter\b/);
 	});
 
@@ -150,9 +150,9 @@ test.describe('REQ-011 ledger layout at 1280px', () => {
 			const lis = heading.locator('xpath=following-sibling::ul[1]/li');
 			await expect(lis).toHaveText(items);
 		}
-		await expectAll(page, 'section li', 'borderTopWidth', /^1px$/);
-		await expectAll(page, 'section li', 'borderTopLeftRadius', /^4px$/);
-		await expectAll(page, 'section li', 'fontSize', /^12px$/);
+		await expectAll(page, '.skills li', 'borderTopWidth', /^1px$/);
+		await expectAll(page, '.skills li', 'borderTopLeftRadius', /^4px$/);
+		await expectAll(page, '.skills li', 'fontSize', /^12px$/);
 	});
 });
 

@@ -91,7 +91,7 @@ header h1 {
 		align-items: center;
 		justify-content: space-between;
 		gap: 20px;
-		padding: 0 0 14pt;
+		padding: 1pt 0 14pt;
 		border-bottom: 1px solid var(--rule);
 		break-inside: avoid;
 		break-after: avoid;
@@ -108,7 +108,7 @@ header h1 {
 	}
 	header h1 {
 		font-size: 30px;
-		line-height: 1.05;
+		line-height: 1.15;
 	}
 	.job {
 		font-size: 8.5pt;
@@ -132,14 +132,14 @@ header h1 {
 	}
 }
 /* Location under the job title: Inter, muted, same size as the entry meta line (14px, 9pt in print). */
-.location {
+header .location {
 	margin: 0;
 	font-size: 14px;
 	line-height: 1.4;
 	color: var(--muted);
 }
 @media print {
-	.location {
+	header .location {
 		font-size: 9pt;
 	}
 }

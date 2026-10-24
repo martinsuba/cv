@@ -115,7 +115,9 @@ system stack and install fonts on the runner; a Google Fonts link; a self-hosted
 self-host **Inter** (SIL OFL, neutral and technical, close to the San Francisco look Martin's own PDF had) with
 `@fontsource/inter` (static faces 400/600/400-italic; the variable package embeds as Type3 in Chromium PDFs, see T-008),
 Latin + Latin Extended subsets (Š, Ú, ...). · Consequences: identical rendering everywhere; no third-party requests; `scripts/pdf.js` already waits for
-`document.fonts.ready`.
+`document.fonts.ready`. · T-024 addition: fontsource Inter has no U+2192 (the arrow in the About text), so two one-glyph
+Inter subsets (400, 600; from inter-ui 3.19.3, see `src/fonts/README.md`) are declared with `unicode-range: U+2192`. They are
+under 4 KB, so Vite inlines them as base64; the real font total is about 205 KB, under the 230 KB budget.
 
 ### D-007: "Technical ledger" design (direction A)
 Context: Martin picked direction A of three T-010 proposals (canvas https://claude.ai/artifact/AeMkfPFe6NVjtSg5Gx5pk4). ·

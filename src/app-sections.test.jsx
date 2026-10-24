@@ -16,7 +16,9 @@ const headings = () => screen.queryAllByRole('heading', { level: 2 }).map((h) =>
 
 describe('App sections without content', () => {
 	beforeEach(() => {
+		// Real data has languages; the tests below that count sections start without them.
 		state.cv = structuredClone(real);
+		delete state.cv.languages;
 	});
 
 	it('renders all four sections numbered 01-04 for full content', () => {
@@ -30,7 +32,7 @@ describe('App sections without content', () => {
 	});
 
 	it('renders no sections when all are empty', () => {
-		state.cv = { ...real, about: null, experience: [], skills: {}, education: [] };
+		state.cv = { ...real, about: null, experience: [], skills: {}, education: [], languages: [] };
 		render(<App />);
 		expect(headings()).toEqual([]);
 	});
@@ -76,7 +78,7 @@ describe('App sections without content', () => {
 	});
 
 	it('renders only the remaining section as 01 when just one has content', () => {
-		state.cv = { ...real, about: null, experience: [], skills: {} };
+		state.cv = { ...real, about: null, experience: [], skills: {}, languages: [] };
 		render(<App />);
 		expect(headings()).toEqual([expect.stringMatching(/^01 \/ Education/)]);
 	});
