@@ -1,0 +1,25 @@
+/* Plain list on screen (no tags); one line with " · " separators in print, same technique as skills (D-007). */
+.language-list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 15px;
+	line-height: 1.65;
+	color: var(--body);
+}
+@media print {
+	.language-list {
+		display: block;
+		font-size: 10pt;
+		line-height: 1.5;
+	}
+	.language-list li {
+		display: inline;
+	}
+	.language-list li:not(:last-child)::after {
+		content: ' · ';
+	}
+}

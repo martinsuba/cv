@@ -131,3 +131,15 @@ header h1 {
 		white-space: nowrap;
 	}
 }
+/* Location under the job title: Inter, muted, same size as the entry meta line (14px, 9pt in print). */
+.location {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.4;
+	color: var(--muted);
+}
+@media print {
+	.location {
+		font-size: 9pt;
+	}
+}

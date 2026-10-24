@@ -20,7 +20,14 @@ export default function experience({ experience, number }) {
 								<span className="sep"> · </span>
 								<span>{item.location}</span>
 							</div>
-							<p className="description">{item.description}</p>
+							{item.description != null && <p className="description">{item.description}</p>}
+							{item.highlights != null && (
+								<ul className="highlights">
+									{item.highlights.map((h) => (
+										<li>{h}</li>
+									))}
+								</ul>
+							)}
 						</div>
 					</article>
 				))}

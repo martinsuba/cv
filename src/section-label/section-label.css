@@ -53,6 +53,17 @@
 	line-height: 1.65;
 	color: var(--body);
 }
+/* Highlights (plan v5, D-008): real bullets, after the optional description. */
+.entry .highlights {
+	margin: 6px 0 0;
+	padding-left: 20px;
+	font-size: 15px;
+	line-height: 1.65;
+	color: var(--body);
+}
+.entry .highlights li + li {
+	margin-top: 4px;
+}
 .entries {
 	display: flex;
 	flex-direction: column;
@@ -141,5 +152,16 @@
 		font-size: 10pt;
 		line-height: 1.5;
 		color: var(--body);
+	}
+	.entry .highlights {
+		grid-column: 1 / -1;
+		margin: 3pt 0 0;
+		padding-left: 5mm;
+		font-size: 10pt;
+		line-height: 1.5;
+		color: var(--body);
+	}
+	.entry .highlights li + li {
+		margin-top: 1.5pt;
 	}
 }

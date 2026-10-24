@@ -10,6 +10,7 @@ export default function header({ cv }) {
 				<div className="who">
 					<h1>{cv.name}</h1>
 					<p className="job">{cv.title}</p>
+					{cv.location != null && <p className="location">{cv.location}</p>}
 				</div>
 			</div>
 			<nav aria-label="Contact">
