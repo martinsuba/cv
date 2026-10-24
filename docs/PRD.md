@@ -1,5 +1,5 @@
 # PRD: cv
-Status: v3 draft (plan PR v3) · Last update: 2026-10-23
+Status: v4 draft (plan PR v4) · Last update: 2026-10-24
 
 ## Problem & why
 Martin's CV is a small Preact site that renders `data/cv.json` and exports `cv.pdf`. It stopped being maintainable:
@@ -173,6 +173,33 @@ Acceptance criteria:
 - Given all workflows, Then checkout, setup-node, cache and the Pages actions use their current major versions.
 - Given the mutation workflow on a milestone PR, Then Stryker uses the Vitest runner, mutates `src/**` and `scripts/**`,
   at most 10% of mutants end as timeouts, and Stryker is a pinned devDependency.
+- (plan v4) Given the mutation workflow, When timeouts exceed 10% of mutants, the report is missing, or the score falls
+  below the break threshold in stryker.config.json, Then the job fails; the job summary lists the surviving mutants
+  with file and line. The workflow declares `permissions: contents: read`.
+Priority: could
+
+### REQ-015: Unit tests where mutation testing found gaps (M6)
+The first meaningful mutation run (62.91%, run 40068998427) showed untested logic in the build scripts and in the
+app's empty-section branches. These scripts produce the PDF and the meta tags and guard the data, so they deserve tests.
+Acceptance criteria:
+- Given `scripts/validate.js`, Then its CLI path (exit code 1 and an error list for invalid data, 0 for valid data) is
+  covered by unit tests with synthetic files.
+- Given `scripts/vite-plugin-cv-meta.js`, Then `injectMeta` is unit-tested (tags filled from cv.json, HTML escaping,
+  and a build error, not a silent no-op, when `</head>` is missing).
+- Given `scripts/pdf.js`, Then `makePdf` is unit-tested with an injected fake browser/page: A4, 16 mm margins,
+  `printBackground`, waits for fonts and images, and the server is always stopped (also on error).
+- Given `src/app.jsx`, Then sections without content render no heading and numbering stays consecutive.
+- Given the mutation workflow, Then the overall score is at least 75% and the break threshold is raised to 75.
+Priority: should
+
+### REQ-016: Dependency hygiene (M6)
+Acceptance criteria:
+- Given the open Dependabot security alerts on master, Then each one is classified (real and fixed / real and not
+  fixable yet / stale, no longer in package-lock.json) in a short report in the PR; real fixable ones are fixed with
+  non-breaking updates; stale ones are listed for Martin to dismiss (the Lead does not dismiss alerts).
+- Given `.github/dependabot.yml`, Then npm and github-actions updates are checked weekly and grouped into one PR per
+  ecosystem.
+- Given `npm audit --omit=dev`, Then it reports no high or critical vulnerabilities.
 Priority: could
 
 ## Constraints (budget, privacy, data, platforms)
