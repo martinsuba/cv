@@ -106,7 +106,7 @@
 	.entries {
 		display: flex;
 		flex-direction: column;
-		gap: 14pt;
+		gap: 11pt;
 	}
 	/* An entry stays on one page. Header line: title left, dates right; company/location below. */
 	.entry {

@@ -34,8 +34,8 @@ describe('validateData', () => {
 
 	it('rejects an entry with neither description nor highlights and names the entry', () => {
 		const d = real();
-		delete d.experience[1].description;
-		expect(validateData(d).join('\n')).toMatch(/\/experience\/1: .*anyOf/);
+		delete d.experience[5].description;
+		expect(validateData(d).join('\n')).toMatch(/\/experience\/5: .*anyOf/);
 	});
 
 	it('rejects empty or non-string highlights', () => {

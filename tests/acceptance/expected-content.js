@@ -1,23 +1,73 @@
-// Exact text of Martin's current CV PDF (2026-10-23), copied verbatim from docs/PLAN.md T-002.
+// Exact texts of content v2, copied verbatim from data/cv.json (formerly docs/content-v2.json). REQ-018.
 export const ABOUT =
-	'Engineering Manager with a strong background in web product development across JavaScript / TypeScript, React, and Node.js. Combines hands-on engineering experience with team leadership, technical ownership, and close product collaboration. Strongest in leading product engineering teams in web-based environments, shaping technical solutions, improving execution, and delivering user-facing products in changing environments.';
+	'Engineering Manager with 13+ years in web product engineering, leading a team that delivers security products to Tier-1 partners at F-Secure. Grew from developer to tech lead to manager on the same product through two acquisitions (SaferPass → Lookout → F-Secure). I focus on growing engineers and predictable delivery. Hands-on with AI-native software development: running AI-orchestrated workflows in my team and exploring how they reshape the whole SDLC. Technical enough to shape architecture and review solutions (JavaScript/TypeScript, React, Node.js, web and native SDKs).';
 
-export const EM_80_SENTENCE =
-	'Current automation initiatives are reducing manual effort by up to 80% in selected internal workflows.';
+export const LOCATION = 'Bratislava, Slovakia';
 
-export const DESCRIPTIONS = {
-	'Engineering Manager (F-Secure)':
-		'Leading the Solution Implementation team responsible for configuring, releasing, and delivering cybersecurity solutions to partners, while overseeing internal automation and delivery tooling development. In this role, I focus on improving delivery tooling, automating internal processes, and developing internal tools that improve workflows, reduce manual effort, and make delivery more efficient and reliable, including AI-orchestrated workflows and agentic automations. Current automation initiatives are reducing manual effort by up to 80% in selected internal workflows.',
-	'Technical Project Lead':
-		'In addition to my Engineering Manager responsibilities, took on a side role as Technical Project Lead, managing Tier-1 partner deliveries end-to-end, coordinating cross-team execution, and improving delivery processes in a dynamic environment. Worked across engineering and stakeholder groups to keep delivery aligned, unblock execution, and drive complex customer-facing releases.',
-	'Lead Frontend engineer':
-		'Led frontend development of password manager clients, including browser extensions and SDKs for TypeScript, iOS, and Android. Worked closely with Product and engineering stakeholders on integrating SaferPass technology into F-Secure products and apps, discussing technical feasibility, feature integration, and UX coherence to ensure the combined experience made sense for users. Led the technical solution for delivering SaferPass technology as a component in the F-Secure SDK, including integration across web and native technologies. Owned architectural direction in this area, coordinated cross-team execution, and helped deliver a successful SDK release for a Tier-1 customer, enabling launch of a new product offering.',
-	'Lead Frontend engineer at SaferPass (acquired by F-Secure) (Lookout)':
-		'Started taking on team lead responsibilities while continuing hands-on frontend development of the SaferPass web product and browser extension. Worked across product and engineering during the acquisition period, helping maintain delivery continuity, support the team through change, and contribute to the transition of the product into a larger organization.',
-	'JavaScript Developer (acquired by Lookout) (SaferPass)':
-		'Worked as a JavaScript developer in a small, product-focused startup environment, building the frontend of the SaferPass web-based password manager and browser extension. Worked across JavaScript / TypeScript, AngularJS, React, Web Extension APIs, Web APIs, and Node.js to deliver new features, refactor legacy code, and improve test coverage.',
+export const EM_HIGHLIGHTS = [
+	'Line manager for the team: 1:1s, regular feedback, performance reviews and career development.',
+	'Hiring and onboarding of new engineers.',
+	'Owns delivery and release readiness for partner releases: planning around real capacity, managing dependencies across teams and raising risks early.',
+	'Introduced AI-orchestrated workflows and agentic automations into delivery, reducing manual effort by up to 80% in selected workflows, and brought the team along in adopting AI tools.',
+	'Improves delivery processes and quality in a security-critical, partner-facing environment.',
+];
+
+// Highlights of the other recent roles (entries 2-5), keyed by 'title (company)'.
+export const OTHER_HIGHLIGHTS = {
+	'Technical Project Lead (alongside the EM role) (F-Secure)': [
+		'Led Tier-1 partner deliveries end to end, from scope and planning to release.',
+		'Coordinated execution across engineering teams and stakeholder groups, unblocking work and keeping commitments aligned.',
+		'Improved the delivery process for complex, customer-facing releases.',
+	],
+	'Lead Frontend Engineer (F-Secure)': [
+		'Led frontend development of the password manager clients: browser extensions and SDKs for TypeScript, iOS and Android.',
+		'Owned the architecture for delivering SaferPass as a component of the F-Secure SDK, integrating web and native technologies.',
+		'Shipped the SDK release for a Tier-1 partner, enabling the launch of a new product offering.',
+		'Partnered with Product on integrating SaferPass into F-Secure products: feasibility, feature scope and a consistent user experience.',
+		'Mentored engineers and set technical direction for the frontend.',
+	],
+	'Lead Frontend Engineer (Lookout (SaferPass))': [
+		'Took on team lead responsibilities while staying hands-on in frontend development of the web product and browser extension.',
+		'Kept delivery going and supported the team through the acquisition and the move into a larger organization.',
+	],
+	'JavaScript Developer (SaferPass)': [
+		'Built the frontend of the web app and browser extension (JavaScript/TypeScript, AngularJS, React, Web Extension APIs, Node.js).',
+		'Delivered new features, refactored legacy code and improved test coverage.',
+	],
 };
 
-export const SKILL_GROUPS_IN_ORDER = ['Leadership & Delivery', 'Engineering', 'AI'];
+// Descriptions of the entries that have one (EM, Lookout, SaferPass and the earlier roles).
+export const DESCRIPTIONS = {
+	'Engineering Manager (F-Secure)':
+		"Leading the Solution Implementation team, which configures, releases and delivers cybersecurity products to Tier-1 partners, and owning the team's internal automation and delivery tooling.",
+	'Lead Frontend Engineer (Lookout (SaferPass))':
+		'SaferPass was acquired by Lookout in 2022; the consumer business moved to F-Secure in 2023.',
+	'JavaScript Developer (SaferPass)': 'Product startup building a web-based password manager.',
+	'Front-end Web Developer (WEZEO)':
+		'Responsive web and mobile apps (JavaScript, AngularJS, Angular, Ionic).',
+	'Front-end Web Developer (Elite Solutions)':
+		'Web interfaces for client projects including O2, Sberbank, SLSP, VÚB and Hyundai.',
+	'Front-end Web Developer (pelicantravel.com)':
+		'Web pages, e-mail newsletters and WordPress templates.',
+	'Coder (webikon)': 'WordPress themes (HTML, CSS).',
+};
 
-export const REMOVED_SKILLS = ['Mocha', 'Jasmine', 'Travis', 'Photoshop', 'Sketch'];
+export const LANGUAGES = [
+	'Slovak (native)',
+	'English (professional)',
+	'Czech (professional)',
+	'German (elementary)',
+];
+
+export const SKILL_GROUPS_IN_ORDER = ['Leadership', 'Delivery', 'AI', 'Engineering'];
+
+export const REMOVED_SKILLS = [
+	'Git',
+	'Webpack',
+	'npm',
+	'Mocha',
+	'Jasmine',
+	'Travis',
+	'Photoshop',
+	'Sketch',
+];
