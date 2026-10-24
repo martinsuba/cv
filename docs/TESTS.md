@@ -53,7 +53,7 @@ Unit tests (`src/**/*.test.jsx`) cover the header, about, experience, education,
 ## Plan v4 (M6)
 | REQ | tests | status |
 | --- | --- | --- |
-| REQ-015 | unit tests: `scripts/validate-cli.test.js` (CLI exit codes), `scripts/inject-meta.test.js` (injectMeta, missing `</head>` throws), `scripts/make-pdf.test.js` (makePdf with fake browser); app.jsx empty sections (T-020); mutation score ≥ 75% | scripts done (T-019), app.jsx planned (T-020) |
-| REQ-014 (v4) | unit tests for scripts/mutation-summary.js (missing report, timeout share, survivor list); mutation job fails on break threshold | done (T-018); break threshold 60 (75 in T-020) |
+| REQ-015 | unit tests: `scripts/validate-cli.test.js` (CLI exit codes), `scripts/inject-meta.test.js` (injectMeta, missing `</head>` throws), `scripts/make-pdf.test.js` (makePdf with fake browser); `src/app-sections.test.jsx` (app.jsx empty sections, consecutive numbering), header link-text regex and icon attributes in `header.test.jsx`; Stryker `break` 75 (score 80.2%) | done (T-019, T-020) |
+| REQ-014 (v4) | unit tests for scripts/mutation-summary.js (missing report, timeout share, survivor list); mutation job fails on break threshold | done (T-018); break threshold raised to 75 (T-020) |
 | REQ-016 | PR report of alert triage; `npm audit --omit=dev` no high/critical; dependabot.yml present | planned (T-021) |
 
