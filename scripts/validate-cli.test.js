@@ -4,7 +4,19 @@ import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { main } from './validate.js';
+import { main, validateData } from './validate.js';
+
+describe('error message format', () => {
+	it('labels root-level errors "(root)" and names the unknown property', () => {
+		expect(validateData([])).toEqual(['(root): must be object']);
+		const d = JSON.parse(readFileSync('data/cv.json', 'utf8'));
+		expect(validateData({ ...d, extra: 1 })).toEqual([
+			"(root): must NOT have additional properties 'extra'",
+		]);
+		d.name = 5;
+		expect(validateData(d)).toEqual(['/name: must be string']);
+	});
+});
 
 const real = () => JSON.parse(readFileSync('data/cv.json', 'utf8'));
 const tmp = (text) => {
