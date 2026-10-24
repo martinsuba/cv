@@ -49,9 +49,48 @@ export function toMarkdown({ counts, total, score, survivors }) {
 	return lines.join('\n') + '\n';
 }
 
+export const MAX_TIMEOUT_PCT = 10;
+export const MAX_SURVIVORS_LISTED = 30;
+
+/** Lists the first survivors (file:line and mutator), capped at `limit`. */
+export function survivorList(survivors, limit = MAX_SURVIVORS_LISTED) {
+	if (survivors.length === 0) return '';
+	const shown = survivors.slice(0, limit);
+	const lines = ['', `### Surviving mutants (${shown.length} of ${survivors.length})`, ''];
+	for (const s of shown) lines.push(`- \`${s.file}:${s.line}\` ${s.mutator} (${s.status})`);
+	return lines.join('\n') + '\n';
+}
+
+/** Returns { markdown, exitCode, error } for a report file path. Pure apart from reading the file. */
+export function run(file, read = readFileSync) {
+	let report;
+	try {
+		report = JSON.parse(read(file, 'utf8'));
+	} catch (err) {
+		return {
+			markdown: '',
+			exitCode: 1,
+			error: `Mutation report not found or unreadable: ${file} (${err.message}). Did Stryker run?`,
+		};
+	}
+	const result = summarize(report);
+	let markdown = toMarkdown(result) + survivorList(result.survivors);
+	let exitCode = 0;
+	let error;
+	if (result.total > 0 && (result.counts.Timeout / result.total) * 100 > MAX_TIMEOUT_PCT) {
+		exitCode = 1;
+		error = `Timeouts exceed ${MAX_TIMEOUT_PCT} % of mutants (REQ-014).`;
+		markdown += `\n**FAILED: ${error}**\n`;
+	}
+	return { markdown, exitCode, error };
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
 	const file = process.argv[2] ?? 'reports/mutation/mutation.json';
-	const md = toMarkdown(summarize(JSON.parse(readFileSync(file, 'utf8'))));
-	process.stdout.write(md);
-	if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, md);
+	const { markdown, exitCode, error } = run(file);
+	process.stdout.write(markdown);
+	if (markdown && process.env.GITHUB_STEP_SUMMARY)
+		appendFileSync(process.env.GITHUB_STEP_SUMMARY, markdown);
+	if (error) console.error(error);
+	process.exitCode = exitCode;
 }
