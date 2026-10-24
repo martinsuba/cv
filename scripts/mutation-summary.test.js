@@ -72,6 +72,12 @@ describe('run', () => {
 		expect(res.markdown).toContain('| 2 | 1 | 1 | 1 | 60.00 % |');
 		expect(res.markdown).toContain('FAILED');
 	});
+	it('passes with exactly 10 % timeouts (1 of 10 mutants): the limit is exclusive', () => {
+		const edge = { files: { 'a.js': { mutants: [...Array(9).fill(m('Killed')), m('Timeout')] } } };
+		const res = run('r.json', reader(edge));
+		expect(res.exitCode).toBe(0);
+		expect(res.markdown).not.toContain('FAILED');
+	});
 	it('passes with 10 % timeouts or fewer and lists survivors', () => {
 		const ok = {
 			files: {
