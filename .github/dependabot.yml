@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      npm:
+        patterns: ['*']
+    ignore:
+      # vitest is pinned (Stryker compatibility); Stryker is pinned too. No major bumps.
+      - dependency-name: vitest
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@stryker-mutator/*'
+        update-types: ['version-update:semver-major']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ['*']
