@@ -1,9 +1,9 @@
 # Status: cv
-Phase: plan review (plan v5: content v2)
+Phase: build (M7 complete; milestone PR in review)
 Current task: –
-Open PRs: Plan v5 (plan/5)
+Open PRs: M7 milestone (chore/milestone-M7)
 Blockers: –
-Next step: Martin reviews and merges the Plan v5 PR, then says "go M7" (T-023 data model, T-024 content v2). Deploy after the M7 milestone, with Martin's approval.
+Next step: Martin reviews and merges the M7 milestone PR, then approves a deploy so content v2 goes live. Optional follow-up: keep hyphenated words like "F-Secure" from breaking across lines (render-time no-wrap span, needs a plan update).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -72,3 +72,8 @@ Next step: Martin reviews and merges the Plan v5 PR, then says "go M7" (T-023 da
 - 2026-10-24: content rules (Martin): general EM CV, not tailored per company; no team sizes or other sensitive/changing numbers; earlier roles stay separate entries; Technical Project Lead stays separate.
 - 2026-10-24: header location "Bratislava, Slovakia" without "open to remote or hybrid": the site is public and visible to the current employer (Martin, on the Lead's challenge).
 - 2026-10-24: plan v5: D-008 data model (optional description + highlights[], top-level location and languages); exact target data in docs/content-v2.json; M7 = T-023, T-024.
+- 2026-10-24: plan v5 merged (#75); Martin: "go M7".
+- 2026-10-24: T-023 done (PR #76, 0 fix rounds; review + test-review clean). Location/languages acceptance tests were conditional fixme until T-024.
+- 2026-10-24: T-024 done (PR #77, 1 fix round: a removed-skills regex had been loosened, reverted). PDF 2 pages (~95%/97% fill) via print spacing only; print h1 line-height 1.15 for top-margin headroom (44.25 pt vs 42.5 pt limit). "→" in About needed one-glyph Inter subsets (src/fonts/, inter-ui 3.19.3, OFL, ~1.4 KB inlined) because fontsource Inter lacks U+2192 and Chromium fell back to LiberationSans (REQ-012). design.spec `section li` scoped to `.skills li` (Lead-allowed).
+- 2026-10-24: M7 complete. Cosmetic open point: "F-Secure" can break at its hyphen in the PDF; CSS alone can't prevent it (needs no-wrap spans at render time). Not done; ask Martin.
+- 2026-10-24: a stale git-ignored .stryker-tmp/ in the main checkout breaks `npm run lint` locally (agents may not delete it); `rm -rf .stryker-tmp` by Martin, or add it to the ESLint ignores in a later task.

@@ -236,11 +236,11 @@ From the retro (docs/RETRO.md) and the first meaningful mutation run. No visual 
   Stryker and Vitest 5, confirm the mutation score is unchanged. Until then the Lead checks once per milestone.
 - REQs: REQ-014
 
-## M7: Content v2 (plan v5)
+## [x] M7: Content v2 (plan v5)
 Approved text: ~/HAL/ai-assistant/notes/career/cv/cv-draft.md (v3 FINAL, 2026-10-24). The exact target data is
 `docs/content-v2.json` (committed with this plan); tasks copy it, never retype or reword it. Design A stays.
 
-### [ ] T-023: Data model and rendering for highlights, location and languages  (size M)
+### [x] T-023: Data model and rendering for highlights, location and languages  (size M)  — #76
 - Goal: schema + components for the D-008 fields, with the current `data/cv.json` unchanged (it stays valid: every
   entry still has a description). Experience: optional `description` (render the `p` only when present) and optional
   `highlights` → `ul.highlights > li` after it; schema `anyOf` needs one of them. Header: optional top-level `location`
@@ -260,7 +260,7 @@ Approved text: ~/HAL/ai-assistant/notes/career/cv/cv-draft.md (v3 FINAL, 2026-10
 - Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs/ARCHITECTURE.md
   data model matches, docs/TESTS.md updated; the site and PDF look unchanged with today's data (PDF still 2 pages).
 
-### [ ] T-024: Content v2  (size M)
+### [x] T-024: Content v2  (size M)  — #77
 - Goal: replace `data/cv.json` with `docs/content-v2.json` byte for byte, delete `docs/content-v2.json`; rewrite
   `tests/acceptance/expected-content.js` and the REQ-003 tests as REQ-018 tests with texts copied from that file
   (About, the five EM highlights, highlights of the other recent roles, earlier-role descriptions, location, languages,
