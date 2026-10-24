@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: – (M5 complete; milestone PR in review)
-Open PRs: M5 milestone (chore/milestone-M5)
+Current task: – (M1–M5 done; retro in review; plan v4 next)
+Open PRs: retro + deploy record (chore/retro)
 Blockers: –
-Next step: Martin merges the M5 milestone PR. All planned milestones (M1–M5) then done; options: retro, plan v4 (survivor tests, Vitest 5 revert, timeout gate, content tailoring).
+Next step: Martin merges the retro PR; plan v4 PR (follow-ups); framework proposals go to the ops session.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -60,4 +60,4 @@ Next step: Martin merges the M5 milestone PR. All planned milestones (M1–M5) t
 - 2026-10-24: resolved the docs/STATUS.md conflict between #64 and the status PR #65 by merging master into the T-013 branch (no force-push); reviewer re-approved the new head (docs-only delta).
 - 2026-10-24: T-013 done (PR #64, 0 fix rounds; Vitest 4.1.12 pin accepted by the Lead as a temporary, documented decision). First on-demand mutation run on master (run 40068998427, 2m22s): score 62.91%, 250 killed, 82 survived, 1 timeout (0.3%), 66 no coverage, 4 errors. M5 complete: T-011 (#62), T-012 (#63), T-013 (#64).
 - 2026-10-24: follow-up candidates for a plan v4: unit tests for top survivors (pdf.js makePdf/resolveRequest, validate.js CLI path, vite-plugin-cv-meta injectMeta, app.jsx empty sections); make the ≤10% timeout rule a gate (summary script exit code); mutation-summary.js missing-report handling; `permissions: contents: read` in mutation.yml; revert to Vitest 5 when Stryker releases the fix; deploy once to verify the containerised deploy build.
-
+- 2026-10-24: deployed 166cb04 (run 40069676603): containerised deploy build verified in practice, smoke checks green. Retro written (docs/RETRO.md). Martin: do plan v4 improvements.
