@@ -1,0 +1,17 @@
+import SectionLabel from '../section-label/section-label.jsx';
+import './languages.css';
+
+export default function languages({ languages, number }) {
+	return (
+		<section className="section languages">
+			<SectionLabel number={number} name="Languages" />
+			<ul className="language-list">
+				{languages.map((item) => (
+					<li>
+						{item.language} ({item.level})
+					</li>
+				))}
+			</ul>
+		</section>
+	);
+}

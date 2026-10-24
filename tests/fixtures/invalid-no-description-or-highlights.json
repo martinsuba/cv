@@ -1,0 +1,34 @@
+{
+	"name": "Jane Example",
+	"title": "Example Engineer",
+	"about": "Synthetic fixture: an experience entry with neither description nor highlights.",
+	"contact": {
+		"email": "jane@example.invalid"
+	},
+	"experience": [
+		{
+			"company": {
+				"name": "Example Corp",
+				"link": "https://example.invalid/"
+			},
+			"from": "January 2020",
+			"to": "Present",
+			"location": "Nowhere",
+			"title": "Example Role"
+		}
+	],
+	"education": [
+		{
+			"institution": "Example University",
+			"field": "Examples",
+			"degree": "Bachelor's degree",
+			"from": "2010",
+			"to": "2013"
+		}
+	],
+	"skills": {
+		"Engineering": [
+			"Testing"
+		]
+	}
+}

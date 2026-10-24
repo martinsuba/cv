@@ -80,4 +80,29 @@ describe('App sections without content', () => {
 		render(<App />);
 		expect(headings()).toEqual([expect.stringMatching(/^01 \/ Education/)]);
 	});
+
+	it('renders Languages after Education as the next number when languages are present', () => {
+		state.cv.languages = [{ language: 'Examplish', level: 'native' }];
+		render(<App />);
+		expect(headings()).toEqual([
+			expect.stringMatching(/^01 \/ About/),
+			expect.stringMatching(/^02 \/ Experience/),
+			expect.stringMatching(/^03 \/ Skills/),
+			expect.stringMatching(/^04 \/ Education/),
+			expect.stringMatching(/^05 \/ Languages/),
+		]);
+		expect(screen.getByText('Examplish (native)')).toBeInTheDocument();
+	});
+
+	it('renders no Languages section for an empty languages array', () => {
+		state.cv.languages = [];
+		render(<App />);
+		expect(headings().some((h) => h.includes('Languages'))).toBe(false);
+	});
+
+	it('passes the top-level location to the header', () => {
+		state.cv.location = 'Example City';
+		render(<App />);
+		expect(screen.getByText('Example City')).toBeInTheDocument();
+	});
 });

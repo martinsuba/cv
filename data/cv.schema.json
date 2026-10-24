@@ -7,6 +7,7 @@
 	"properties": {
 		"name": { "type": "string", "minLength": 1 },
 		"title": { "type": "string", "minLength": 1 },
+		"location": { "type": "string", "minLength": 1 },
 		"about": { "type": "string", "minLength": 1 },
 		"contact": {
 			"type": "object",
@@ -23,7 +24,8 @@
 			"items": {
 				"type": "object",
 				"additionalProperties": false,
-				"required": ["title", "company", "from", "to", "location", "description"],
+				"required": ["title", "company", "from", "to", "location"],
+				"anyOf": [{ "required": ["description"], "properties": { "description": {} } }, { "required": ["highlights"], "properties": { "highlights": {} } }],
 				"properties": {
 					"title": { "type": "string", "minLength": 1 },
 					"company": {
@@ -38,7 +40,12 @@
 					"from": { "type": "string", "minLength": 1 },
 					"to": { "type": "string", "minLength": 1 },
 					"location": { "type": "string", "minLength": 1 },
-					"description": { "type": "string", "minLength": 1 }
+					"description": { "type": "string", "minLength": 1 },
+					"highlights": {
+						"type": "array",
+						"minItems": 1,
+						"items": { "type": "string", "minLength": 1 }
+					}
 				}
 			}
 		},
@@ -63,6 +70,18 @@
 				"type": "array",
 				"minItems": 1,
 				"items": { "type": "string", "minLength": 1 }
+			}
+		},
+		"languages": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["language", "level"],
+				"properties": {
+					"language": { "type": "string", "minLength": 1 },
+					"level": { "type": "string", "minLength": 1 }
+				}
 			}
 		}
 	}

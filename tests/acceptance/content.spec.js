@@ -1,4 +1,4 @@
-// REQ-001 (single data source) and REQ-003 (current content).
+// REQ-001 (single data source), REQ-017 (highlights, location, languages) and REQ-003 (current content).
 import { test, expect } from '@playwright/test';
 import { cv, contactLinks, expectTextVisible } from '../helpers.js';
 import {
@@ -30,7 +30,7 @@ test.describe('REQ-001 single data source', () => {
 		}
 	});
 
-	test('REQ-001: every experience entry (title, company, dates, location, description) is visible', async ({
+	test('REQ-001: every experience entry (title, company, dates, location, description if any) is visible', async ({
 		page,
 	}) => {
 		for (const e of cv.experience) {
@@ -38,8 +38,46 @@ test.describe('REQ-001 single data source', () => {
 			await expectTextVisible(page, e.company.name);
 			await expectTextVisible(page, `${e.from} - ${e.to}`);
 			await expectTextVisible(page, e.location);
-			await expectTextVisible(page, e.description);
+			if (e.description != null) await expectTextVisible(page, e.description);
 		}
+	});
+
+	test('REQ-017: every highlight is its own li in the entry, after the description; no empty description p', async ({
+		page,
+	}) => {
+		const entries = page.locator('article.entry', { has: page.locator('h3') });
+		for (const e of cv.experience) {
+			const entry = entries.filter({ hasText: e.company.name }).filter({ hasText: e.title });
+			await expect(entry.first(), e.title).toBeVisible();
+			const list = entry.first().locator('ul.highlights');
+			if (e.highlights?.length) {
+				await expect(list.locator(':scope > li'), e.title).toHaveText(e.highlights);
+			} else {
+				await expect(list, e.title).toHaveCount(0);
+			}
+			const description = entry.first().locator('p.description');
+			await expect(description, e.title).toHaveCount(e.description != null ? 1 : 0);
+		}
+	});
+
+	// Until T-024 data/cv.json has no location or languages; these tests switch on when the data has them.
+	test('REQ-017: location is shown under the job title in the header', async ({ page }) => {
+		test.fixme(cv.location == null, 'T-024: cv.json has no top-level location yet');
+		await expect(page.locator('header .job + .location')).toHaveText(cv.location);
+	});
+
+	test('REQ-017: Languages section after Education lists "<language> (<level>)"', async ({
+		page,
+	}) => {
+		test.fixme(!cv.languages?.length, 'T-024: cv.json has no languages yet');
+		const section = page.locator('section.languages');
+		await expect(section.getByRole('heading', { level: 2 })).toHaveText(/^\d\d \/ Languages$/i);
+		await expect(section.locator('ul > li')).toHaveText(
+			cv.languages.map((l) => `${l.language} (${l.level})`),
+		);
+		const labels = await page.locator('h2.section-label').allTextContents();
+		expect(labels.at(-1)).toMatch(/Languages$/i);
+		expect(labels.at(-2)).toMatch(/Education$/i);
 	});
 
 	test('REQ-001: every education entry is visible', async ({ page }) => {

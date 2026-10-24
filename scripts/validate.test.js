@@ -24,6 +24,42 @@ describe('validateData', () => {
 		expect(validateData(d)).toEqual([]);
 	});
 
+	it('accepts an entry with only highlights, and one with both', () => {
+		const d = real();
+		d.experience[0].highlights = ['A point.'];
+		expect(validateData(d)).toEqual([]);
+		delete d.experience[0].description;
+		expect(validateData(d)).toEqual([]);
+	});
+
+	it('rejects an entry with neither description nor highlights and names the entry', () => {
+		const d = real();
+		delete d.experience[1].description;
+		expect(validateData(d).join('\n')).toMatch(/\/experience\/1: .*anyOf/);
+	});
+
+	it('rejects empty or non-string highlights', () => {
+		const d = real();
+		d.experience[0].highlights = [];
+		expect(validateData(d).join('\n')).toMatch(/\/experience\/0\/highlights/);
+		d.experience[0].highlights = [''];
+		expect(validateData(d).join('\n')).toMatch(/\/experience\/0\/highlights\/0/);
+		d.experience[0].highlights = [3];
+		expect(validateData(d).join('\n')).toMatch(/\/experience\/0\/highlights\/0/);
+	});
+
+	it('accepts location and languages and rejects malformed ones', () => {
+		const d = real();
+		d.location = 'Example City';
+		d.languages = [{ language: 'Examplish', level: 'native' }];
+		expect(validateData(d)).toEqual([]);
+		d.languages = [{ language: 'Examplish' }];
+		expect(validateData(d).join('\n')).toMatch(/\/languages\/0.*level/);
+		d.languages = [];
+		d.location = '';
+		expect(validateData(d).join('\n')).toMatch(/\/location/);
+	});
+
 	it('names the path of a missing required field', () => {
 		const d = real();
 		delete d.experience[0].title;

@@ -28,7 +28,7 @@ data/photo.jpg ───────────────────┘     
 - `index.html`: Vite entry; meta tags (title, description, OG) filled at build time from `cv.json` (small Vite plugin or
   `transformIndexHtml`).
 - `src/main.jsx` / `src/app.jsx`: renders sections from `cv.json`.
-- `src/header`, `src/about`, `src/experience`, `src/education`, `src/skills`: one component + CSS each (kept from today).
+- `src/header` (shows the optional top-level `location` under the job title), `src/about`, `src/experience`, `src/education`, `src/skills`: one component + CSS each (kept from today).
 - Header contact icons: three inline SVGs (LinkedIn, GitHub, npm) + text for email. The devicon font, `devicon.json`
   and `get-icon-class.js` are removed.
 - `src/languages` (plan v5): "Languages" section after Education, one `li` per language "<language> (<level>)".
@@ -63,7 +63,9 @@ Plan v5 additions (D-008), all optional so older data stays valid:
 An experience entry needs `description`, `highlights` or both (schema `anyOf`). `contact.npm` stays allowed in the schema
 but is removed from the data.
 Skill groups render in JSON key order (e.g. "Leadership & Delivery", "Engineering", "AI") as comma-separated text, as
-in Martin's current PDF. `data/cv.schema.json` makes every field above required except `company.link` and contact entries.
+in Martin's current PDF. `data/cv.schema.json` makes every field above required except `company.link`, contact entries and the plan v5
+additions (`location`, `languages`, and per experience entry `description`/`highlights`, of which one is required).
+`highlights` is a non-empty array of non-empty strings; an empty `languages` array renders no section.
 
 ## External services / APIs
 - **GitHub Pages via Actions** (project site): served at `https://martinsuba.github.io/cv/`; `martinsuba.github.io` has

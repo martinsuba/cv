@@ -108,4 +108,16 @@ describe('Header', () => {
 			expect(svg).toHaveClass('icon');
 		}
 	});
+
+	it('shows the location under the job title when present', () => {
+		const { container } = render(<Header cv={{ ...cv, location: 'Example City, Nowhere' }} />);
+		const loc = screen.getByText('Example City, Nowhere');
+		expect(loc).toHaveClass('location');
+		expect(loc.previousElementSibling).toBe(container.querySelector('.job'));
+	});
+
+	it('shows no location element without a location', () => {
+		const { container } = render(<Header cv={cv} />);
+		expect(container.querySelector('.location')).toBeNull();
+	});
 });
