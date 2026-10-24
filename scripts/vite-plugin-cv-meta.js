@@ -33,6 +33,9 @@ export function buildMeta(cv) {
 }
 
 export function injectMeta(html, cv) {
+	if (!/<\/head>/i.test(html)) {
+		throw new Error('cv-meta: index.html has no </head>, cannot inject meta tags');
+	}
 	const stripped = html.replace(/<title>[\s\S]*?<\/title>\s*/i, '');
 	return stripped.replace(/(\s*)<\/head>/i, (_, ws) => `\n\t\t${buildMeta(cv)}${ws}</head>`);
 }

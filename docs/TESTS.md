@@ -54,6 +54,6 @@ Unit tests (`src/**/*.test.jsx`) cover the header, about, experience, education,
 | REQ | tests | status |
 | --- | --- | --- |
 | REQ-014 (v4) | unit tests for scripts/mutation-summary.js (missing report, timeout share, survivor list); mutation job fails on break threshold | planned (T-018) |
-| REQ-015 | unit tests: validate.js CLI, injectMeta, makePdf with fake browser, app.jsx empty sections; mutation score ≥ 75% | planned (T-019, T-020) |
+| REQ-015 | unit tests: `scripts/validate-cli.test.js` (CLI exit codes), `scripts/inject-meta.test.js` (injectMeta, missing `</head>` throws), `scripts/make-pdf.test.js` (makePdf with fake browser); app.jsx empty sections (T-020); mutation score ≥ 75% | scripts done (T-019), app.jsx planned (T-020) |
 | REQ-016 | PR report of alert triage; `npm audit --omit=dev` no high/critical; dependabot.yml present | planned (T-021) |
 

@@ -85,13 +85,13 @@ export function parseArgs(argv, base = baseDir()) {
 	return { out };
 }
 
-export async function makePdf({ root = ROOT, out } = {}) {
+export async function makePdf({ root = ROOT, out, chromium } = {}) {
 	const dist = resolve(root, 'dist');
 	if (!existsSync(resolve(dist, 'index.html'))) {
 		throw new Error('dist/index.html not found. Run `npm run build` first.');
 	}
 	const target = out ? resolve(out) : defaultOut(root);
-	const { chromium } = await import('@playwright/test');
+	chromium ??= (await import('@playwright/test')).chromium;
 	const server = createStaticServer(dist);
 	try {
 		await new Promise((ok, fail) => {

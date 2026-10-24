@@ -37,13 +37,19 @@ export function validateFile(file) {
 	return validateData(data);
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-	const file = process.env.CV_JSON ? resolve(process.env.CV_JSON) : resolve(root, 'data/cv.json');
+/** CLI body: returns the exit code (0 valid, 1 invalid). Output goes through `log` / `error`. */
+export function main(env = process.env, log = console.log, error = console.error) {
+	const file = env.CV_JSON ? resolve(env.CV_JSON) : resolve(root, 'data/cv.json');
 	const errors = validateFile(file);
 	if (errors.length) {
-		console.error(`Validation failed for ${file}:`);
-		for (const e of errors) console.error(`  - ${e}`);
-		process.exit(1);
+		error(`Validation failed for ${file}:`);
+		for (const e of errors) error(`  - ${e}`);
+		return 1;
 	}
-	console.log(`${file} is valid`);
+	log(`${file} is valid`);
+	return 0;
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+	process.exit(main());
 }
