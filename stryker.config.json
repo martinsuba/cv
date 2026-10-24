@@ -15,7 +15,7 @@
 	"coverageAnalysis": "perTest",
 	"timeoutMS": 10000,
 	"timeoutFactor": 2,
-	"thresholds": { "high": 80, "low": 70, "break": 60 },
+	"thresholds": { "high": 80, "low": 70, "break": 75 },
 	"reporters": ["json", "clear-text", "progress"],
 	"jsonReporter": { "fileName": "reports/mutation/mutation.json" }
 }

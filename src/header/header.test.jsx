@@ -80,4 +80,32 @@ describe('Header', () => {
 		render(<Header cv={cv} />);
 		expect(screen.getByRole('img')).toHaveAttribute('alt', 'Jane Example');
 	});
+
+	it('strips only a leading scheme from the displayed link text', () => {
+		const c = {
+			...cv,
+			contact: {
+				a: 'http://plain.example.invalid/x',
+				b: '//relative.example.invalid/y',
+				c: 'https://redirect.example.invalid/?u=http://inner.example.invalid',
+			},
+		};
+		render(<Header cv={c} />);
+		expect(screen.getByText('plain.example.invalid/x')).toBeInTheDocument();
+		expect(screen.getByText('relative.example.invalid/y')).toBeInTheDocument();
+		expect(
+			screen.getByText('redirect.example.invalid/?u=http://inner.example.invalid'),
+		).toBeInTheDocument();
+	});
+
+	it('renders icons as 18x18 svgs with the icon class', () => {
+		const { container } = render(<Header cv={cv} />);
+		const svgs = container.querySelectorAll('.contact svg');
+		expect(svgs).toHaveLength(3);
+		for (const svg of svgs) {
+			expect(svg).toHaveAttribute('width', '18');
+			expect(svg).toHaveAttribute('height', '18');
+			expect(svg).toHaveClass('icon');
+		}
+	});
 });
