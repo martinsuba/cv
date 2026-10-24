@@ -69,6 +69,26 @@
 		U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* The right arrow (U+2192) is in none of the @fontsource Inter subsets and would fall back to a system font in the PDF
+   (REQ-012). One-glyph subsets of Inter 3.19.3 (inter-ui, SIL OFL) for 400 and 600, made with pyftsubset. */
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 400;
+	src: url(./fonts/inter-arrow-400-normal.woff2) format('woff2');
+	unicode-range: U+2192;
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 600;
+	src: url(./fonts/inter-arrow-600-normal.woff2) format('woff2');
+	unicode-range: U+2192;
+}
+
 /* Self-hosted static JetBrains Mono (SIL OFL), 400, Latin only: labels, dates and contacts are ASCII (REQ-012, D-007).
    Static file, not the variable font (Type3 in PDFs). Own @font-face so only the woff2 is bundled. */
 @font-face {
@@ -157,7 +177,7 @@ h3 {
 	.container {
 		display: flex;
 		flex-direction: column;
-		gap: 16pt;
+		gap: 12pt;
 		max-width: none;
 		padding: 0;
 	}

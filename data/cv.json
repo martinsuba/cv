@@ -1,158 +1,206 @@
 {
-  "name": "Martin Šuba",
-  "title": "Engineering Manager",
-  "about": "Engineering Manager with a strong background in web product development across JavaScript / TypeScript, React, and Node.js. Combines hands-on engineering experience with team leadership, technical ownership, and close product collaboration. Strongest in leading product engineering teams in web-based environments, shaping technical solutions, improving execution, and delivering user-facing products in changing environments.",
-  "contact": {
-    "email": "martin.suba01@gmail.com",
-    "linkedin": "https://linkedin.com/in/martinsuba",
-    "github": "https://github.com/martinsuba",
-    "npm": "https://npmjs.com/~martinsuba"
-  },
-  "experience": [
-    {
-      "title": "Engineering Manager",
-      "company": {
-        "name": "F-Secure Corporation",
-        "link": "https://www.f-secure.com/"
-      },
-      "from": "January 2025",
-      "to": "Present",
-      "location": "Bratislava, Slovakia",
-      "description": "Leading the Solution Implementation team responsible for configuring, releasing, and delivering cybersecurity solutions to partners, while overseeing internal automation and delivery tooling development. In this role, I focus on improving delivery tooling, automating internal processes, and developing internal tools that improve workflows, reduce manual effort, and make delivery more efficient and reliable, including AI-orchestrated workflows and agentic automations. Current automation initiatives are reducing manual effort by up to 80% in selected internal workflows."
-    },
-    {
-      "title": "Technical Project Lead",
-      "company": {
-        "name": "F-Secure Corporation",
-        "link": "https://www.f-secure.com/"
-      },
-      "from": "February 2025",
-      "to": "December 2025",
-      "location": "Bratislava, Slovakia",
-      "description": "In addition to my Engineering Manager responsibilities, took on a side role as Technical Project Lead, managing Tier-1 partner deliveries end-to-end, coordinating cross-team execution, and improving delivery processes in a dynamic environment. Worked across engineering and stakeholder groups to keep delivery aligned, unblock execution, and drive complex customer-facing releases."
-    },
-    {
-      "title": "Lead Frontend engineer",
-      "company": {
-        "name": "F-Secure Corporation",
-        "link": "https://www.f-secure.com/"
-      },
-      "from": "June 2023",
-      "to": "December 2024",
-      "location": "Bratislava, Slovakia",
-      "description": "Led frontend development of password manager clients, including browser extensions and SDKs for TypeScript, iOS, and Android. Worked closely with Product and engineering stakeholders on integrating SaferPass technology into F-Secure products and apps, discussing technical feasibility, feature integration, and UX coherence to ensure the combined experience made sense for users. Led the technical solution for delivering SaferPass technology as a component in the F-Secure SDK, including integration across web and native technologies. Owned architectural direction in this area, coordinated cross-team execution, and helped deliver a successful SDK release for a Tier-1 customer, enabling launch of a new product offering."
-    },
-    {
-      "title": "Lead Frontend engineer at SaferPass (acquired by F-Secure)",
-      "company": {
-        "name": "Lookout",
-        "link": "https://www.lookout.com/"
-      },
-      "from": "May 2022",
-      "to": "May 2023",
-      "location": "Bratislava, Slovakia",
-      "description": "Started taking on team lead responsibilities while continuing hands-on frontend development of the SaferPass web product and browser extension. Worked across product and engineering during the acquisition period, helping maintain delivery continuity, support the team through change, and contribute to the transition of the product into a larger organization."
-    },
-    {
-      "title": "JavaScript Developer (acquired by Lookout)",
-      "company": {
-        "name": "SaferPass",
-        "link": "https://saferpass.net"
-      },
-      "from": "October 2017",
-      "to": "May 2022",
-      "location": "Bratislava, Slovakia",
-      "description": "Worked as a JavaScript developer in a small, product-focused startup environment, building the frontend of the SaferPass web-based password manager and browser extension. Worked across JavaScript / TypeScript, AngularJS, React, Web Extension APIs, Web APIs, and Node.js to deliver new features, refactor legacy code, and improve test coverage."
-    },
-    {
-      "title": "Front-end web developer",
-      "company": {
-        "name": "WEZEO",
-        "link": "https://www.wezeo.com/"
-      },
-      "from": "September 2015",
-      "to": "September 2017",
-      "location": "Bratislava, Slovakia",
-      "description": "Built responsive cross-browser web and mobile applications using HTML, SASS, JavaScript, jQuery, AngularJS, Angular, and Ionic."
-    },
-    {
-      "title": "Front-end web developer",
-      "company": {
-        "name": "Elite Solutions",
-        "link": "https://www.elitesolutions.sk"
-      },
-      "from": "April 2014",
-      "to": "August 2015",
-      "location": "Bratislava, Slovakia",
-      "description": "Built websites and user interfaces using HTML, CSS, and JavaScript, collaborating with designers and back-end developers on client projects for O2, Sberbank, SLSP, VÚB, and Hyundai."
-    },
-    {
-      "title": "Front-end web developer",
-      "company": {
-        "name": "pelicantravel.com",
-        "link": "https://www.pelikan.sk/sk"
-      },
-      "from": "April 2013",
-      "to": "March 2014",
-      "location": "Bratislava, Slovakia",
-      "description": "Built web pages, e-mail newsletters, and customized WordPress templates, while also supporting related online marketing activities."
-    },
-    {
-      "title": "Coder",
-      "company": {
-        "name": "webikon",
-        "link": "https://webikon.sk/"
-      },
-      "from": "November 2012",
-      "to": "March 2013",
-      "location": "Bratislava, Slovakia",
-      "description": "Built WordPress themes using HTML and CSS."
-    }
-  ],
-  "education": [
-    {
-      "institution": "University of Economics in Bratislava",
-      "field": "Management",
-      "degree": "Master's degree",
-      "from": "2013",
-      "to": "2015"
-    },
-    {
-      "institution": "University of Economics in Bratislava",
-      "field": "Business Economics and Management",
-      "degree": "Bachelor's degree",
-      "from": "2010",
-      "to": "2013"
-    }
-  ],
-  "skills": {
-    "Leadership & Delivery": [
-      "engineering leadership",
-      "team leadership",
-      "delivery ownership",
-      "product collaboration",
-      "cross-functional collaboration",
-      "process improvement",
-      "agile delivery"
-    ],
-    "Engineering": [
-      "JavaScript/TypeScript",
-      "React",
-      "Node.js",
-      "frontend architecture",
-      "browser extensions",
-      "web and native integration",
-      "CI/CD",
-      "testing",
-      "Angular",
-      "Git",
-      "Webpack",
-      "npm"
-    ],
-    "AI": [
-      "AI-assisted development",
-      "LLM prototyping and automation",
-      "Anthropic / Claude ecosystem"
-    ]
-  }
+	"name": "Martin Šuba",
+	"title": "Engineering Manager",
+	"location": "Bratislava, Slovakia",
+	"about": "Engineering Manager with 13+ years in web product engineering, leading a team that delivers security products to Tier-1 partners at F-Secure. Grew from developer to tech lead to manager on the same product through two acquisitions (SaferPass → Lookout → F-Secure). I focus on growing engineers and predictable delivery. Hands-on with AI-native software development: running AI-orchestrated workflows in my team and exploring how they reshape the whole SDLC. Technical enough to shape architecture and review solutions (JavaScript/TypeScript, React, Node.js, web and native SDKs).",
+	"contact": {
+		"email": "martin.suba01@gmail.com",
+		"linkedin": "https://linkedin.com/in/martinsuba",
+		"github": "https://github.com/martinsuba"
+	},
+	"experience": [
+		{
+			"title": "Engineering Manager",
+			"company": {
+				"name": "F-Secure",
+				"link": "https://www.f-secure.com/"
+			},
+			"from": "January 2025",
+			"to": "Present",
+			"location": "Bratislava, Slovakia",
+			"description": "Leading the Solution Implementation team, which configures, releases and delivers cybersecurity products to Tier-1 partners, and owning the team's internal automation and delivery tooling.",
+			"highlights": [
+				"Line manager for the team: 1:1s, regular feedback, performance reviews and career development.",
+				"Hiring and onboarding of new engineers.",
+				"Owns delivery and release readiness for partner releases: planning around real capacity, managing dependencies across teams and raising risks early.",
+				"Introduced AI-orchestrated workflows and agentic automations into delivery, reducing manual effort by up to 80% in selected workflows, and brought the team along in adopting AI tools.",
+				"Improves delivery processes and quality in a security-critical, partner-facing environment."
+			]
+		},
+		{
+			"title": "Technical Project Lead (alongside the EM role)",
+			"company": {
+				"name": "F-Secure",
+				"link": "https://www.f-secure.com/"
+			},
+			"from": "February 2025",
+			"to": "December 2025",
+			"location": "Bratislava, Slovakia",
+			"highlights": [
+				"Led Tier-1 partner deliveries end to end, from scope and planning to release.",
+				"Coordinated execution across engineering teams and stakeholder groups, unblocking work and keeping commitments aligned.",
+				"Improved the delivery process for complex, customer-facing releases."
+			]
+		},
+		{
+			"title": "Lead Frontend Engineer",
+			"company": {
+				"name": "F-Secure",
+				"link": "https://www.f-secure.com/"
+			},
+			"from": "June 2023",
+			"to": "December 2024",
+			"location": "Bratislava, Slovakia",
+			"highlights": [
+				"Led frontend development of the password manager clients: browser extensions and SDKs for TypeScript, iOS and Android.",
+				"Owned the architecture for delivering SaferPass as a component of the F-Secure SDK, integrating web and native technologies.",
+				"Shipped the SDK release for a Tier-1 partner, enabling the launch of a new product offering.",
+				"Partnered with Product on integrating SaferPass into F-Secure products: feasibility, feature scope and a consistent user experience.",
+				"Mentored engineers and set technical direction for the frontend."
+			]
+		},
+		{
+			"title": "Lead Frontend Engineer",
+			"company": {
+				"name": "Lookout (SaferPass)",
+				"link": "https://www.lookout.com/"
+			},
+			"from": "May 2022",
+			"to": "May 2023",
+			"location": "Bratislava, Slovakia",
+			"description": "SaferPass was acquired by Lookout in 2022; the consumer business moved to F-Secure in 2023.",
+			"highlights": [
+				"Took on team lead responsibilities while staying hands-on in frontend development of the web product and browser extension.",
+				"Kept delivery going and supported the team through the acquisition and the move into a larger organization."
+			]
+		},
+		{
+			"title": "JavaScript Developer",
+			"company": {
+				"name": "SaferPass",
+				"link": "https://saferpass.net"
+			},
+			"from": "October 2017",
+			"to": "May 2022",
+			"location": "Bratislava, Slovakia",
+			"description": "Product startup building a web-based password manager.",
+			"highlights": [
+				"Built the frontend of the web app and browser extension (JavaScript/TypeScript, AngularJS, React, Web Extension APIs, Node.js).",
+				"Delivered new features, refactored legacy code and improved test coverage."
+			]
+		},
+		{
+			"title": "Front-end Web Developer",
+			"company": {
+				"name": "WEZEO",
+				"link": "https://www.wezeo.com/"
+			},
+			"from": "September 2015",
+			"to": "September 2017",
+			"location": "Bratislava, Slovakia",
+			"description": "Responsive web and mobile apps (JavaScript, AngularJS, Angular, Ionic)."
+		},
+		{
+			"title": "Front-end Web Developer",
+			"company": {
+				"name": "Elite Solutions",
+				"link": "https://www.elitesolutions.sk"
+			},
+			"from": "April 2014",
+			"to": "August 2015",
+			"location": "Bratislava, Slovakia",
+			"description": "Web interfaces for client projects including O2, Sberbank, SLSP, VÚB and Hyundai."
+		},
+		{
+			"title": "Front-end Web Developer",
+			"company": {
+				"name": "pelicantravel.com",
+				"link": "https://www.pelikan.sk/sk"
+			},
+			"from": "April 2013",
+			"to": "March 2014",
+			"location": "Bratislava, Slovakia",
+			"description": "Web pages, e-mail newsletters and WordPress templates."
+		},
+		{
+			"title": "Coder",
+			"company": {
+				"name": "webikon",
+				"link": "https://webikon.sk/"
+			},
+			"from": "November 2012",
+			"to": "March 2013",
+			"location": "Bratislava, Slovakia",
+			"description": "WordPress themes (HTML, CSS)."
+		}
+	],
+	"education": [
+		{
+			"institution": "University of Economics in Bratislava",
+			"field": "Management",
+			"degree": "Master's degree",
+			"from": "2013",
+			"to": "2015"
+		},
+		{
+			"institution": "University of Economics in Bratislava",
+			"field": "Business Economics and Management",
+			"degree": "Bachelor's degree",
+			"from": "2010",
+			"to": "2013"
+		}
+	],
+	"skills": {
+		"Leadership": [
+			"people management",
+			"1:1s and feedback",
+			"coaching and mentoring",
+			"performance and career development",
+			"hiring and onboarding",
+			"delegation",
+			"stakeholder management"
+		],
+		"Delivery": [
+			"delivery ownership",
+			"release management",
+			"capacity planning",
+			"risk management",
+			"cross-team coordination",
+			"agile delivery (Scrum/Kanban)",
+			"process improvement"
+		],
+		"AI": [
+			"AI adoption in engineering teams",
+			"AI-orchestrated workflows and agentic automation",
+			"AI-native SDLC (Claude Code / Anthropic ecosystem)"
+		],
+		"Engineering": [
+			"JavaScript/TypeScript",
+			"React",
+			"Node.js",
+			"frontend architecture",
+			"browser extensions",
+			"web and native (iOS/Android) SDK integration",
+			"CI/CD",
+			"testing"
+		]
+	},
+	"languages": [
+		{
+			"language": "Slovak",
+			"level": "native"
+		},
+		{
+			"language": "English",
+			"level": "professional"
+		},
+		{
+			"language": "Czech",
+			"level": "professional"
+		},
+		{
+			"language": "German",
+			"level": "elementary"
+		}
+	]
 }

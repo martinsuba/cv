@@ -24,7 +24,7 @@
   `validate` first (`"build": "npm run validate && vite build"`), so extra args such as `--outDir` still reach vite.
 - `npm run pdf` writes `dist/cv.pdf` from an existing `dist/` and starts/stops its own server. `npm run pdf -- --out <path>` writes to another file instead (the self-contained test uses a temp file so it never touches `dist/cv.pdf`).
 - Fixture files with invalid data: `tests/fixtures/` (synthetic).
-- Exact expected texts for REQ-003: `tests/acceptance/expected-content.js` (copied from docs/PLAN.md T-002).
+- Exact expected texts for REQ-018: `tests/acceptance/expected-content.js` (copied from `data/cv.json`, content v2).
 - Tests marked `test.fixme` name the task that makes them pass; that task removes the `fixme` (it needs the
   acceptance-change label or a test-review, per the framework).
 
@@ -35,7 +35,7 @@ Status: passing = runs in CI now; fixme = `test.fixme` until the named task is d
 |---|---|---|
 | REQ-001 | `content.spec.js`: name/title/about; contact links (mailto vs URL); every experience entry; every education entry; every skill group + items | passing |
 | REQ-002 | `validate.spec.js`: valid exits 0; missing title; wrong type; malformed JSON; build fails on broken data | passing |
-| REQ-003 | `content.spec.js`: About text; "up to 80%" sentence; full descriptions (incl. SaferPass JavaScript Developer); skill group order; removed skills/language group | passing |
+| REQ-003 | superseded by REQ-018 (T-024): the old current-content tests were replaced | superseded |
 | REQ-004 | `build.spec.js`: build without legacy flags; all assets 200 and no console errors under /cv/; no service worker/manifest in dist | passing |
 | REQ-005 | `pdf.spec.js`: `npm run pdf` self-contained; A4; text content | passing (T-004, T-005): self-contained run writes a temp file via `--out`; at most 3 pages; last page >= 25% |
 | REQ-006 | `print.spec.js`: no experience entry split across PDF pages; download link hidden in print | passing (T-005) |
@@ -55,6 +55,6 @@ Unit tests (`src/**/*.test.jsx`) cover the header, about, experience, education,
 | REQ-015 | unit tests: `scripts/validate-cli.test.js` (CLI exit codes), `scripts/inject-meta.test.js` (injectMeta, missing `</head>` throws), `scripts/make-pdf.test.js` (makePdf with fake browser); `src/app-sections.test.jsx` (app.jsx empty sections, consecutive numbering), header link-text regex and icon attributes in `header.test.jsx`; Stryker `break` 75 (score 80.2%) | done (T-019, T-020) |
 | REQ-014 (v4) | unit tests for scripts/mutation-summary.js (missing report, timeout share, survivor list); mutation job fails on break threshold | done (T-018); break threshold raised to 75 (T-020) |
 | REQ-016 | PR report of alert triage; `npm audit --omit=dev` no high/critical; dependabot.yml present | planned (T-021) |
-| REQ-017 | `content.spec.js` (location, highlights, optional description, languages), `validate.spec.js` (entry without description and highlights), `print.spec.js` (no split entries via last highlight) | done (T-023): `content.spec.js` highlight/description test runs on today's data; the location and Languages tests are conditional `test.fixme` (skipped while `data/cv.json` has no `location`/`languages`, they run by themselves after T-024); rendering is also covered by unit tests with synthetic data (`experience`, `header`, `languages`, `app-sections`, `scripts/validate.test.js`); fixture `tests/fixtures/invalid-no-description-or-highlights.json` |
-| REQ-018 | `content.spec.js` + `expected-content.js` (content v2 texts, skill order, absent npm/Git/Webpack/"open to"), PDF specs (≤2 pages) | planned (T-024); replaces the REQ-003 tests |
+| REQ-017 | `content.spec.js` (location, highlights, optional description, languages), `validate.spec.js` (entry without description and highlights), `print.spec.js` (no split entries via last highlight) | done (T-023, T-024): `content.spec.js` highlight/description, location and Languages tests run on the content v2 data (the `test.fixme` markers are gone); rendering is also covered by unit tests with synthetic data (`experience`, `header`, `languages`, `app-sections`, `scripts/validate.test.js`); fixture `tests/fixtures/invalid-no-description-or-highlights.json` |
+| REQ-018 | `content.spec.js` + `expected-content.js` (content v2 texts, skill order, absent npm/Git/Webpack/"open to"), PDF specs (≤2 pages) | done (T-024); replaces the REQ-003 tests; PDF is 2 pages |
 
