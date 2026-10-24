@@ -236,8 +236,49 @@ From the retro (docs/RETRO.md) and the first meaningful mutation run. No visual 
   Stryker and Vitest 5, confirm the mutation score is unchanged. Until then the Lead checks once per milestone.
 - REQs: REQ-014
 
+## M7: Content v2 (plan v5)
+Approved text: ~/HAL/ai-assistant/notes/career/cv/cv-draft.md (v3 FINAL, 2026-10-24). The exact target data is
+`docs/content-v2.json` (committed with this plan); tasks copy it, never retype or reword it. Design A stays.
+
+### [ ] T-023: Data model and rendering for highlights, location and languages  (size M)
+- Goal: schema + components for the D-008 fields, with the current `data/cv.json` unchanged (it stays valid: every
+  entry still has a description). Experience: optional `description` (render the `p` only when present) and optional
+  `highlights` → `ul.highlights > li` after it; schema `anyOf` needs one of them. Header: optional top-level `location`
+  under the job title (Inter, muted, same size as the company meta line). New `src/languages` section after Education:
+  heading "Languages", `ul > li` "<language> (<level>)"; tags-free plain list on screen, one line with " · " separators
+  in print (same CSS technique as skills, D-007). Bullets in print: real list markers or "– ", 4–6 mm indent, keep
+  REQ-013 spacing.
+- REQs: REQ-017 (and REQ-001/REQ-006 plan v5 criteria)
+- Acceptance tests to make pass: content.spec.js REQ-001 criteria extended (location, highlights, description only
+  when present, languages); validate.spec.js + `tests/fixtures/` synthetic file with an entry that has neither field;
+  print.spec.js split check uses the last highlight, else the description. Until T-024 the real data has no
+  highlights/location/languages, so the acceptance tests for them also run against a synthetic fixture
+  (`CV_JSON` build into a temp outDir, as validate.spec does) or are `test.fixme('T-024')` – builder's choice,
+  state it in the PR. Touches tests/acceptance → test-review.
+- Areas/files: data/cv.schema.json, src/experience/*, src/header/*, src/languages/* (new), src/app.jsx, src/style.css,
+  unit tests with synthetic data, tests/acceptance/content.spec.js, validate.spec.js, print.spec.js, tests/fixtures/
+- Definition of done: code + unit tests, listed acceptance tests pass, CI green, review clean, docs/ARCHITECTURE.md
+  data model matches, docs/TESTS.md updated; the site and PDF look unchanged with today's data (PDF still 2 pages).
+
+### [ ] T-024: Content v2  (size M)
+- Goal: replace `data/cv.json` with `docs/content-v2.json` byte for byte, delete `docs/content-v2.json`; rewrite
+  `tests/acceptance/expected-content.js` and the REQ-003 tests as REQ-018 tests with texts copied from that file
+  (About, the five EM highlights, highlights of the other recent roles, earlier-role descriptions, location, languages,
+  skill group order Leadership/Delivery/AI/Engineering, absent: Git/Webpack/npm skills, the npm contact, "open to");
+  remove `test.fixme('T-024')` markers if T-023 used them. Remove the now unused npm icon only if nothing references it.
+- REQs: REQ-018, REQ-017, REQ-001
+- Acceptance tests to make pass: content.spec.js (REQ-001, REQ-018), print.spec.js, pdf.spec.js, print-layout.spec.js,
+  fonts.spec.js (hyphenated words: "Tier-1", "AI-native", "AI-orchestrated", "e-mail", "Front-end"), design.spec.js.
+- PDF budget: at most 2 A4 pages. If the new content runs over, first tighten print spacing within REQ-013 limits
+  (≥15 mm margins, ≥9.5 pt body); never shorten or reword the content: stop and report to the Lead instead.
+- Areas/files: data/cv.json, docs/content-v2.json (deleted), tests/acceptance/expected-content.js, content.spec.js,
+  src/header/icons.jsx (+ test) if the npm icon goes, print CSS only if needed for 2 pages
+- Definition of done: code + tests, CI green, review + test-review clean; the Lead renders the PDF pages and checks them
+  against the draft before the milestone PR. Deploy only after Martin approves (docs/DEPLOY.md).
+
 ## Screens (web UI projects)
 - CV page, desktop 1280px: full page.
 - CV page, mobile 375px: full page.
 - CV page, print media (A4 emulation): full page; plus PDF pages rendered as images (from T-009).
 - From M4: compare each screen with its canvas board (A · Technical ledger, web and PDF).
+- From M7: header with location, an entry with intro + bullets, an entry with bullets only, the Languages section.

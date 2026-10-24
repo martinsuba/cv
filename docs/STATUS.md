@@ -1,9 +1,9 @@
 # Status: cv
-Phase: build
-Current task: – (M6 complete; milestone PR in review)
-Open PRs: M6 milestone (chore/milestone-M6)
+Phase: plan review (plan v5: content v2)
+Current task: –
+Open PRs: Plan v5 (plan/5)
 Blockers: –
-Next step: Martin merges the M6 milestone PR. No planned work left; content tailoring when Martin wants it.
+Next step: Martin reviews and merges the Plan v5 PR, then says "go M7" (T-023 data model, T-024 content v2). Deploy after the M7 milestone, with Martin's approval.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -68,3 +68,7 @@ Next step: Martin merges the M6 milestone PR. No planned work left; content tail
 - 2026-10-24: T-020 done (PR #72, 0 fix rounds): app empty-section/numbering and header tests; break 75; score 80.22% (run 40073150880). Note: app-sections.test.jsx clones the real cv.json instead of a synthetic fixture (reviewer non-blocking; follow-up candidate).
 - 2026-10-24: T-022 done (PR #73, 0 fix rounds): Stryker 10.1.1 (released 2026-10-23, supports Vitest 5) + vitest 5.0.5, exact pins; dependabot keeps the @stryker-mutator/* major ignore. Score 81.32%: the +1.1 points are 6 validate.js mutants reclassified from Survived (0 tests had run, a Stryker 10.0.0 artefact) to RuntimeError (they crash on import), not new tests. Baseline: 356 killed, 55 survived, 1 timeout, 27 no coverage.
 - 2026-10-24: Dependabot alerts readable now (Martin granted the permission): 218 alerts in total, 0 open, all "fixed" (214 auto-closed on 2026-10-23 when the old preact-cli lockfile was replaced, 4 on 2026-03-11). Nothing to dismiss; REQ-016 triage complete.
+- 2026-10-24: content rework with Martin in chat; approved draft v3 in ~/HAL/ai-assistant/notes/career/cv/cv-draft.md; pre-rework backup (live PDF + cv.json) in ~/HAL/ai-assistant/notes/career/cv/backup-2026-10-24/.
+- 2026-10-24: content rules (Martin): general EM CV, not tailored per company; no team sizes or other sensitive/changing numbers; earlier roles stay separate entries; Technical Project Lead stays separate.
+- 2026-10-24: header location "Bratislava, Slovakia" without "open to remote or hybrid": the site is public and visible to the current employer (Martin, on the Lead's challenge).
+- 2026-10-24: plan v5: D-008 data model (optional description + highlights[], top-level location and languages); exact target data in docs/content-v2.json; M7 = T-023, T-024.

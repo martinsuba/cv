@@ -1,5 +1,5 @@
 # PRD: cv
-Status: v4 draft (plan PR v4) · Last update: 2026-10-24
+Status: v5 draft (plan PR v5) · Last update: 2026-10-24
 
 ## Problem & why
 Martin's CV is a small Preact site that renders `data/cv.json` and exports `cv.pdf`. It stopped being maintainable:
@@ -8,6 +8,12 @@ Martin's CV is a small Preact site that renders `data/cv.json` and exports `cv.p
 - making the PDF needs a dev server started by hand on a fixed port;
 - deploying means copying `build/` into the separate `martinsuba.github.io` repo by hand;
 - the PDF has 4 pages, the last one holds only the bachelor's degree.
+
+Plan v5 (content rework): the CV read like a developer CV with a manager title on top: management work was invisible,
+descriptions were dense paragraphs, and location and languages were missing. Martin approved a new text
+(~/HAL/ai-assistant/notes/career/cv/cv-draft.md, v3 FINAL, 2026-10-24) aimed at Engineering Manager roles in general.
+It needs a few small data model additions: bullet points per role, an optional intro line per role, a header location
+and a Languages section.
 
 Goal of this project: one JSON file is the only thing Martin edits; CI builds the site and the PDF from it, and a
 deploy he triggers publishes both to `https://martinsuba.github.io/cv/`.
@@ -22,9 +28,12 @@ deploy he triggers publishes both to `https://martinsuba.github.io/cv/`.
 - PDF: A4, at most 3 pages, no near-empty last page.
 - Deploy is one manual GitHub Actions run; site + `cv.pdf` live under `/cv/`.
 - M4: the "Technical ledger" design (direction A, chosen by Martin from the T-010 proposals) on screen and in the PDF.
+- M7: site and PDF show the approved content v2 word for word, still on at most 2 A4 pages.
 
 ## Non-goals (explicitly out of scope)
-- Rewriting or tailoring CV content for specific roles (separate effort, later).
+- Tailored CV variants per company or job ad (Martin: one general EM CV).
+- Writing new CV text in this repo: the text is decided in the career notes draft; tasks copy it verbatim.
+- Updating LinkedIn (Martin, by hand).
 - Changes to the `martinsuba.github.io` root repo (it stays as is; Martin may host other things there).
 - Dark mode, multiple languages, a CMS or editing UI, analytics.
 - A custom domain.
@@ -37,6 +46,8 @@ Acceptance criteria:
 - Given `data/cv.json`, When the built site is opened, Then the name, title, about text, every contact link, every
   experience entry (title, company, dates, location, description), every education entry and every skill group with
   all its items are visible on the page.
+- (plan v5) Given `data/cv.json`, Then the header location, every experience `highlights` item, an entry's
+  `description` only when present, and every language with its level are visible on the page.
 - Given a contact of type `email`, When it is rendered, Then its link is `mailto:<address>`; other contacts link to their URL.
 Priority: must
 
@@ -51,7 +62,8 @@ Priority: must
 
 ### REQ-003: Current content
 `data/cv.json` holds the exact text of Martin's current CV PDF (2026-10-23).
-Acceptance criteria:
+Superseded in plan v5 by REQ-018 (content v2); its tests are rewritten to REQ-018 in T-024.
+Acceptance criteria (until T-024):
 - Given the built site, When it is opened, Then it shows the PDF's About text, the "up to 80%" sentence in the F-Secure
   Engineering Manager entry, the full Technical Project Lead / Lead Frontend / Lookout / SaferPass descriptions from the PDF,
   and skill groups "Leadership & Delivery", "Engineering" and "AI" in that order.
@@ -120,6 +132,8 @@ Acceptance criteria:
 Priority: should
 
 ### REQ-011: Design refresh: "Technical ledger" (M4)
+(plan v5: "full description" below now means all of an entry's content: intro line and every bullet; old roles keep
+their own entries.)
 Martin chose direction A from the T-010 proposals (canvas: https://claude.ai/artifact/AeMkfPFe6NVjtSg5Gx5pk4, boards
 "A · Technical ledger"): Inter for text, JetBrains Mono for labels, dates and contacts, one blue accent (#1D4ED8),
 numbered section labels in a left column, dates in their own column, skills as tags on screen. All content stays: every
@@ -202,8 +216,38 @@ Acceptance criteria:
 - Given `npm audit --omit=dev`, Then it reports no high or critical vulnerabilities.
 Priority: could
 
+### REQ-017: Data model for bullets, location and languages (M7)
+Acceptance criteria:
+- Given an experience entry, Then it may have a `description` (one short paragraph or intro line), a `highlights` array
+  of non-empty strings, or both, and `npm run validate` fails (naming the entry) when it has neither.
+- Given an entry with `highlights`, When the page renders, Then they are one `ul` with one `li` per highlight, after the
+  description if there is one; on screen and in the PDF each highlight reads as its own bullet line.
+- Given a top-level `location` string, Then it is shown in the header under the job title; without it, nothing is shown.
+- Given a top-level `languages` array of `{ language, level }`, Then a "Languages" section after Education lists each as
+  "<language> (<level>)", numbered like the other sections; without it, no section and no heading.
+- Given dist/cv.pdf, Then the bullets, location and languages are in the extracted text, and no entry is split across
+  pages (REQ-006 now checks the last highlight, or the description when there are no highlights).
+Priority: must
+
+### REQ-018: Content v2 (M7)
+`data/cv.json` holds the approved draft (~/HAL/ai-assistant/notes/career/cv/cv-draft.md, v3 FINAL, 2026-10-24) word for
+word, as given in docs/PLAN.md T-024.
+Acceptance criteria:
+- Given the built site, Then it shows the new About text, the five Engineering Manager highlights (incl. "up to 80%"),
+  every highlight of the Technical Project Lead, Lead Frontend (F-Secure, Lookout) and SaferPass entries, the one-line
+  descriptions of the four earlier roles, the location "Bratislava, Slovakia" and the four languages.
+- Given the built site, Then skill groups are "Leadership", "Delivery", "AI", "Engineering" in that order, and Git,
+  Webpack and npm are not skill items.
+- Given the built site, Then the header has no npm link and the page contains no "open to" phrase (public site,
+  Martin 2026-10-24).
+- Given dist/cv.pdf, Then it has at most 2 A4 pages and REQ-005/006/011/012/013 still hold.
+- Visual check: the milestone PR attaches 1280px, 375px and PDF page screenshots; Martin judges.
+Priority: must
+
 ## Constraints (budget, privacy, data, platforms)
 - Public repo and public site; all CV data is already public (email, photo, history). No secrets in the build.
+- No team sizes, project counts or other sensitive or fast-changing numbers in the content (Martin, 2026-10-24).
+- Nothing on the public site that signals a job search (no "open to …"); the current employer can see it.
 - Free tier only: GitHub Actions + GitHub Pages.
 - Node 24 (server and CI). Default branch is `master` (framework docs say "main"; read it as `master` here).
 
