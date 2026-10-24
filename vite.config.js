@@ -10,5 +10,8 @@ export default defineConfig({
 		environment: 'jsdom',
 		include: ['src/**/*.test.{js,jsx}', 'scripts/**/*.test.js'],
 		setupFiles: ['./vitest.setup.js'],
+		// Under Stryker (one Vitest run per mutant) an explicit reporter list keeps Vitest from adding its
+		// GitHub job-summary reporter, which would write one "Vitest Test Report" box per mutant run.
+		...(process.env.STRYKER_MUTATOR_WORKER === undefined ? {} : { reporters: ['dot'] }),
 	},
 });

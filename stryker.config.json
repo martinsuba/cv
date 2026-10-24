@@ -1,8 +1,7 @@
 {
-	"$schema": "https://raw.githubusercontent.com/stryker-mutator/stryker/master/packages/core/schema/stryker-core.json",
-	"testRunner": "command",
-	"commandRunner": { "command": "npm test" },
-	"mutate": ["src/**/*.{js,jsx}", "!src/**/*.test.{js,jsx}"],
+	"$schema": "./node_modules/@stryker-mutator/core/schema/stryker-core.json",
+	"testRunner": "vitest",
+	"mutate": ["src/**/*.{js,jsx}", "scripts/**/*.js", "!**/*.test.{js,jsx}"],
 	"ignorePatterns": [
 		"dist",
 		"tests",
@@ -10,9 +9,12 @@
 		"reports",
 		"playwright-report",
 		"test-results",
-		"screenshots"
+		"screenshots",
+		".claude"
 	],
-	"coverageAnalysis": "off",
-	"reporters": ["json", "clear-text"],
+	"coverageAnalysis": "perTest",
+	"timeoutMS": 10000,
+	"timeoutFactor": 2,
+	"reporters": ["json", "clear-text", "progress"],
 	"jsonReporter": { "fileName": "reports/mutation/mutation.json" }
 }

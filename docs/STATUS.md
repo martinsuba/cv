@@ -1,12 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-013 meaningful mutation testing (PR #64, head d497c07): reviewer APPROVE at d497c07 (no blocking issues); test-review not run yet
-Open PRs: #64 T-013; this status PR
-Blockers: – (session paused for Claude usage limit, 2026-10-23)
-Next step (resume here): 1) #64 reviewer already APPROVED d497c07; if the head is unchanged, run the
-test-reviewer (mutation.yml changed), re-run acceptance-guard, merge with --match-head-commit. 0 fix rounds used so far.
-2) Then M5 milestone PR (chore/milestone-M5): PLAN ticks T-011/T-012/T-013, screenshots, mutation score; test the new
-`workflow_dispatch` on mutation.yml. 3) Optional: retro (offered after deploys, not run yet).
+Current task: T-013 meaningful mutation testing (PR #64): review done, test-review next
+Open PRs: #64 T-013
+Blockers: –
+Next step: T-013 test-review + merge; then M5 milestone PR (PLAN ticks T-011/T-012/T-013, mutation score, workflow_dispatch run).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md

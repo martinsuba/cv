@@ -104,7 +104,9 @@ describe('parseArgs', () => {
 	});
 	it('reads --out <path> as an absolute path', () => {
 		expect(parseArgs(['--out', '/tmp/x.pdf'])).toEqual({ out: '/tmp/x.pdf' });
-		expect(parseArgs(['--out', 'x.pdf']).out).toBe(resolve('x.pdf'));
+		expect(parseArgs(['--out', 'x.pdf']).out).toBe(
+			resolve(process.env.INIT_CWD || process.cwd(), 'x.pdf'),
+		);
 	});
 	it('resolves a relative --out against the given base directory (npm INIT_CWD)', () => {
 		expect(parseArgs(['--out', 'x.pdf'], '/work/dir').out).toBe('/work/dir/x.pdf');
