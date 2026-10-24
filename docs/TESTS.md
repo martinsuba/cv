@@ -49,3 +49,11 @@ Status: passing = runs in CI now; fixme = `test.fixme` until the named task is d
 | REQ-013 | `print-layout.spec.js`: all contact links sit in the page-1 header: every link's text box above the first section label (`01`) and either one shared baseline or right edges within 2 pt (right-aligned column), from `readPdfTextBoxes`; dominant body size 10.0 ± 0.1 pt (catches shrink-to-fit); text in `dist/cv.pdf` keeps >= 15 mm (42.5 pt) from every page edge (helper `readPdfTextBoxes`); most common font size >= 9.5 pt (helper `dominantFontSize`). Page count / last page / split entries via REQ-005/006 | passing (T-009, T-017) |
 
 Unit tests (`src/**/*.test.jsx`) cover the header, about, experience, education, skills components and the App.
+
+## Plan v4 (M6)
+| REQ | tests | status |
+| --- | --- | --- |
+| REQ-014 (v4) | unit tests for scripts/mutation-summary.js (missing report, timeout share, survivor list); mutation job fails on break threshold | planned (T-018) |
+| REQ-015 | unit tests: validate.js CLI, injectMeta, makePdf with fake browser, app.jsx empty sections; mutation score ≥ 75% | planned (T-019, T-020) |
+| REQ-016 | PR report of alert triage; `npm audit --omit=dev` no high/critical; dependabot.yml present | planned (T-021) |
+
