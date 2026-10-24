@@ -3,7 +3,7 @@ Phase: build
 Current task: – (M6 complete; milestone PR in review)
 Open PRs: M6 milestone (chore/milestone-M6)
 Blockers: –
-Next step: Martin merges the M6 milestone PR; dismiss stale Dependabot alerts (or grant "Dependabot alerts: read"). No planned work left; content tailoring when Martin wants it.
+Next step: Martin merges the M6 milestone PR. No planned work left; content tailoring when Martin wants it.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -67,4 +67,4 @@ Next step: Martin merges the M6 milestone PR; dismiss stale Dependabot alerts (o
 - 2026-10-24: T-019 done (PR #71, 0 fix rounds; one master merge to fix a docs/TESTS.md conflict, which had silently blocked CI): validate.js main(), makePdf with injected chromium, injectMeta throws without </head>; scripts score 62.8% -> 82.3%.
 - 2026-10-24: T-020 done (PR #72, 0 fix rounds): app empty-section/numbering and header tests; break 75; score 80.22% (run 40073150880). Note: app-sections.test.jsx clones the real cv.json instead of a synthetic fixture (reviewer non-blocking; follow-up candidate).
 - 2026-10-24: T-022 done (PR #73, 0 fix rounds): Stryker 10.1.1 (released 2026-10-23, supports Vitest 5) + vitest 5.0.5, exact pins; dependabot keeps the @stryker-mutator/* major ignore. Score 81.32%: the +1.1 points are 6 validate.js mutants reclassified from Survived (0 tests had run, a Stryker 10.0.0 artefact) to RuntimeError (they crash on import), not new tests. Baseline: 356 killed, 55 survived, 1 timeout, 27 no coverage.
-
+- 2026-10-24: Dependabot alerts readable now (Martin granted the permission): 218 alerts in total, 0 open, all "fixed" (214 auto-closed on 2026-10-23 when the old preact-cli lockfile was replaced, 4 on 2026-03-11). Nothing to dismiss; REQ-016 triage complete.
