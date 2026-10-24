@@ -27,3 +27,4 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-23 | M4 gate + deploy gate | merged M4 milestone #61, approved deploy, said "go M5" | n – gates
 2026-10-23 | M5 T-012 | added acceptance-change label and merged #63 (acceptance-guard.yml changed) | n – framework gate
 2026-10-23 | M5 | paused the session for the Claude usage limit, asked for a status write-up | n – resource limit
+2026-10-24 | resume | merged status PR #65, said "you continue" | n – gate

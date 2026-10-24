@@ -181,18 +181,18 @@ sizes and spacing; values below are the contract. All entries keep their full te
   images next to the canvas board in the PR.
 - Then: deploy (Martin approves).
 
-## M5: Maintenance (could; Martin may drop or reorder)
-### [ ] T-011: CI on the Playwright container image  (size S)
+## [x] M5: Maintenance (could; Martin may drop or reorder)
+### [x] T-011: CI on the Playwright container image  (size S)  — #62
 - Goal: run the `ci` and `screenshots` jobs in `mcr.microsoft.com/playwright:v<installed version>-noble`, drop the
   browser cache/install steps; deploy.yml the same. Keep the version in one place (check it matches package-lock).
 - REQs: REQ-014. Areas/files: .github/workflows/ci.yml, screenshots.yml, deploy.yml (explicitly allowed).
 
-### [ ] T-012: Current major versions of workflow actions  (size S)
+### [x] T-012: Current major versions of workflow actions  (size S)  — #63
 - Goal: bump checkout, setup-node, cache (and any other action) in all workflows to current majors; read release notes
   for breaking changes. acceptance-guard.yml is included, so this PR needs Martin's `acceptance-change` label.
 - REQs: REQ-014. Areas/files: .github/workflows/* (explicitly allowed).
 
-### [ ] T-013: Meaningful mutation testing  (size S)
+### [x] T-013: Meaningful mutation testing  (size S)  — #64
 - Goal: Stryker as a pinned devDependency with `@stryker-mutator/vitest-runner`, mutate `src/**` and `scripts/**`,
   timeouts ≤ 10%; mutation.yml uses the local binary. Report the score and survivors in the PR.
 - REQs: REQ-014. Areas/files: package.json, stryker.config.json, .github/workflows/mutation.yml (explicitly allowed).
