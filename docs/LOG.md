@@ -31,3 +31,4 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-24 | M5 gate | merged M5 milestone #66; approved deploy, retro and plan v4 improvements | n – gates
 2026-10-24 | M6 gate | merged retro #67 and plan v4 #68, said "go M6" | n – gates
 2026-10-24 | M6 T-021 | needs to dismiss stale Dependabot alerts (PAT cannot read them) | y – resolved: Martin granted "Dependabot alerts: read"; all 218 alerts were already fixed, none to dismiss
+2026-10-24 | plan v5 | content rework in chat: answered the review points, approved draft v3, chose location without "open to" | n – content and product decisions

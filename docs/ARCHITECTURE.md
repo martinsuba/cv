@@ -31,6 +31,7 @@ data/photo.jpg ───────────────────┘     
 - `src/header`, `src/about`, `src/experience`, `src/education`, `src/skills`: one component + CSS each (kept from today).
 - Header contact icons: three inline SVGs (LinkedIn, GitHub, npm) + text for email. The devicon font, `devicon.json`
   and `get-icon-class.js` are removed.
+- `src/languages` (plan v5): "Languages" section after Education, one `li` per language "<language> (<level>)".
 - `src/download-link`: "Download PDF" link to `cv.pdf`, hidden in print.
 - `scripts/validate.js`: validates `data/cv.json` against `data/cv.schema.json`, prints field-level errors.
 - `scripts/pdf.js`: serves `dist/` under `/cv/` on a free port, opens it in Playwright Chromium, `page.pdf()` A4 with
@@ -51,6 +52,16 @@ data/photo.jpg ───────────────────┘     
   "skills": { "<group display name>": ["string", "..."] }
 }
 ```
+Plan v5 additions (D-008), all optional so older data stays valid:
+```json
+{
+  "location": "string",
+  "experience": [ { "...": "as above", "description": "string (optional)", "highlights": ["string", "..."] } ],
+  "languages": [ { "language": "string", "level": "string" } ]
+}
+```
+An experience entry needs `description`, `highlights` or both (schema `anyOf`). `contact.npm` stays allowed in the schema
+but is removed from the data.
 Skill groups render in JSON key order (e.g. "Leadership & Delivery", "Engineering", "AI") as comma-separated text, as
 in Martin's current PDF. `data/cv.schema.json` makes every field above required except `company.link` and contact entries.
 
@@ -117,3 +128,12 @@ comma-separated text in print (CSS generated separators), so the PDF stays ATS-f
 header/footer templates cannot use the page's web fonts and would embed a system font (breaks REQ-012). ·
 Consequences: font budget rises to 230 KB; fonts.spec and print-layout.spec change (test-review needed); everything
 else (data, scripts, deploy) stays.
+
+### D-008: Content v2 data model: highlights, location, languages (plan v5)
+Context: the approved content v2 has bullet points per role, an optional intro line, a header location and a Languages
+section; the schema only had one `description` string per entry. · Options: (a) keep one string and put "• " bullets
+inside it (no schema change, but bullets become text, wrap badly and can't be styled or tested); (b) Markdown in
+`description` (needs a parser, more markup in a JSON file); (c) explicit fields: optional `description` + `highlights`
+string array, top-level `location` and `languages`. · Decision: (c) (Lead). · Consequences: real `ul/li` markup on screen
+and in the PDF (ATS reads bullets as separate lines); schema and REQ-001/006 tests learn the new fields; old data without
+them still validates. Languages render as text with a " · " separator in print, like skills (D-007).

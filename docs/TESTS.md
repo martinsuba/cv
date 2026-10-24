@@ -55,4 +55,6 @@ Unit tests (`src/**/*.test.jsx`) cover the header, about, experience, education,
 | REQ-015 | unit tests: `scripts/validate-cli.test.js` (CLI exit codes), `scripts/inject-meta.test.js` (injectMeta, missing `</head>` throws), `scripts/make-pdf.test.js` (makePdf with fake browser); `src/app-sections.test.jsx` (app.jsx empty sections, consecutive numbering), header link-text regex and icon attributes in `header.test.jsx`; Stryker `break` 75 (score 80.2%) | done (T-019, T-020) |
 | REQ-014 (v4) | unit tests for scripts/mutation-summary.js (missing report, timeout share, survivor list); mutation job fails on break threshold | done (T-018); break threshold raised to 75 (T-020) |
 | REQ-016 | PR report of alert triage; `npm audit --omit=dev` no high/critical; dependabot.yml present | planned (T-021) |
+| REQ-017 | `content.spec.js` (location, highlights, optional description, languages), `validate.spec.js` (entry without description and highlights), `print.spec.js` (no split entries via last highlight) | planned (T-023) |
+| REQ-018 | `content.spec.js` + `expected-content.js` (content v2 texts, skill order, absent npm/Git/Webpack/"open to"), PDF specs (≤2 pages) | planned (T-024); replaces the REQ-003 tests |
 
