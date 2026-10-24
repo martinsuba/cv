@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-013 meaningful mutation testing (PR #64): review done, test-review next
-Open PRs: #64 T-013
+Current task: – (M5 complete; milestone PR in review)
+Open PRs: M5 milestone (chore/milestone-M5)
 Blockers: –
-Next step: T-013 test-review + merge; then M5 milestone PR (PLAN ticks T-011/T-012/T-013, mutation score, workflow_dispatch run).
+Next step: Martin merges the M5 milestone PR. All planned milestones (M1–M5) then done; options: retro, plan v4 (survivor tests, Vitest 5 revert, timeout gate, content tailoring).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -57,3 +57,7 @@ Next step: T-013 test-review + merge; then M5 milestone PR (PLAN ticks T-011/T-0
 - 2026-10-23: T-012 done (PR #63, merged by Martin with acceptance-change): checkout/setup-node/upload-artifact v4 -> v7; Pages actions already v5; Node 20 deprecation gone; keep ubuntu-latest (Ubuntu 26 notice harmless).
 - 2026-10-23: T-013 (PR #64): Stryker 10.0.0 + vitest-runner, mutates src/** + scripts/**; local run 399 mutants, 250 killed, 82 survived, 1 timeout, 66 no coverage, score 62.9%. Lead decision: vitest pinned 5.x -> 4.1.12 because Stryker 10.0.0's vitest-runner runs no tests on Vitest 5 (stryker-js #6210/#6262/#6263, fixed upstream, unreleased); revert when Stryker releases the fix. Top survivors (follow-up candidates): pdf.js makePdf/resolveRequest, validate.js CLI exit path, vite-plugin-cv-meta injectMeta, app.jsx empty-section branches.
 - 2026-10-23: T-013 review non-blocking follow-ups: mutation-summary.js crashes if mutation.json is missing (use existsSync); add `permissions: contents: read` to mutation.yml (now has workflow_dispatch); list top survivor lines in the summary.
+- 2026-10-24: resolved the docs/STATUS.md conflict between #64 and the status PR #65 by merging master into the T-013 branch (no force-push); reviewer re-approved the new head (docs-only delta).
+- 2026-10-24: T-013 done (PR #64, 0 fix rounds; Vitest 4.1.12 pin accepted by the Lead as a temporary, documented decision). First on-demand mutation run on master (run 40068998427, 2m22s): score 62.91%, 250 killed, 82 survived, 1 timeout (0.3%), 66 no coverage, 4 errors. M5 complete: T-011 (#62), T-012 (#63), T-013 (#64).
+- 2026-10-24: follow-up candidates for a plan v4: unit tests for top survivors (pdf.js makePdf/resolveRequest, validate.js CLI path, vite-plugin-cv-meta injectMeta, app.jsx empty sections); make the ≤10% timeout rule a gate (summary script exit code); mutation-summary.js missing-report handling; `permissions: contents: read` in mutation.yml; revert to Vitest 5 when Stryker releases the fix; deploy once to verify the containerised deploy build.
+
