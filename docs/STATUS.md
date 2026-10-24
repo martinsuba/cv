@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: T-013 Stryker with the Vitest runner (in progress)
-Open PRs: T-013 (task/T-013-stryker-vitest)
+Current task: T-013 meaningful mutation testing (PR #64): review done, test-review next
+Open PRs: #64 T-013
 Blockers: –
-Next step: T-013 review and merge
+Next step: T-013 test-review + merge; then M5 milestone PR (PLAN ticks T-011/T-012/T-013, mutation score, workflow_dispatch run).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -52,4 +52,8 @@ Next step: T-013 review and merge
 - 2026-10-23: M4 complete: T-015 (#58, 0 fix rounds), T-016 (#59, 1 fix round: design.spec checked only the first element, caught by the test-reviewer), T-017 (#60, 0). PDF 2 pages, fonts Inter + JetBrains Mono (no Type3). Not yet deployed: T-014 photo + all of M4.
 - 2026-10-23: Lead note: two test-reviewers claimed the `acceptance-change` label was required; it is not (guard accepts test-review success). Consider clarifying the test-reviewer prompt.
 - 2026-10-23: Martin: fix the Node 20 deprecation warning (checkout@v4, setup-node@v4, upload-artifact@v4 forced onto Node 24) in the next milestone. Covered by M5 T-012 (all actions to current majors; needs his `acceptance-change` label because acceptance-guard.yml changes). Also check the ubuntu-latest → Ubuntu 26 migration notice there.
-- 2026-10-23: T-013: Stryker 10.0.0 vitest-runner cannot select tests on Vitest 5 (all covered mutants survive; upstream fixes merged on master, unreleased), so Vitest is pinned to 4.1.12 (Builder, flagged to the Lead). Revert to Vitest 5 once Stryker releases the fix.
+- 2026-10-23: deployed 71ea171 (design A + new photo), run 39993495414, smoke checks green. Martin: "go M5".
+- 2026-10-23: T-011 done (PR #62, 0 fix rounds): ci/screenshots/deploy build in mcr.microsoft.com/playwright:v1.64.1-noble, ci ~56 s (was ~9 min); scripts/workflows.test.js pins image tag = package-lock version. Deploy container path verified only by review until the next deploy run.
+- 2026-10-23: T-012 done (PR #63, merged by Martin with acceptance-change): checkout/setup-node/upload-artifact v4 -> v7; Pages actions already v5; Node 20 deprecation gone; keep ubuntu-latest (Ubuntu 26 notice harmless).
+- 2026-10-23: T-013 (PR #64): Stryker 10.0.0 + vitest-runner, mutates src/** + scripts/**; local run 399 mutants, 250 killed, 82 survived, 1 timeout, 66 no coverage, score 62.9%. Lead decision: vitest pinned 5.x -> 4.1.12 because Stryker 10.0.0's vitest-runner runs no tests on Vitest 5 (stryker-js #6210/#6262/#6263, fixed upstream, unreleased); revert when Stryker releases the fix. Top survivors (follow-up candidates): pdf.js makePdf/resolveRequest, validate.js CLI exit path, vite-plugin-cv-meta injectMeta, app.jsx empty-section branches.
+- 2026-10-23: T-013 review non-blocking follow-ups: mutation-summary.js crashes if mutation.json is missing (use existsSync); add `permissions: contents: read` to mutation.yml (now has workflow_dispatch); list top survivor lines in the summary.
