@@ -143,7 +143,7 @@ test.describe('REQ-018 content v2', () => {
 	}) => {
 		const body = await page.locator('body').innerText();
 		for (const skill of REMOVED_SKILLS) {
-			expect(body, skill).not.toMatch(new RegExp(`(^|[^\\w-])${skill}(?![\\w-])`, 'i'));
+			expect(body, skill).not.toMatch(new RegExp(`\\b${skill}\\b`, 'i'));
 		}
 		expect(body).not.toMatch(/open to/i);
 		await expect(page.locator('a[href*="npmjs"]')).toHaveCount(0);
