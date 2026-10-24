@@ -1,9 +1,9 @@
 # Status: cv
 Phase: build
-Current task: – (M1–M5 done; retro in review; plan v4 next)
-Open PRs: retro + deploy record (chore/retro)
+Current task: – (M6 complete; milestone PR in review)
+Open PRs: M6 milestone (chore/milestone-M6)
 Blockers: –
-Next step: Martin merges the retro PR; plan v4 PR (follow-ups); framework proposals go to the ops session.
+Next step: Martin merges the M6 milestone PR. No planned work left; content tailoring when Martin wants it.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -61,3 +61,10 @@ Next step: Martin merges the retro PR; plan v4 PR (follow-ups); framework propos
 - 2026-10-24: T-013 done (PR #64, 0 fix rounds; Vitest 4.1.12 pin accepted by the Lead as a temporary, documented decision). First on-demand mutation run on master (run 40068998427, 2m22s): score 62.91%, 250 killed, 82 survived, 1 timeout (0.3%), 66 no coverage, 4 errors. M5 complete: T-011 (#62), T-012 (#63), T-013 (#64).
 - 2026-10-24: follow-up candidates for a plan v4: unit tests for top survivors (pdf.js makePdf/resolveRequest, validate.js CLI path, vite-plugin-cv-meta injectMeta, app.jsx empty sections); make the ≤10% timeout rule a gate (summary script exit code); mutation-summary.js missing-report handling; `permissions: contents: read` in mutation.yml; revert to Vitest 5 when Stryker releases the fix; deploy once to verify the containerised deploy build.
 - 2026-10-24: deployed 166cb04 (run 40069676603): containerised deploy build verified in practice, smoke checks green. Retro written (docs/RETRO.md). Martin: do plan v4 improvements.
+- 2026-10-24: M6 started (Martin: "go M6"); builders no longer edit STATUS/LOG (retro proposal 4), the Lead updates them in milestone PRs.
+- 2026-10-24: T-018 done (PR #69, 0 fix rounds): mutation gate (break 60), summary exits 1 on missing report or >10% timeouts, survivor list, mutation.yml `permissions: contents: read`. Gate run on master: 63.24% (run 40070831777).
+- 2026-10-24: T-021 done (PR #70, 0 fix rounds): `npm audit` 0 (qs via typed-rest-client fixed), dependabot.yml weekly grouped. Dependabot alerts API returned 403 (PAT lacks "Dependabot alerts: read"): any npm alert still open after merge is stale (npm audit uses the same advisory DB) and Martin can dismiss it.
+- 2026-10-24: T-019 done (PR #71, 0 fix rounds; one master merge to fix a docs/TESTS.md conflict, which had silently blocked CI): validate.js main(), makePdf with injected chromium, injectMeta throws without </head>; scripts score 62.8% -> 82.3%.
+- 2026-10-24: T-020 done (PR #72, 0 fix rounds): app empty-section/numbering and header tests; break 75; score 80.22% (run 40073150880). Note: app-sections.test.jsx clones the real cv.json instead of a synthetic fixture (reviewer non-blocking; follow-up candidate).
+- 2026-10-24: T-022 done (PR #73, 0 fix rounds): Stryker 10.1.1 (released 2026-10-23, supports Vitest 5) + vitest 5.0.5, exact pins; dependabot keeps the @stryker-mutator/* major ignore. Score 81.32%: the +1.1 points are 6 validate.js mutants reclassified from Survived (0 tests had run, a Stryker 10.0.0 artefact) to RuntimeError (they crash on import), not new tests. Baseline: 356 killed, 55 survived, 1 timeout, 27 no coverage.
+- 2026-10-24: Dependabot alerts readable now (Martin granted the permission): 218 alerts in total, 0 open, all "fixed" (214 auto-closed on 2026-10-23 when the old preact-cli lockfile was replaced, 4 on 2026-03-11). Nothing to dismiss; REQ-016 triage complete.

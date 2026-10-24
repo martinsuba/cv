@@ -197,10 +197,10 @@ sizes and spacing; values below are the contract. All entries keep their full te
   timeouts ≤ 10%; mutation.yml uses the local binary. Report the score and survivors in the PR.
 - REQs: REQ-014. Areas/files: package.json, stryker.config.json, .github/workflows/mutation.yml (explicitly allowed).
 
-## M6: Quality follow-ups (plan v4)
+## [x] M6: Quality follow-ups (plan v4)
 From the retro (docs/RETRO.md) and the first meaningful mutation run. No visual change.
 
-### [ ] T-018: Mutation gate and workflow hardening  (size S)
+### [x] T-018: Mutation gate and workflow hardening  (size S)  — #69
 - Goal: `scripts/mutation-summary.js` handles a missing report (clear message, exit 1), exits non-zero when timeouts
   exceed 10% of mutants, and lists surviving mutants with file:line and mutator (top 30). Stryker `thresholds`
   `{ high: 80, low: 70, break: 60 }` (raised to 75 in T-020). mutation.yml gets `permissions: contents: read`.
@@ -209,7 +209,7 @@ From the retro (docs/RETRO.md) and the first meaningful mutation run. No visual 
   on the branch is not possible before merge, so the Lead runs it on master after merge and reports the result.
 - Areas/files: scripts/mutation-summary.js (+ test), stryker.config.json, .github/workflows/mutation.yml (explicitly allowed)
 
-### [ ] T-019: Unit tests for the build scripts  (size M)
+### [x] T-019: Unit tests for the build scripts  (size M)  — #71
 - Goal: tests for `validate.js` CLI path, `vite-plugin-cv-meta.js` `injectMeta` (and make a missing `</head>` a build
   error), and `pdf.js` `makePdf` with an injected fake browser. Small refactors for testability are fine (e.g. export
   `main()` returning an exit code; pass the Playwright `chromium` as a parameter). Behaviour stays the same.
@@ -217,13 +217,13 @@ From the retro (docs/RETRO.md) and the first meaningful mutation run. No visual 
 - Acceptance: unit tests only; all existing acceptance tests keep passing (PDF identical in page count and fonts).
 - Areas/files: scripts/*.js, scripts/*.test.js, tests/fixtures/ (synthetic)
 
-### [ ] T-020: Unit tests for app branches; raise the mutation bar  (size S)
+### [x] T-020: Unit tests for app branches; raise the mutation bar  (size S)  — #72
 - Goal: tests for `src/app.jsx` empty sections and consecutive numbering, the header regex, and anything else left in
   the survivor list that is cheap; then set Stryker `break` to 75 and confirm the score ≥ 75% locally.
 - REQs: REQ-015
 - Areas/files: src/**/*.test.jsx, stryker.config.json
 
-### [ ] T-021: Dependency hygiene  (size S)
+### [x] T-021: Dependency hygiene  (size S)  — #70
 - Goal: triage the Dependabot alerts (`gh api repos/martinsuba/cv/dependabot/alerts`), fix real ones with non-breaking
   updates, list stale ones for Martin to dismiss; add `.github/dependabot.yml` (npm + github-actions, weekly, grouped).
 - REQs: REQ-016
@@ -231,7 +231,7 @@ From the retro (docs/RETRO.md) and the first meaningful mutation run. No visual 
 - Note: the Playwright image tag must follow any @playwright/test bump (scripts/workflows.test.js enforces it); if a
   bump would need workflow edits, leave Playwright as is and note it.
 
-### [ ] T-022: Back to Vitest 5  (size S, could; blocked until Stryker releases the fix)
+### [x] T-022: Back to Vitest 5  (size S, could; blocked until Stryker releases the fix)  — #73
 - Goal: when `@stryker-mutator/vitest-runner` > 10.0.0 ships the Vitest 5 fix (stryker-js #6210/#6262/#6263), bump
   Stryker and Vitest 5, confirm the mutation score is unchanged. Until then the Lead checks once per milestone.
 - REQs: REQ-014
