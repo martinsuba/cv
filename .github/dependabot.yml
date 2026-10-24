@@ -8,9 +8,8 @@ updates:
       npm:
         patterns: ['*']
     ignore:
-      # vitest is pinned (Stryker compatibility); Stryker is pinned too. No major bumps.
-      - dependency-name: vitest
-        update-types: ['version-update:semver-major']
+      # Stryker is pinned exactly (runner and core must match, vitest-runner supports specific Vitest
+      # majors); no major bumps. Vitest follows normally again.
       - dependency-name: '@stryker-mutator/*'
         update-types: ['version-update:semver-major']
   - package-ecosystem: github-actions

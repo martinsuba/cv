@@ -14,9 +14,8 @@
   and counts as Markdown (CI appends it to the job summary). Under Stryker `vite.config.js` sets Vitest `reporters: ['dot']`
   (detected via `STRYKER_MUTATOR_WORKER`) so no per-run GitHub summary box is written; plain `npm test` is unchanged.
   Entry files and CLI guards that only run as processes (`scripts/pdf.js` makePdf, `validate.js` main block, `src/main.jsx`)
-  show as NoCoverage: they are exercised only by the Playwright acceptance tests. Stryker 10.0.0 does not select tests
-  correctly on Vitest 5 (nested `describe` names), so Vitest is pinned to 4.1.12 until a Stryker release with the fix
-  (stryker-js #6210/#6262/#6263) allows going back to Vitest 5.
+  show as NoCoverage: they are exercised only by the Playwright acceptance tests. Stryker >= 10.1.0 supports Vitest 5 (T-022); Stryker core, vitest-runner and Vitest are pinned exactly
+  (10.1.1 / 5.0.5) so a bump is a deliberate change.
 - CI (`.github/workflows/ci.yml`, job `ci`): npm ci, lint, format check, unit, build, acceptance. `npm run pdf` runs before acceptance and `dist/cv.pdf` is uploaded as artifact `cv-pdf` on every run.
 
 ## Contracts the not-yet-built features must satisfy (tests are written against them)
