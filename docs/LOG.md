@@ -33,3 +33,5 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-24 | M6 T-021 | needs to dismiss stale Dependabot alerts (PAT cannot read them) | y – resolved: Martin granted "Dependabot alerts: read"; all 218 alerts were already fixed, none to dismiss
 2026-10-24 | plan v5 | content rework in chat: answered the review points, approved draft v3, chose location without "open to" | n – content and product decisions
 2026-10-24 | plan v5 gate | merged plan v5 (#75), said "go M7" | n – gate
+2026-10-25 | M7 review | reviewed the CV text, asked for About changes (Python, years, voice, honest AI wording); merged plan v6 (#79), said "go" | n – content decisions
+2026-10-25 | M7 | switched out of auto mode because the command classifier kept failing | n – platform fault

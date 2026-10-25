@@ -1,9 +1,9 @@
 # Status: cv
-Phase: build (M7 complete; milestone PR in review)
+Phase: build (M7 complete incl. T-025; milestone PR in review)
 Current task: –
-Open PRs: M7 milestone (chore/milestone-M7)
+Open PRs: M7 milestone #78 (chore/milestone-M7)
 Blockers: –
-Next step: Martin reviews and merges the M7 milestone PR, then approves a deploy so content v2 goes live. Optional follow-up: keep hyphenated words like "F-Secure" from breaking across lines (render-time no-wrap span, needs a plan update).
+Next step: Martin merges the M7 milestone PR #78, then approves a deploy so content v2 (with the v4.1 About) goes live. Optional follow-up: keep hyphenated words ("F-Secure", "AI-orchestrated") from breaking across lines in the PDF (render-time no-wrap spans, needs a plan update).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -77,3 +77,6 @@ Next step: Martin reviews and merges the M7 milestone PR, then approves a deploy
 - 2026-10-24: T-024 done (PR #77, 1 fix round: a removed-skills regex had been loosened, reverted). PDF 2 pages (~95%/97% fill) via print spacing only; print h1 line-height 1.15 for top-margin headroom (44.25 pt vs 42.5 pt limit). "→" in About needed one-glyph Inter subsets (src/fonts/, inter-ui 3.19.3, OFL, ~1.4 KB inlined) because fontsource Inter lacks U+2192 and Chromium fell back to LiberationSans (REQ-012). design.spec `section li` scoped to `.skills li` (Lead-allowed).
 - 2026-10-24: M7 complete. Cosmetic open point: "F-Secure" can break at its hyphen in the PDF; CSS alone can't prevent it (needs no-wrap spans at render time). Not done; ask Martin.
 - 2026-10-24: a stale git-ignored .stryker-tmp/ in the main checkout breaks `npm run lint` locally (agents may not delete it); `rm -rf .stryker-tmp` by Martin, or add it to the ESLint ignores in a later task.
+- 2026-10-25: Martin reviewed M7: About v4.1 (10+ years counted from WEZEO 2015, Python, "guide architecture decisions", AI sentence true to current practice: AI-orchestrated workflows at work, AI-native SDLC as exploration), one voice without "I", EM bullets as present participles. Plan v6 merged (#79).
+- 2026-10-25: T-025 done (PR #80, 0 fix rounds; review + test-review clean). PDF still 2 pages. Milestone branch updated with master and fresh screenshots.
+- 2026-10-25: the auto-mode command classifier returned no verdict repeatedly (server-side error); Martin switched to accept-edits mode so the Lead could continue with per-command approval.
