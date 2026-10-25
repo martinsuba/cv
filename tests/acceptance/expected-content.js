@@ -1,15 +1,15 @@
 // Exact texts of content v2, copied verbatim from data/cv.json (formerly docs/content-v2.json). REQ-018.
 export const ABOUT =
-	'Engineering Manager with 13+ years in web product engineering, leading a team that delivers security products to Tier-1 partners at F-Secure. Grew from developer to tech lead to manager on the same product through two acquisitions (SaferPass → Lookout → F-Secure). I focus on growing engineers and predictable delivery. Hands-on with AI-native software development: running AI-orchestrated workflows in my team and exploring how they reshape the whole SDLC. Technical enough to shape architecture and review solutions (JavaScript/TypeScript, React, Node.js, web and native SDKs).';
+	'Engineering Manager with 10+ years in web product engineering, leading a team that delivers security products to Tier-1 partners at F-Secure. Grew from developer to tech lead to manager on the same product through two acquisitions (SaferPass → Lookout → F-Secure). Focused on growing engineers and predictable delivery. Running AI-orchestrated workflows in my team and exploring how AI-native development reshapes the whole SDLC. Technical enough to guide architecture decisions and review solutions (JavaScript/TypeScript, React, Node.js, Python, web and native SDKs).';
 
 export const LOCATION = 'Bratislava, Slovakia';
 
 export const EM_HIGHLIGHTS = [
-	'Line manager for the team: 1:1s, regular feedback, performance reviews and career development.',
-	'Hiring and onboarding of new engineers.',
-	'Owns delivery and release readiness for partner releases: planning around real capacity, managing dependencies across teams and raising risks early.',
+	'Managing the team: 1:1s, regular feedback, performance reviews and career development.',
+	'Hiring and onboarding new engineers.',
+	'Owning delivery and release readiness for partner releases: planning around real capacity, managing dependencies across teams and raising risks early.',
 	'Introduced AI-orchestrated workflows and agentic automations into delivery, reducing manual effort by up to 80% in selected workflows, and brought the team along in adopting AI tools.',
-	'Improves delivery processes and quality in a security-critical, partner-facing environment.',
+	'Improving delivery processes and quality in a security-critical, partner-facing environment.',
 ];
 
 // Highlights of the other recent roles (entries 2-5), keyed by 'title (company)'.
