@@ -1,4 +1,5 @@
 import SectionLabel from '../section-label/section-label.jsx';
+import NoBreak from '../no-break/no-break.jsx';
 import './skills.css';
 
 export default function skills({ skills, number }) {
@@ -11,7 +12,9 @@ export default function skills({ skills, number }) {
 						<h3>{key}</h3>
 						<ul className="tags">
 							{value.map((skill) => (
-								<li>{skill}</li>
+								<li>
+									<NoBreak text={skill} />
+								</li>
 							))}
 						</ul>
 					</div>

@@ -1,4 +1,5 @@
 import SectionLabel from '../section-label/section-label.jsx';
+import NoBreak from '../no-break/no-break.jsx';
 import './languages.css';
 
 export default function languages({ languages, number }) {
@@ -8,7 +9,7 @@ export default function languages({ languages, number }) {
 			<ul className="language-list">
 				{languages.map((item) => (
 					<li>
-						{item.language} ({item.level})
+						<NoBreak text={`${item.language} (${item.level})`} />
 					</li>
 				))}
 			</ul>

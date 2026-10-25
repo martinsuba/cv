@@ -185,3 +185,8 @@ h3 {
 		font-size: 10pt;
 	}
 }
+
+/* REQ-019: hyphenated words (wrapped by src/no-break) never break at the hyphen, on screen and in the PDF. */
+.nobr {
+	white-space: nowrap;
+}
