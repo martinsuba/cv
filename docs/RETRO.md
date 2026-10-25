@@ -1,4 +1,129 @@
 # Retrospective: cv
+
+# Round 3: content rework (plan v5–v7, M7, deploy 7295df4)
+Written by the Project Lead on 2026-10-25, after the deploy. Sources: docs/LOG.md, the docs/STATUS.md decisions log,
+`gh pr list --state all`, `gh run list --status failure`, PR review comments, `git log`, `usage.py report --since 2026-10-24`.
+Rounds 1–2 (M1–M5) are in the original retro below; M6 had no retro of its own.
+
+## Timeline and numbers
+- **Duration:** 2026-10-24 ~18:00 → 2026-10-25 07:32, in two sessions (a restart in between).
+- **Flow:** CV review in chat (career notes, two job ads) → draft v1–v3 with Martin → backup → plan v5 (#75) → M7 T-023, T-024 →
+  milestone PR #78 → Martin's text review → plan v6 (#79) → T-025 → todo + cosmetic fix → plan v7 (#81) → T-026, T-027 (built in
+  parallel) → #78 merged → deploy 7295df4 (run 40172795768, green) → deploy record #84.
+- **PRs:** #75–#84 = 10: 3 plan, 5 task, 1 milestone, 1 deploy record. All merged.
+- **Fix rounds:** T-023 0, T-024 1 (a test regex had been loosened), T-025 0, T-026 0, T-027 0. 1 round in 5 tasks.
+- **Models:** Lead Opus 5.5; builders Sonnet 5.5; reviewer and test-reviewer Opus 5.5.
+- **Content outcome:** About rewritten 4 times (draft v1, v2, v3, v4/v4.1), EM bullets twice, skills 3 times; PDF stayed at 2 pages throughout.
+
+## Martin's inputs (from docs/LOG.md and the chat): by gate, could an agent have done it?
+| When | Input | Agent? |
+|---|---|---|
+| 10-24 review | asked for the CV review, pointed to notes and 2 job ads | n – the request |
+| 10-24 draft | 9 answers to the review points (no numbers, keep entries separate, not tailored) | n – content preferences |
+| 10-24 draft | 3 rounds of edits (drop delegation bullet and education in About, AI-native line, "fascinated" too strong, "Hands-on" better) | partly – see below |
+| 10-24 plan v5 | chose location without "open to" after the Lead's challenge | n – but the Lead put "open to" into the draft first |
+| 10-24 gates | merged #75, "go M7" | n – gate |
+| 10-25 review | Python, years (13+ was counted from a 2012 part-time job), "shape/reshape" twice, overconfident tone | **y – a self-review checklist would have caught 3 of 4** |
+| 10-25 review | AI-native SDLC must not read as production practice | **partly – the Lead wrote "Hands-on with AI-native…" without asking what was real** |
+| 10-25 review | voice mix ("Grew…" vs "I focus…", "Owns" vs "Led") | **y – Martin found what the Lead should have** |
+| 10-25 | todo: "AI-assisted development" skill | n – content |
+| 10-25 | switched out of auto mode (classifier outage) | n – platform fault |
+| 10-25 gates | merged #79, #81, #78, #84; "go" ×2, "deploy" | n – gates |
+
+**Corrections Martin had to make to the Lead:** years of experience, overclaiming AI-native work, inconsistent voice, a
+duplicated word. All were in text the Lead wrote. **Questions Martin had to ask:** "how do you mean temporary?" about the
+classifier outage. The first answer had said "temporary" without saying where that came from.
+
+## What the gates caught / what slipped through
+- **Reviewer:** T-024 widened a removed-skills regex (`\b` → a custom lookaround), which is weaker; the reviewer caught it and it was reverted.
+  It also flagged a 0.25 pt top-margin headroom that a browser bump could break; the Lead had it fixed in the same round.
+- **Acceptance tests:** fonts.spec caught the "→" glyph falling back to LiberationSans (fontsource Inter has no U+2192). The
+  builder added one-glyph Inter subsets (OFL, documented).
+- **Builder foresight:** the T-023 builder found that v2 content would make the PDF 3 pages and that design.spec's unscoped
+  `section li` would break. Both were handled in T-024 as planned.
+- **Slipped to Martin:** the text-quality problems listed above. No content was wrong; it was wording and accuracy. The Lead's own
+  milestone verdict said "meets REQ-017/018", which was true but did not cover voice or claims.
+- **Slipped to the PDF:** hyphen line breaks ("F-"/"Secure", "AI-"/"orchestrated"). Seen by the Lead and the reviewer, but left
+  for a later task. Fixed in T-027 with a regression test.
+
+## Process failures (agents' side)
+- **Lead wrote claims stronger than reality** ("Hands-on with AI-native…", "Technical enough to shape architecture") and counted
+  years from the first part-time job. It should have asked before writing a claim, not after.
+- **Draft put "open to remote or hybrid" on a public site.** The Lead caught this at plan time; it should have been caught at draft time.
+- **Milestone PR reopened 3 times.** The Lead opened #78 before Martin had reviewed the text, so two follow-up plans (v6, v7) and three
+  screenshot refreshes followed. A text-review gate before the milestone would have saved two plan PRs.
+- **Test-reviewer switched the main checkout** to the task branch once (T-024). From then on the prompts said "use a worktree".
+- **Parallel builders shared port 4173** (T-026 and T-027 in separate worktrees): spurious local e2e failures (14 in one run). CI was unaffected.
+- **Test-reviewer claimed `acceptance-change` was required** for the third time (also on 2026-10-23). The guard accepts a
+  `test-review` success; the Lead re-ran it.
+- **`rm -rf` denied** twice (stale `.stryker-tmp/`, a scratch directory). `npm run lint` still fails locally until Martin deletes it.
+- **Auto-mode classifier outage:** about 8 Bash calls got "no verdict". The Lead stopped after 3 per turn, as the error advised;
+  Martin switched to accept-edits mode.
+- **Screenshot workflow** produces identical `-dark`/`-light` PNGs and no PDF page images. The Lead renders PDF pages with an
+  ad-hoc scratch script (`render-pdf.mjs`) each milestone.
+
+## Test quality (unit, acceptance, screenshots, mutation, spike/staging)
+- **Unit tests:** 107 (M6) → 121 (T-023) → 130 (T-027).
+- **Acceptance tests:** 60 (M6) → 67 (T-024) → 72 (T-027), 0 skipped. The location and languages `fixme` tests switched on by themselves in T-024, as designed.
+- **New checks:**
+  - exact content texts (REQ-018), AI and Engineering skill order;
+  - schema `anyOf` (description or highlights);
+  - hyphenated words in `.nobr` with nowrap, no U+2011, no PDF line ending inside a cv.json word (REQ-019).
+- **Mutation testing:** 82.33% at the first M7 head, 83.47% at the final head (break 75). The new components have no survivors.
+  The 55 survivors are the old build-tooling ones (`mutation-summary.js`, `pdf.js`, `validate.js`).
+- **Spike / staging:** none needed. There are no new external services, and Pages has no staging.
+
+## Cost and model fit
+`usage.py report --since 2026-10-24` (includes M6 on the morning of 10-24): ≈ **$23.70**, 329 min, cache hit 97%.
+
+| agent | runs | $ | min | max ctx |
+|---|---:|---:|---:|---:|
+| lead (Opus) | 14 | 14.92 | 146 | 329k |
+| builder (Sonnet) | 10 | 3.73 | 123 | 71k |
+| reviewer (Opus) | 11 | 3.57 | 47 | 57k |
+| test-reviewer (Opus) | 7 | 1.48 | 13 | 27k |
+
+M7 tasks: T-024 $3.02, T-023 $1.97, T-027 $1.11, T-025 $0.92, T-026 $0.49 (≈ $7.5). The two most expensive single runs
+were the Lead: "Lead on master" $6.05, which includes the CV review and drafting chat, and "Lead on chore/milestone-M7" $4.52
+(three milestone refreshes).
+- **Lead context grew to ~330k,** because the content discussion (career notes, job ads, 6 draft rounds) ran in the same
+  session as the orchestration. Every later Lead call paid for that context.
+  **Idea:** draft content in a separate notes chat, then start the Lead fresh with only the approved draft. Estimated saving ≈ $3–5 per content milestone.
+- **Data-only tasks (T-025, T-026):** Opus review plus Opus test-review cost ≈ $0.4–0.6 per task for a one-line JSON change.
+  Sonnet would have done. Saving ≈ $0.5 per milestone; low priority.
+- **Text-review gate before the milestone PR:** would have avoided plan v6/v7 overhead (two plan PRs, two milestone refreshes),
+  ≈ $3 and two Martin gates.
+- **Opus reviewers were worth it** on T-023, T-024 and T-027: real findings, flaky-suite analysis, mutation-style checks.
+
+## Proposals for the framework (ranked, with file to change; mark permission needs)
+1. **Content self-review checklist before showing Martin any CV or prose draft.** One voice, consistent tense, every
+   claim backed by what Martin told us, counts and years from the agreed start, no repeated words, nothing public that
+   signals a job search. *Saves ~10 Martin-minutes and one plan round per content change; risk none.* File: a new section in
+   `~/.claude/skills/plan/SKILL.md` ("content drafts"), or a small `content-review` skill. No permission needed.
+2. **Text gate before the milestone PR for content projects.** The Lead sends Martin the final rendered text/PDF, and his
+   OK comes first. *Saves 1–2 plan PRs and screenshot refreshes.* File: `~/.claude/skills/next-task/SKILL.md` ("End of milestone").
+3. **Fix the test-reviewer's label rule** (3rd occurrence). State that `acceptance-guard` passes on `test-review: success` and
+   the label is only for acceptance-guard.yml changes or exhausted rounds. Also: always work in its own worktree and never switch the
+   main checkout. File: `~/.claude/agents/test-reviewer.md`.
+4. **Parallel builders need distinct ports.** Make the preview port configurable (`PW_PORT`) in `playwright.config.js` (repo
+   task), and have the Lead pass a different port per worktree builder. Files: this repo's `playwright.config.js` (task) and
+   `~/.claude/skills/next-task/SKILL.md` (parallel-build note).
+5. **Render PDF pages in the screenshots workflow** and drop the duplicate dark PNGs (no dark mode). *Removes the Lead's
+   scratch script.* Repo task: `tests/screenshots/` and `.github/workflows/screenshots.yml`. **Needs Martin's
+   `acceptance-change` label** (workflow change).
+6. **Ignore `.stryker-tmp/` in ESLint** (repo task, `eslint.config.js`). Alternatively allow `rm -rf .stryker-tmp` for agents.
+   **The allowlist entry needs a settings change by Martin** (`~/.claude/settings.json` or the project `.claude/settings.json`).
+7. **Classifier outages:** add a line to the Lead's guidance. After 3 "no verdict" errors, stop and offer to switch out of
+   auto mode, and say where "temporary" comes from. File: `~/.claude/FRAMEWORK.md` (Rules). Low value, no risk.
+8. **Cheaper reviews for data-only tasks:** reviewer and test-reviewer on Sonnet when the diff is only `data/*.json` plus
+   expected-content. File: `~/.claude/skills/next-task/SKILL.md`. Small saving; keep Opus for code.
+
+Items 1–3 and 7–8 belong to the ops session (`~/.claude`). Items 4–6 are repo tasks for a future plan here.
+
+---
+
+# Rounds 1–2 (M1–M5)
+
 Written by the Project Lead on 2026-10-24, after M5 and the post-M5 deploy. Sources: docs/LOG.md, the docs/STATUS.md
 decisions log, `gh pr list --state all`, `gh run list --status failure`, PR review comments, `git log`.
 
