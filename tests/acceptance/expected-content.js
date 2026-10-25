@@ -61,6 +61,13 @@ export const LANGUAGES = [
 
 export const SKILL_GROUPS_IN_ORDER = ['Leadership', 'Delivery', 'AI', 'Engineering'];
 
+export const AI_SKILLS_IN_ORDER = [
+	'AI adoption in engineering teams',
+	'AI-orchestrated workflows and agentic automation',
+	'AI-assisted development',
+	'AI-native SDLC (Claude Code / Anthropic ecosystem)',
+];
+
 export const REMOVED_SKILLS = [
 	'Git',
 	'Webpack',
