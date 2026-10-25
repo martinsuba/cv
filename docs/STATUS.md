@@ -1,9 +1,9 @@
 # Status: cv
-Phase: plan review (plan v5: content v2)
+Phase: build (M7 complete incl. T-025…T-027; milestone PR in review)
 Current task: –
-Open PRs: Plan v5 (plan/5)
+Open PRs: M7 milestone #78 (chore/milestone-M7)
 Blockers: –
-Next step: Martin reviews and merges the Plan v5 PR, then says "go M7" (T-023 data model, T-024 content v2). Deploy after the M7 milestone, with Martin's approval.
+Next step: Martin merges the M7 milestone PR #78, then approves a deploy so content v2 goes live.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -72,3 +72,14 @@ Next step: Martin reviews and merges the Plan v5 PR, then says "go M7" (T-023 da
 - 2026-10-24: content rules (Martin): general EM CV, not tailored per company; no team sizes or other sensitive/changing numbers; earlier roles stay separate entries; Technical Project Lead stays separate.
 - 2026-10-24: header location "Bratislava, Slovakia" without "open to remote or hybrid": the site is public and visible to the current employer (Martin, on the Lead's challenge).
 - 2026-10-24: plan v5: D-008 data model (optional description + highlights[], top-level location and languages); exact target data in docs/content-v2.json; M7 = T-023, T-024.
+- 2026-10-24: plan v5 merged (#75); Martin: "go M7".
+- 2026-10-24: T-023 done (PR #76, 0 fix rounds; review + test-review clean). Location/languages acceptance tests were conditional fixme until T-024.
+- 2026-10-24: T-024 done (PR #77, 1 fix round: a removed-skills regex had been loosened, reverted). PDF 2 pages (~95%/97% fill) via print spacing only; print h1 line-height 1.15 for top-margin headroom (44.25 pt vs 42.5 pt limit). "→" in About needed one-glyph Inter subsets (src/fonts/, inter-ui 3.19.3, OFL, ~1.4 KB inlined) because fontsource Inter lacks U+2192 and Chromium fell back to LiberationSans (REQ-012). design.spec `section li` scoped to `.skills li` (Lead-allowed).
+- 2026-10-24: M7 complete. Cosmetic open point: "F-Secure" can break at its hyphen in the PDF; CSS alone can't prevent it (needs no-wrap spans at render time). Not done; ask Martin.
+- 2026-10-24: a stale git-ignored .stryker-tmp/ in the main checkout breaks `npm run lint` locally (agents may not delete it); `rm -rf .stryker-tmp` by Martin, or add it to the ESLint ignores in a later task.
+- 2026-10-25: Martin reviewed M7: About v4.1 (10+ years counted from WEZEO 2015, Python, "guide architecture decisions", AI sentence true to current practice: AI-orchestrated workflows at work, AI-native SDLC as exploration), one voice without "I", EM bullets as present participles. Plan v6 merged (#79).
+- 2026-10-25: T-025 done (PR #80, 0 fix rounds; review + test-review clean). PDF still 2 pages. Milestone branch updated with master and fresh screenshots.
+- 2026-10-25: the auto-mode command classifier returned no verdict repeatedly (server-side error); Martin switched to accept-edits mode so the Lead could continue with per-command approval.
+- 2026-10-25: plan v7 merged (#81): T-026 "AI-assisted development" skill (Martin's todo), T-027 hyphenated words on one line (REQ-019, D-009). Martin: "go".
+- 2026-10-25: T-026 done (PR #82, 0 fix rounds) and T-027 done (PR #83, 0 fix rounds), built in parallel in separate worktrees; review + test-review clean. PDF 2 pages; "F-Secure"/"AI-orchestrated" no longer break. Parallel builders shared preview port 4173, which caused spurious local e2e failures (CI unaffected): run parallel builders with different ports or sequentially.
+- 2026-10-25: test-reviewer again claimed the `acceptance-change` label was required; it is not (guard accepts test-review success). Same note as 2026-10-23: clarify the test-reviewer prompt.
