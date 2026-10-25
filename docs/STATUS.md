@@ -1,9 +1,9 @@
 # Status: cv
-Phase: build (M7 complete incl. T-025…T-027; milestone PR in review)
+Phase: deployed (M7 content v2 live)
 Current task: –
-Open PRs: M7 milestone #78 (chore/milestone-M7)
+Open PRs: deploy record (chore/deploy-record-7295df4)
 Blockers: –
-Next step: Martin merges the M7 milestone PR #78, then approves a deploy so content v2 goes live.
+Next step: none planned. Martin updates LinkedIn with the new wording by hand. Optional: retro for M7.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -83,3 +83,4 @@ Next step: Martin merges the M7 milestone PR #78, then approves a deploy so cont
 - 2026-10-25: plan v7 merged (#81): T-026 "AI-assisted development" skill (Martin's todo), T-027 hyphenated words on one line (REQ-019, D-009). Martin: "go".
 - 2026-10-25: T-026 done (PR #82, 0 fix rounds) and T-027 done (PR #83, 0 fix rounds), built in parallel in separate worktrees; review + test-review clean. PDF 2 pages; "F-Secure"/"AI-orchestrated" no longer break. Parallel builders shared preview port 4173, which caused spurious local e2e failures (CI unaffected): run parallel builders with different ports or sequentially.
 - 2026-10-25: test-reviewer again claimed the `acceptance-change` label was required; it is not (guard accepts test-review success). Same note as 2026-10-23: clarify the test-reviewer prompt.
+- 2026-10-25: deployed 7295df4 (M7 content v2 incl. T-025…T-027), run 40172795768, approved by Martin. Smoke checks green: /cv/ 200 with the name, /cv/cv.pdf 200 application/pdf, 2 pages; live PDF text has "10+ years", "Running AI-orchestrated", "AI-assisted development", Python, "Managing the team", languages, location; no npm link; meta description from the new About.
