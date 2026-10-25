@@ -294,6 +294,33 @@ Approved text: ~/HAL/ai-assistant/notes/career/cv/cv-draft.md (v3 FINAL, 2026-10
 - Areas/files: data/cv.json, tests/acceptance/expected-content.js, tests/acceptance/content.spec.js (explicitly allowed)
 - Definition of done: CI green, review + test-review clean; the Lead checks the PDF pages before updating the milestone PR.
 
+### [ ] T-026: AI-assisted development skill  (size S, plan v7)
+- Goal: Martin's todo (2026-10-25). In `data/cv.json` insert "AI-assisted development" into `skills.AI` right after
+  "AI-orchestrated workflows and agentic automation" (so the group reads: AI adoption in engineering teams,
+  AI-orchestrated workflows and agentic automation, AI-assisted development, AI-native SDLC (Claude Code / Anthropic
+  ecosystem)). Nothing else in the data changes.
+- REQs: REQ-018 (plan v7 criterion), REQ-001
+- Acceptance tests to make pass: content.spec.js with a check for the exact AI group order; all PDF specs (≤2 pages).
+- Areas/files: data/cv.json, tests/acceptance/expected-content.js, tests/acceptance/content.spec.js (explicitly allowed)
+- Definition of done: CI green, review + test-review clean.
+
+### [ ] T-027: Keep hyphenated words on one line  (size S, plan v7)
+- Goal: a small render helper (e.g. `src/no-break/no-break.jsx`) splits a text into tokens and wraps every word with an
+  inner ASCII hyphen (regex like `[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)+`, Unicode-aware for "VÚB"-style letters) in
+  `<span class="nobr">` with `white-space: nowrap` (global CSS in src/style.css). Use it in About, experience
+  description + highlights, education, skills items and languages. The text in the DOM stays identical (same
+  characters, ASCII "-", no U+2011), so copy/paste, ATS parsing and the exact-text tests keep working.
+- REQs: REQ-019, REQ-010, REQ-012
+- Acceptance tests to make pass: a new acceptance check (e.g. in print.spec.js or a new nobr.spec.js): on the built page
+  every hyphenated word from cv.json sits inside a `.nobr` element with computed `white-space: nowrap`; in dist/cv.pdf
+  text, no line ends with a letter/digit followed by "-" where the next line continues the same cv.json word; plus all
+  existing specs (content, fonts hyphenated words, ≤2 pages, a11y, 375px no-scroll). Unit tests for the helper
+  (no hyphen, one/several hyphenated words, leading/trailing hyphens and " - " dashes not wrapped, "→" untouched).
+- Areas/files: src/no-break/* (new), src/about, src/experience, src/education, src/skills, src/languages, src/style.css,
+  unit tests, tests/acceptance/ (new or extended spec; explicitly allowed)
+- Definition of done: CI green, review + test-review clean; the Lead renders the PDF pages and checks that
+  "F-Secure" and "AI-orchestrated" no longer break, and the PDF is still 2 pages.
+
 ## Screens (web UI projects)
 - CV page, desktop 1280px: full page.
 - CV page, mobile 375px: full page.
