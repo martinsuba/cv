@@ -1,9 +1,9 @@
 # Status: cv
-Phase: build (M7 complete incl. T-025; milestone PR in review)
+Phase: build (M7 complete incl. T-025…T-027; milestone PR in review)
 Current task: –
 Open PRs: M7 milestone #78 (chore/milestone-M7)
 Blockers: –
-Next step: Martin merges the M7 milestone PR #78, then approves a deploy so content v2 (with the v4.1 About) goes live. Todo (Martin, 2026-10-25): add "AI-assisted development" to the AI skills (needs a plan v7 + small task). Optional follow-up: keep hyphenated words ("F-Secure", "AI-orchestrated") from breaking across lines in the PDF (render-time no-wrap spans, needs a plan update).
+Next step: Martin merges the M7 milestone PR #78, then approves a deploy so content v2 goes live.
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
@@ -80,3 +80,6 @@ Next step: Martin merges the M7 milestone PR #78, then approves a deploy so cont
 - 2026-10-25: Martin reviewed M7: About v4.1 (10+ years counted from WEZEO 2015, Python, "guide architecture decisions", AI sentence true to current practice: AI-orchestrated workflows at work, AI-native SDLC as exploration), one voice without "I", EM bullets as present participles. Plan v6 merged (#79).
 - 2026-10-25: T-025 done (PR #80, 0 fix rounds; review + test-review clean). PDF still 2 pages. Milestone branch updated with master and fresh screenshots.
 - 2026-10-25: the auto-mode command classifier returned no verdict repeatedly (server-side error); Martin switched to accept-edits mode so the Lead could continue with per-command approval.
+- 2026-10-25: plan v7 merged (#81): T-026 "AI-assisted development" skill (Martin's todo), T-027 hyphenated words on one line (REQ-019, D-009). Martin: "go".
+- 2026-10-25: T-026 done (PR #82, 0 fix rounds) and T-027 done (PR #83, 0 fix rounds), built in parallel in separate worktrees; review + test-review clean. PDF 2 pages; "F-Secure"/"AI-orchestrated" no longer break. Parallel builders shared preview port 4173, which caused spurious local e2e failures (CI unaffected): run parallel builders with different ports or sequentially.
+- 2026-10-25: test-reviewer again claimed the `acceptance-change` label was required; it is not (guard accepts test-review success). Same note as 2026-10-23: clarify the test-reviewer prompt.

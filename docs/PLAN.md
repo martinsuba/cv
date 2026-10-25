@@ -294,7 +294,7 @@ Approved text: ~/HAL/ai-assistant/notes/career/cv/cv-draft.md (v3 FINAL, 2026-10
 - Areas/files: data/cv.json, tests/acceptance/expected-content.js, tests/acceptance/content.spec.js (explicitly allowed)
 - Definition of done: CI green, review + test-review clean; the Lead checks the PDF pages before updating the milestone PR.
 
-### [ ] T-026: AI-assisted development skill  (size S, plan v7)
+### [x] T-026: AI-assisted development skill  (size S, plan v7)  — #82
 - Goal: Martin's todo (2026-10-25). In `data/cv.json` insert "AI-assisted development" into `skills.AI` right after
   "AI-orchestrated workflows and agentic automation" (so the group reads: AI adoption in engineering teams,
   AI-orchestrated workflows and agentic automation, AI-assisted development, AI-native SDLC (Claude Code / Anthropic
@@ -304,7 +304,7 @@ Approved text: ~/HAL/ai-assistant/notes/career/cv/cv-draft.md (v3 FINAL, 2026-10
 - Areas/files: data/cv.json, tests/acceptance/expected-content.js, tests/acceptance/content.spec.js (explicitly allowed)
 - Definition of done: CI green, review + test-review clean.
 
-### [ ] T-027: Keep hyphenated words on one line  (size S, plan v7)
+### [x] T-027: Keep hyphenated words on one line  (size S, plan v7)  — #83
 - Goal: a small render helper (e.g. `src/no-break/no-break.jsx`) splits a text into tokens and wraps every word with an
   inner ASCII hyphen (regex like `[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)+`, Unicode-aware for "VÚB"-style letters) in
   `<span class="nobr">` with `white-space: nowrap` (global CSS in src/style.css). Use it in About, experience

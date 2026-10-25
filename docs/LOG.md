@@ -35,3 +35,4 @@ date | gate/phase | what Martin did | could an agent do it? (y/n + why)
 2026-10-24 | plan v5 gate | merged plan v5 (#75), said "go M7" | n – gate
 2026-10-25 | M7 review | reviewed the CV text, asked for About changes (Python, years, voice, honest AI wording); merged plan v6 (#79), said "go" | n – content decisions
 2026-10-25 | M7 | switched out of auto mode because the command classifier kept failing | n – platform fault
+2026-10-25 | M7 | added a todo (AI-assisted development skill), chose to fix hyphen breaks before deploy; merged plan v7 (#81), said "go" | n – content decisions
