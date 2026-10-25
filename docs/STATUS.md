@@ -3,7 +3,7 @@ Phase: build (M7 complete incl. T-025; milestone PR in review)
 Current task: –
 Open PRs: M7 milestone #78 (chore/milestone-M7)
 Blockers: –
-Next step: Martin merges the M7 milestone PR #78, then approves a deploy so content v2 (with the v4.1 About) goes live. Optional follow-up: keep hyphenated words ("F-Secure", "AI-orchestrated") from breaking across lines in the PDF (render-time no-wrap spans, needs a plan update).
+Next step: Martin merges the M7 milestone PR #78, then approves a deploy so content v2 (with the v4.1 About) goes live. Todo (Martin, 2026-10-25): add "AI-assisted development" to the AI skills (needs a plan v7 + small task). Optional follow-up: keep hyphenated words ("F-Secure", "AI-orchestrated") from breaking across lines in the PDF (render-time no-wrap spans, needs a plan update).
 
 ## Decisions log
 - 2026-10-23: project onboarded to the framework (was a legacy repo without docs). Context: ~/HAL/ai-assistant/notes/career/cv/cv-project-notes.md
