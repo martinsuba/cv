@@ -32,6 +32,7 @@ data/photo.jpg ───────────────────┘     
 - Header contact icons: three inline SVGs (LinkedIn, GitHub, npm) + text for email. The devicon font, `devicon.json`
   and `get-icon-class.js` are removed.
 - `src/languages` (plan v5): "Languages" section after Education, one `li` per language "<language> (<level>)".
+- `src/no-break` (plan v7, D-009): `splitHyphenated(text)` + `<NoBreak text>` wrap words with an inner ASCII hyphen in `span.nobr`; used by about, experience (description, highlights), education, skills and languages.
 - `src/download-link`: "Download PDF" link to `cv.pdf`, hidden in print.
 - `scripts/validate.js`: validates `data/cv.json` against `data/cv.schema.json`, prints field-level errors.
 - `scripts/pdf.js`: serves `dist/` under `/cv/` on a free port, opens it in Playwright Chromium, `page.pdf()` A4 with
@@ -141,3 +142,6 @@ inside it (no schema change, but bullets become text, wrap badly and can't be st
 string array, top-level `location` and `languages`. · Decision: (c) (Lead). · Consequences: real `ul/li` markup on screen
 and in the PDF (ATS reads bullets as separate lines); schema and REQ-001/006 tests learn the new fields; old data without
 them still validates. Languages render as text with a " · " separator in print, like skills (D-007).
+
+### D-009: Hyphenated words on one line (plan v7)
+Context: Chromium always allows a line break after an ASCII hyphen, so the PDF broke "F-Secure" and "AI-orchestrated"; CSS on the running text cannot stop it. · Options: (a) U+2011 non-breaking hyphen (changes the text: copy/paste, ATS parsing and exact-text tests break); (b) `<wbr>`/CSS tricks (no effect on hyphen breaks). · Decision: (c) wrap each hyphenated word in `<span class="nobr">` (`white-space: nowrap`) at render time (`src/no-break`); the DOM text is unchanged. · Consequences: a very long hyphenated word can no longer wrap inside itself (none in the CV); titles, company and dates are not wrapped.
