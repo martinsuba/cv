@@ -9,6 +9,7 @@ import {
 	DESCRIPTIONS,
 	LANGUAGES,
 	SKILL_GROUPS_IN_ORDER,
+	AI_SKILLS_IN_ORDER,
 	REMOVED_SKILLS,
 } from './expected-content.js';
 
@@ -136,6 +137,16 @@ test.describe('REQ-018 content v2', () => {
 	}) => {
 		const headings = await page.locator('.skills h3').allTextContents();
 		expect(headings.map((h) => h.replace(/:$/, '').trim())).toEqual(SKILL_GROUPS_IN_ORDER);
+	});
+
+	test('REQ-018: the AI skill group has exactly the four items in order, incl. "AI-assisted development"', async ({
+		page,
+	}) => {
+		const group = page.locator('.skills .group', {
+			has: page.getByRole('heading', { name: /^AI:?$/ }),
+		});
+		const items = (await group.locator('ul.tags > li').allTextContents()).map((t) => t.trim());
+		expect(items).toEqual(AI_SKILLS_IN_ORDER);
 	});
 
 	test('REQ-018: "Python" directly follows "Node.js" in the Engineering skills', async ({
