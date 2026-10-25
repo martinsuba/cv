@@ -122,7 +122,9 @@ Items 1–3 and 7–8 belong to the ops session (`~/.claude`). Items 4–6 are r
 
 ---
 
-# Rounds 1–2 (M1–M5)Written by the Project Lead on 2026-10-24, after M5 and the post-M5 deploy. Sources: docs/LOG.md, the docs/STATUS.md
+# Rounds 1–2 (M1–M5)
+
+Written by the Project Lead on 2026-10-24, after M5 and the post-M5 deploy. Sources: docs/LOG.md, the docs/STATUS.md
 decisions log, `gh pr list --state all`, `gh run list --status failure`, PR review comments, `git log`.
 
 ## Timeline and numbers
