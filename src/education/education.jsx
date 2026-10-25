@@ -1,4 +1,5 @@
 import SectionLabel from '../section-label/section-label.jsx';
+import NoBreak from '../no-break/no-break.jsx';
 import './education.css';
 
 export default function education({ education, number }) {
@@ -12,11 +13,17 @@ export default function education({ education, number }) {
 							{item.from} - {item.to}
 						</div>
 						<div className="body">
-							<h3>{item.degree}</h3>
+							<h3>
+								<NoBreak text={item.degree} />
+							</h3>
 							<div className="meta">
-								<span>{item.institution}</span>
+								<span>
+									<NoBreak text={item.institution} />
+								</span>
 								<span className="sep"> · </span>
-								<span>{item.field}</span>
+								<span>
+									<NoBreak text={item.field} />
+								</span>
 							</div>
 						</div>
 					</article>

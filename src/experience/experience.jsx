@@ -1,4 +1,5 @@
 import SectionLabel from '../section-label/section-label.jsx';
+import NoBreak from '../no-break/no-break.jsx';
 import './experience.css';
 
 export default function experience({ experience, number }) {
@@ -20,11 +21,17 @@ export default function experience({ experience, number }) {
 								<span className="sep"> · </span>
 								<span>{item.location}</span>
 							</div>
-							{item.description != null && <p className="description">{item.description}</p>}
+							{item.description != null && (
+								<p className="description">
+									<NoBreak text={item.description} />
+								</p>
+							)}
 							{item.highlights != null && (
 								<ul className="highlights">
 									{item.highlights.map((h) => (
-										<li>{h}</li>
+										<li>
+											<NoBreak text={h} />
+										</li>
 									))}
 								</ul>
 							)}
