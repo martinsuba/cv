@@ -1,5 +1,5 @@
 # PRD: cv
-Status: v6 draft (plan PR v6) · Last update: 2026-10-25
+Status: v7 draft (plan PR v7) · Last update: 2026-10-25
 
 ## Problem & why
 Martin's CV is a small Preact site that renders `data/cv.json` and exports `cv.pdf`. It stopped being maintainable:
@@ -242,11 +242,25 @@ Acceptance criteria:
 - (plan v6) Given the built site, Then the About text and the five Engineering Manager highlights are the v4 texts
   from T-025, and "Python" is an Engineering skill item
   right after "Node.js".
+- (plan v7) Given the built site, Then "AI-assisted development" is an AI skill item right after
+  "AI-orchestrated workflows and agentic automation" and before "AI-native SDLC (Claude Code / Anthropic ecosystem)".
 - Given the built site, Then the header has no npm link and the page contains no "open to" phrase (public site,
   Martin 2026-10-24).
 - Given dist/cv.pdf, Then it has at most 2 A4 pages and REQ-005/006/011/012/013 still hold.
 - Visual check: the milestone PR attaches 1280px, 375px and PDF page screenshots; Martin judges.
 Priority: must
+
+### REQ-019: Hyphenated words stay on one line (M7, plan v7)
+In the PDF, "F-Secure" broke as "F-" / "Secure" and "AI-orchestrated" as "AI-" / "orchestrated". Chromium always allows a
+break after an ASCII hyphen, so CSS on the running text cannot prevent it.
+Acceptance criteria:
+- Given any CV text rendered by the components (about, experience descriptions and highlights, education, skills,
+  languages), When a word contains a hyphen between two letters or digits (e.g. "F-Secure", "Tier-1", "AI-native"),
+  Then it is wrapped in an element with `white-space: nowrap`, and the visible text is unchanged.
+- Given dist/cv.pdf, When its text is extracted, Then no hyphenated word from cv.json is split across two lines, every
+  hyphen is still the ASCII "-" (no U+2011), and REQ-005/006/011/012/013 still hold (≤2 pages).
+- Given a 375px viewport, Then there is still no horizontal scrolling (REQ-010).
+Priority: should
 
 ## Constraints (budget, privacy, data, platforms)
 - Public repo and public site; all CV data is already public (email, photo, history). No secrets in the build.
