@@ -138,6 +138,18 @@ test.describe('REQ-018 content v2', () => {
 		expect(headings.map((h) => h.replace(/:$/, '').trim())).toEqual(SKILL_GROUPS_IN_ORDER);
 	});
 
+	test('REQ-018: "Python" directly follows "Node.js" in the Engineering skills', async ({
+		page,
+	}) => {
+		const group = page.locator('.skills .group', {
+			has: page.getByRole('heading', { name: /^Engineering:?$/ }),
+		});
+		const items = (await group.locator('ul.tags > li').allTextContents()).map((t) => t.trim());
+		const i = items.indexOf('Node.js');
+		expect(i).toBeGreaterThanOrEqual(0);
+		expect(items[i + 1]).toBe('Python');
+	});
+
 	test('REQ-018: Git, Webpack and npm skills, the npm contact and "open to" are absent', async ({
 		page,
 	}) => {
