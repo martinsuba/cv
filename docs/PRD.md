@@ -1,5 +1,5 @@
 # PRD: cv
-Status: v5 draft (plan PR v5) · Last update: 2026-10-24
+Status: v6 draft (plan PR v6) · Last update: 2026-10-25
 
 ## Problem & why
 Martin's CV is a small Preact site that renders `data/cv.json` and exports `cv.pdf`. It stopped being maintainable:
@@ -231,13 +231,16 @@ Priority: must
 
 ### REQ-018: Content v2 (M7)
 `data/cv.json` holds the approved draft (~/HAL/ai-assistant/notes/career/cv/cv-draft.md, v3 FINAL, 2026-10-24) word for
-word, as given in docs/PLAN.md T-024.
+word, as given in docs/PLAN.md T-024; plan v6 (draft v4, 2026-10-25) changes the About text and adds Python to the
+Engineering skills, as given in docs/PLAN.md T-025.
 Acceptance criteria:
 - Given the built site, Then it shows the new About text, the five Engineering Manager highlights (incl. "up to 80%"),
   every highlight of the Technical Project Lead, Lead Frontend (F-Secure, Lookout) and SaferPass entries, the one-line
   descriptions of the four earlier roles, the location "Bratislava, Slovakia" and the four languages.
 - Given the built site, Then skill groups are "Leadership", "Delivery", "AI", "Engineering" in that order, and Git,
   Webpack and npm are not skill items.
+- (plan v6) Given the built site, Then the About text is the v4 text from T-025, and "Python" is an Engineering skill item
+  right after "Node.js".
 - Given the built site, Then the header has no npm link and the page contains no "open to" phrase (public site,
   Martin 2026-10-24).
 - Given dist/cv.pdf, Then it has at most 2 A4 pages and REQ-005/006/011/012/013 still hold.

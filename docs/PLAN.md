@@ -276,6 +276,17 @@ Approved text: ~/HAL/ai-assistant/notes/career/cv/cv-draft.md (v3 FINAL, 2026-10
 - Definition of done: code + tests, CI green, review + test-review clean; the Lead renders the PDF pages and checks them
   against the draft before the milestone PR. Deploy only after Martin approves (docs/DEPLOY.md).
 
+### [ ] T-025: About v4 and Python  (size S, plan v6)
+- Goal: Martin's review of the M7 milestone (2026-10-25, draft v4 in the career notes). In `data/cv.json` replace `about`
+  with exactly:
+  "Engineering Manager with 10+ years in web product engineering, leading a team that delivers security products to Tier-1 partners at F-Secure. Grew from developer to tech lead to manager on the same product through two acquisitions (SaferPass → Lookout → F-Secure). I focus on growing engineers and predictable delivery. I run AI-orchestrated workflows in my team and am exploring how AI-native development reshapes the whole SDLC. Technical enough to guide architecture decisions and review solutions (JavaScript/TypeScript, React, Node.js, Python, web and native SDKs)."
+  and insert "Python" into `skills.Engineering` right after "Node.js". Nothing else in the data changes.
+- REQs: REQ-018 (plan v6 criterion), REQ-001
+- Acceptance tests to make pass: content.spec.js with `ABOUT` in tests/acceptance/expected-content.js updated to the new
+  text and a check that "Python" follows "Node.js" in the Engineering group; all PDF specs (still ≤2 pages).
+- Areas/files: data/cv.json, tests/acceptance/expected-content.js, tests/acceptance/content.spec.js (explicitly allowed)
+- Definition of done: CI green, review + test-review clean; the Lead checks the PDF pages before updating the milestone PR.
+
 ## Screens (web UI projects)
 - CV page, desktop 1280px: full page.
 - CV page, mobile 375px: full page.
